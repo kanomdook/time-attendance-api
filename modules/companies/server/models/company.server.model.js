@@ -60,6 +60,14 @@ var CompanySchema = new Schema({
         type: String
       }
     },
+    location: {
+      latitude: {
+        type: String
+      },
+      longitude: {
+        type: String
+      }
+    }
   },
   images: [{
     public_id: {
