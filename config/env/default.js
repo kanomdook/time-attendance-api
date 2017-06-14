@@ -2,9 +2,9 @@
 var multer = require('multer');
 module.exports = {
     app: {
-        title: 'Admin-template',
-        description: 'Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js by Secret',
-        keywords: 'Admin-template',
+        title: 'Time Attendance',
+        description: '',
+        keywords: 'Time Attendance',
         googleAnalyticsTrackingID: process.env.GOOGLE_ANALYTICS_TRACKING_ID || 'GOOGLE_ANALYTICS_TRACKING_ID'
     },
     port: process.env.PORT || 3000,
