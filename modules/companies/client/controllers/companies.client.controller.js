@@ -6,9 +6,9 @@
     .module('companies')
     .controller('CompaniesController', CompaniesController);
 
-  CompaniesController.$inject = ['$scope', '$state', '$window', 'Authentication', 'companyResolve'];
+  CompaniesController.$inject = ['$scope', '$state', '$window', 'Authentication', 'companyResolve', 'FileUploader', '$http', '$timeout'];
 
-  function CompaniesController ($scope, $state, $window, Authentication, company) {
+  function CompaniesController($scope, $state, $window, Authentication, company, FileUploader, $http, $timeout) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -17,7 +17,37 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
+    vm.init = init;
+    $scope.postcode = null;
+    $scope.language = null;
 
+    if (!vm.company._id) {
+      vm.company.images = [];
+      vm.company.address = {
+        country: {
+          cca2: "TH",
+          cca3: "THA",
+          en: {
+            common: "Thailand",
+            official: "Kingdom of Thailand"
+          },
+          th: "ราชอาณาจักรไทย",
+          currency: "THB"
+        }
+      };
+    }
+    function init() {
+      $http.get('json/postcode.json').success(function (response) {
+        $scope.postcode = response.postcodeData;
+      }).error(function (error) {
+
+      });
+      $http.get('json/country-language.json').success(function (response) {
+        $scope.country = response.countryData;
+      }).error(function (error) {
+
+      });
+    }
     // Remove existing Company
     function remove() {
       if ($window.confirm('Are you sure you want to delete?')) {
@@ -27,8 +57,10 @@
 
     // Save Company
     function save(isValid) {
+      $scope.startCall = true;
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.companyForm');
+        $scope.startCall = false;
         return false;
       }
 
@@ -43,11 +75,119 @@
         $state.go('companies.view', {
           companyId: res._id
         });
+        $scope.startCall = false;
+
       }
 
       function errorCallback(res) {
         vm.error = res.data.message;
+        $scope.startCall = false;
+
       }
     }
+
+    $scope.callback = function (postcode) {
+      $scope.checkAutocomplete(postcode);
+    };
+
+    $scope.checkAutocomplete = function (postcode) {
+      if (postcode) {
+        vm.company.address.postcode = postcode.postcode;
+        vm.company.address.district = postcode.district;
+        vm.company.address.subdistrict = postcode.subdistrict;
+        vm.company.address.province = postcode.province;
+      } else {
+        vm.company.address.district = '';
+        vm.company.address.province = '';
+        vm.company.address.subdistrict = '';
+      }
+    };
+
+    // upload images
+    $scope.uploader = new FileUploader({
+      url: 'api/companies_picture',
+      alias: 'newProfilePicture'
+    });
+
+    // Set file uploader image filter
+    $scope.uploader.filters.push({
+      name: 'imageFilter',
+      fn: function (item, options) {
+        var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+        return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+      }
+    });
+
+    // Called after the user selected a new picture file
+    $scope.uploader.onAfterAddingFile = function (fileItem) {
+      if ($window.FileReader) {
+        var fileReader = new FileReader();
+        fileReader.readAsDataURL(fileItem._file);
+
+        fileReader.onload = function (fileReaderEvent) {
+          $timeout(function () {
+            vm.selectedImage = fileReaderEvent.target.result;
+            if (vm.company.images.length === 1) {
+              vm.company.images[0].url = vm.selectedImage;
+            } else {
+              vm.company.images.push({
+                public_id: null,
+                url: vm.selectedImage
+              });
+            }
+          }, 0);
+        };
+      }
+    };
+
+    // Called after the user has successfully uploaded a new picture
+    $scope.uploader.onSuccessItem = function (fileItem, response, status, headers) {
+      // Show success message
+      $scope.success = true;
+      $scope.status = false;
+      // Populate user object
+      // $scope.user = Authentication.user = response;
+      if (vm.company.images.length === 2) {
+        vm.company.images[0].public_id = response.image.public_id;
+        vm.company.images[0].url = response.image.url;
+      } else {
+        vm.company.images.push({
+          public_id: response.image.public_id,
+          url: response.image.url
+        });
+      }
+      console.log(response);
+
+      // Clear upload buttons
+      $scope.cancelUpload();
+    };
+
+    // Called after the user has failed to uploaded a new picture
+    $scope.uploader.onErrorItem = function (fileItem, response, status, headers) {
+      // Clear upload buttons
+      $scope.cancelUpload();
+
+      // Show error message
+      $scope.error = response.message;
+    };
+
+    // Change user profile picture
+    $scope.uploadProfilePicture = function () {
+      // Clear messages
+      $scope.success = $scope.error = null;
+
+      // Start upload
+      $scope.uploader.uploadAll();
+    };
+
+    // Cancel the upload process
+    $scope.cancelUpload = function () {
+      $scope.uploader.clearQueue();
+      // var index = vm.company.images.url.indexOf(vm.selectedImage);
+      var index = vm.company.images.map(function(e) { return e.url; }).indexOf(vm.selectedImage);
+      vm.company.images.splice(index, 1);
+      $scope.imageURL = "";
+    };
+    // upload images end 
   }
 }());

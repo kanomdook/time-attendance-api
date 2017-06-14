@@ -36,8 +36,7 @@ describe('Company Model Unit Tests:', function () {
           district: 'District Name',
           subdistrict: 'Subdistrict Name',
           postcode: 'Postcode Name',
-          province: 'Province Name',
-          country: 'Country Name'
+          province: 'Province Name'
         },
         tel: 'Tel',
         fax: 'Fax',

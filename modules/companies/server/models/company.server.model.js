@@ -16,6 +16,12 @@ var CompanySchema = new Schema({
     required: 'Please fill Company name',
     trim: true
   },
+  taxid: {
+    type: String
+  },
+  brunch: {
+    type: String
+  },
   address: {
     address: {
       type: String,
@@ -33,9 +39,36 @@ var CompanySchema = new Schema({
       type: String,
     },
     country: {
-      type: String,
-    }
+      cca2: {
+        type: String
+      },
+      cca3: {
+        type: String
+      },
+      en: {
+        common: {
+          type: String
+        },
+        official: {
+          type: String
+        }
+      },
+      th: {
+        type: String
+      },
+      currency: {
+        type: String
+      }
+    },
   },
+  images: [{
+    public_id: {
+      type: String,
+    },
+    url: {
+      type: String,
+    },
+  }],
   tel: {
     type: String,
   },

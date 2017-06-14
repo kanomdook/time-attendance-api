@@ -6,7 +6,7 @@
 var companiesPolicy = require('../policies/companies.server.policy'),
   companies = require('../controllers/companies.server.controller');
 
-module.exports = function(app) {
+module.exports = function (app) {
   // Companies Routes
   app.route('/api/companies').all(companiesPolicy.isAllowed)
     .get(companies.list)
@@ -16,6 +16,8 @@ module.exports = function(app) {
     .get(companies.read)
     .put(companies.update)
     .delete(companies.delete);
+
+  app.route('/api/companies_picture').post(companies.changeCompaniesPicture);
 
   // Finish by binding the Company middleware
   app.param('companyId', companies.companyByID);
