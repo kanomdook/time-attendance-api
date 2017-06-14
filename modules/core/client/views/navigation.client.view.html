@@ -32,7 +32,7 @@
             <li class="dropdown" ng-class="{active: $uiRoute}" ng-if="authentication.user" ui-route="/checkins">
                 <a href="/checkins"><i class="fa fa-clock-o"></i> <span class="nav-label">ข้อมูลเวลา</span></a>
             </li>
-            <li class="dropdown" ng-class="{active: $uiRoute}" ng-if="!authentication.user" ui-route="/leaves">
+            <li class="dropdown" ng-class="{active: $uiRoute}" ng-if="authentication.user" ui-route="/leaves">
                 <a href="/leaves"><i class="fa fa-book"></i> <span class="nav-label">ข้อมูลการลา</span></a>
             </li>
             <li class="dropdown" ng-class="{active: $uiRoute}" ng-if="!authentication.user" ui-route="/">
