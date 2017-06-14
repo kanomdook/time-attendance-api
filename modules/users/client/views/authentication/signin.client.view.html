@@ -1,31 +1,34 @@
-<div class="ibox" ng-controller="AuthenticationController">
-    <div class="ibox-content">
-        <div class="row">
-            <div class="middle-box text-center loginscreen animated fadeInRight login-box">
-                <div>
-<!--                     <div>
-                        <h1 class="logo-name">MBJ</h1>
-                    </div> -->
-                    <h3>ลงชื่อเข้าใช้</h3>
-                    <form name="userForm" ng-submit="signin(userForm.$valid)" class="signin" novalidate autocomplete="off">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="ชื่อผู้ใช้" ng-model="credentials.username" required="">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control" placeholder="รหัสผ่าน" ng-model="credentials.password" required="">
-                        </div>
-                        <button type="submit" class="btn btn-primary block full-width m-b" ng-disabled="!credentials.username || !credentials.password || startCall"><i class="fa fa-spinner fa-spin" ng-if="startCall"></i> ลงชื่อเข้าใช้</button>
-                        <alert type="danger" ng-show="error" class="text-center text-danger">
-                            <span ng-bind="newError"></span>
-                        </alert>
-                        <br>
-                        <a href="#"><small>ลืมรหัสผ่าน?</small></a>
-                        <p class="text-muted text-center"><small>คุณต้องการสมัครสมาชิก?</small></p>
-                        <a class="btn btn-sm btn-white btn-block" ui-sref="authentication.signup">ลงทะเบียน</a>
-                    </form>
-                    <!--<p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 © 2014</small> </p>-->
-                </div>
-            </div>
+<div ng-controller="AuthenticationController">
+  <h3 class="col-md-12 text-center">Or with your account</h3>
+  <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4">
+    <form name="userForm" ng-submit="signin(userForm.$valid)" class="signin" novalidate autocomplete="off">
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" class="form-control" ng-model="credentials.username" placeholder="Username" lowercase required>
+          <div ng-messages="userForm.username.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Username is required.</p>
+          </div>
         </div>
-    </div>
+        <div class="form-group" show-errors>
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" class="form-control" ng-model="credentials.password" placeholder="Password" required>
+          <div ng-messages="userForm.password.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Password is required.</p>
+          </div>
+        </div>
+        <div class="text-center form-group">
+          <button type="submit" class="btn btn-primary">Sign in</button>
+          &nbsp; or&nbsp;
+          <a ui-sref="authentication.signup">Sign up</a>
+        </div>
+        <div class="text-center forgot-password">
+          <a ui-sref="password.forgot">Forgot your password?</a>
+        </div>
+        <alert type="danger" ng-show="error" class="text-center text-danger">
+          <span ng-bind="error"></span>
+        </alert>
+      </fieldset>
+    </form>
+  </div>
 </div>

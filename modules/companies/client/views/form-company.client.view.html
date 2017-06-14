@@ -1,0 +1,101 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.company._id ? 'Edit Company' : 'New Company'}}</h1>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.companyForm" class="form-horizontal" ng-submit="vm.save(vm.form.companyForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="name">Name</label>
+          <input name="name" type="text" ng-model="vm.company.name" id="name" class="form-control" placeholder="Name" required>
+          <div ng-messages="vm.form.companyForm.name.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Company name is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="address">Address</label>
+          <input name="address" type="text" ng-model="vm.company.address.address" id="address" class="form-control" placeholder="Address" required>
+          <div ng-messages="vm.form.companyForm.address.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Company address is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="district">District</label>
+          <input name="district" type="text" ng-model="vm.company.address.district" id="district" class="form-control" placeholder="District" required>
+          <div ng-messages="vm.form.companyForm.district.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Company district is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="dubdistrict">Subdistrict</label>
+          <input name="subdistrict" type="text" ng-model="vm.company.address.subdistrict" id="subdistrict" class="form-control" placeholder="Subdistrict" required>
+          <div ng-messages="vm.form.companyForm.subdistrict.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Company subdistrict is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="postcode">Postcode</label>
+          <input name="postcode" type="text" ng-model="vm.company.address.postcode" id="postcode" class="form-control" placeholder="Postcode" required>
+          <div ng-messages="vm.form.companyForm.postcode.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Company postcode is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="province">Province</label>
+          <input name="province" type="text" ng-model="vm.company.address.province" id="province" class="form-control" placeholder="Province" required>
+          <div ng-messages="vm.form.companyForm.province.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Company province is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="country">Country</label>
+          <input name="country" type="text" ng-model="vm.company.address.country" id="country" class="form-control" placeholder="Country" required>
+          <div ng-messages="vm.form.companyForm.country.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Company country is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="tel">Tel</label>
+          <input name="tel" type="text" ng-model="vm.company.tel" id="tel" class="form-control" placeholder="Tel" required>
+          <div ng-messages="vm.form.companyForm.tel.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Company tel is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="fax">Fax</label>
+          <input name="fax" type="text" ng-model="vm.company.fax" id="fax" class="form-control" placeholder="Fax" required>
+          <div ng-messages="vm.form.companyForm.fax.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Company fax is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="email">Email</label>
+          <input name="email" type="text" ng-model="vm.company.email" id="email" class="form-control" placeholder="Email" required>
+          <div ng-messages="vm.form.companyForm.email.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Company email is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="website">Website</label>
+          <input name="website" type="text" ng-model="vm.company.website" id="website" class="form-control" placeholder="website">
+          <div ng-messages="vm.form.companyForm.website.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Company website is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="note">Note</label>
+          <input name="note" type="text" ng-model="vm.company.note" id="note" class="form-control" placeholder="note">
+          <div ng-messages="vm.form.companyForm.note.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Company note is required.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-default">{{vm.company._id ? 'Update' : 'Create'}}</button>
+        </div>
+        <div ng-show="vm.error" class="text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

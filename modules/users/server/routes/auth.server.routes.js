@@ -24,7 +24,7 @@ module.exports = function (app) {
     scope: ['email']
   }));
   app.route('/api/auth/facebook/callback').get(users.oauthCallback('facebook'));
-  app.route('/api/auth/facebook/callback').post(users.oauthCallbackIonic('facebook'));
+
   // Setting the twitter oauth routes
   app.route('/api/auth/twitter').get(users.oauthCall('twitter'));
   app.route('/api/auth/twitter/callback').get(users.oauthCallback('twitter'));

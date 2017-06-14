@@ -1,0 +1,94 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.employeeprofile._id ? 'Edit Employeeprofile' : 'New Employeeprofile'}}</h1>
+  </div>
+  <div class="col-md-12">
+    <form class="form-horizontal" name="vm.form.employeeprofileForm" ng-submit="vm.save(vm.form.employeeprofileForm.$valid)" novalidate>
+      <fieldset>
+
+        <div class="form-group" show-errors>
+          <label class="control-label" for="firstname">Firstname</label>
+          <input class="form-control" id="firstname" name="firstname" ng-model="vm.employeeprofile.firstname" type="text" placeholder="firstname" required>
+          <div ng-messages="vm.form.employeeprofileForm.firstname.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Firstname is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group" show-errors>
+          <label class="control-label" for="lastname">Lastname</label>
+          <input class="form-control" id="lastname" name="lastname" ng-model="vm.employeeprofile.lastname" type="text" placeholder="lastname" required>
+          <div ng-messages="vm.form.employeeprofileForm.lastname.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Lastname is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group" show-errors>
+          <label class="control-label" for="email">email</label>
+          <input class="form-control" id="email" name="email" ng-model="vm.employeeprofile.email" type="text" placeholder="email" required>
+          <div ng-messages="vm.form.employeeprofileForm.email.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">email is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" for="jobTitle">jobTitle</label>
+          <input class="form-control" id="jobTitle" name="jobTitle" ng-model="vm.employeeprofile.jobTitle" type="text" placeholder="jobTitle">
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" for="Line">Line</label>
+          <input class="form-control" id="Line" name="Line" ng-model="vm.employeeprofile.Line" type="text" placeholder="Line">
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" for="Tel">Tel</label>
+          <input class="form-control" id="Tel" name="Tel" ng-model="vm.employeeprofile.Tel" type="text" placeholder="Tel">
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" for="Facebook">Facebook</label>
+          <input class="form-control" id="Facebook" name="Facebook" ng-model="vm.employeeprofile.Facebook" type="text" placeholder="Facebook">
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" for="deviceId">deviceId</label>
+          <input class="form-control" id="deviceId" name="deviceId" ng-model="vm.employeeprofile.deviceId" type="text" placeholder="deviceId">
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-12">
+
+                <div class="form-group text-center">
+                  <img class="img-rounded img-product-detail" ng-src="{{vm.employeeprofile.image}}" alt="{{vm.employeeprofile.email}}">
+                </div>
+                <div class="text-center form-group" ng-hide="uploader.queue.length">
+                  <span class="btn btn-success btn-file">
+                    Select Image <input type="file" nv-file-select uploader="uploader">
+                </span>
+                </div>
+                <div class="text-center form-group" ng-show="uploader.queue.length">
+                  <button class="btn btn-primary" type="button" ng-click="uploadProfilePicture();">Upload</button>
+                  <button class="btn btn-default" ng-click="cancelUpload();">Cancel</button>
+                </div>
+                <div class="text-center text-success" ng-show="success">
+                  <strong>Profile Picture Changed Successfully</strong>
+                </div>
+                <div class="text-center text-danger" ng-show="error">
+                  <strong ng-bind="error"></strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-default" type="submit">{{vm.employeeprofile._id ? 'Update' : 'Create'}}</button>
+        </div>
+        <div class="text-danger" ng-show="vm.error">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,22 @@
+<section>
+  <div class="page-header">
+    <h1>Leaves</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="leave in vm.leaves"
+       ui-sref="leaves.view({ leaveId: leave._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="leave.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="leave.user" ng-bind="leave.user.displayName"></span>
+        <span ng-if="!leave.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="leave.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="vm.leaves.$resolved && !vm.leaves.length">
+    No Leaves yet, why don't you <a ui-sref="leaves.create">create one</a>?
+  </div>
+</section>
