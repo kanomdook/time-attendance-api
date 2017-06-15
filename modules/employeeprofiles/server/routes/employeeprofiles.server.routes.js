@@ -16,10 +16,21 @@ module.exports = function (app) {
     .get(employeeprofiles.read)
     .put(employeeprofiles.update)
     .delete(employeeprofiles.delete);
+
+  // Employeeprofiles Routes By Company
+  app.route('/api/employeeprofiles/company').all(employeeprofilesPolicy.isAllowed)
+    .get(employeeprofiles.listByCompany)
+    .post(employeeprofiles.create);
+
+  app.route('/api/employeeprofiles/company/:employeeprofileId').all(employeeprofilesPolicy.isAllowed)
+    .get(employeeprofiles.read)
+    .put(employeeprofiles.update)
+    .delete(employeeprofiles.delete);
+
   app.route('/api/Employeeprofile/email/:email')
     .get(employeeprofiles.checkemail);
   // Finish by binding the Employeeprofile middleware
   app.param('employeeprofileId', employeeprofiles.employeeprofileByID);
   app.param('email', employeeprofiles.email);
-  
+
 };

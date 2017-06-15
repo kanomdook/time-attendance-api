@@ -18,7 +18,7 @@ module.exports = function (app) {
     .delete(companies.delete);
 
   app.route('/api/companies_picture').post(companies.changeCompaniesPicture);
-
+  
   // Finish by binding the Company middleware
   app.param('companyId', companies.companyByID);
 };

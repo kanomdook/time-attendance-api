@@ -20,6 +20,13 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/employeeprofiles/:employeeprofileId',
       permissions: '*'
+    },
+    {
+      resources: '/api/employeeprofiles/company',
+      permissions: '*'
+    }, {
+      resources: '/api/employeeprofiles/company/:employeeprofileId',
+      permissions: '*'
     }]
   }, {
     roles: ['user'],
@@ -29,6 +36,12 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/employeeprofiles/:employeeprofileId',
       permissions: ['get']
+    }, {
+      resources: '/api/employeeprofiles/company',
+      permissions: ['get', 'post']
+    }, {
+      resources: '/api/employeeprofiles/company/:employeeprofileId',
+      permissions: ['get']
     }]
   }, {
     roles: ['guest'],
@@ -37,6 +50,12 @@ exports.invokeRolesPolicies = function () {
       permissions: ['get']
     }, {
       resources: '/api/employeeprofiles/:employeeprofileId',
+      permissions: ['get']
+    }, {
+      resources: '/api/employeeprofiles/company',
+      permissions: ['get']
+    }, {
+      resources: '/api/employeeprofiles/company/:employeeprofileId',
       permissions: ['get']
     }]
   }]);
