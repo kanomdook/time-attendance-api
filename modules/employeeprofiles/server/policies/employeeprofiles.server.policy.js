@@ -22,10 +22,10 @@ exports.invokeRolesPolicies = function () {
       permissions: '*'
     },
     {
-      resources: '/api/employeeprofiles/company',
+      resources: '/api/employee/company',
       permissions: '*'
     }, {
-      resources: '/api/employeeprofiles/company/:employeeprofileId',
+      resources: '/api/employee/company/:employeeprofileId',
       permissions: '*'
     }]
   }, {
@@ -37,10 +37,10 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/employeeprofiles/:employeeprofileId',
       permissions: ['get']
     }, {
-      resources: '/api/employeeprofiles/company',
+      resources: '/api/employee/company',
       permissions: ['get', 'post']
     }, {
-      resources: '/api/employeeprofiles/company/:employeeprofileId',
+      resources: '/api/employee/company/:employeeprofileId',
       permissions: ['get']
     }]
   }, {
@@ -52,10 +52,10 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/employeeprofiles/:employeeprofileId',
       permissions: ['get']
     }, {
-      resources: '/api/employeeprofiles/company',
+      resources: '/api/employee/company',
       permissions: ['get']
     }, {
-      resources: '/api/employeeprofiles/company/:employeeprofileId',
+      resources: '/api/employee/company/:employeeprofileId',
       permissions: ['get']
     }]
   }]);

@@ -13,6 +13,7 @@ var EmployeeprofileSchema = new Schema({
   email: {
     type: String,
     required: 'Please fill email',
+    unique: 'Email already exists'
   },
   company: {
     type: Schema.ObjectId,

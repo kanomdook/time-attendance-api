@@ -103,7 +103,8 @@
       } else {
 
         CompaniesService.query(function (company) {
-          vm.employeeprofile.office = company[0];
+          vm.employeeprofile.company = company[0];
+          vm.employeeprofile.leader = null;
           vm.employeeprofile.$save(successCallback, errorCallback);
         });
       }

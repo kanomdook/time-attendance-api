@@ -18,11 +18,11 @@ module.exports = function (app) {
     .delete(employeeprofiles.delete);
 
   // Employeeprofiles Routes By Company
-  app.route('/api/employeeprofiles/company').all(employeeprofilesPolicy.isAllowed)
+  app.route('/api/employee/company').all(employeeprofilesPolicy.isAllowed)
     .get(employeeprofiles.listByCompany)
     .post(employeeprofiles.create);
 
-  app.route('/api/employeeprofiles/company/:employeeprofileId').all(employeeprofilesPolicy.isAllowed)
+  app.route('/api/employee/company/:employeeprofileId').all(employeeprofilesPolicy.isAllowed)
     .get(employeeprofiles.read)
     .put(employeeprofiles.update)
     .delete(employeeprofiles.delete);
