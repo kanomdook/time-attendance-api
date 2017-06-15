@@ -13,6 +13,7 @@ var CompanySchema = new Schema({
   name: {
     type: String,
     default: '',
+    unique: 'Company name already exists',
     required: 'Please fill Company name',
     trim: true
   },

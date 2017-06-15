@@ -14,7 +14,7 @@ var EmployeeprofileSchema = new Schema({
     type: String,
     required: 'Please fill email',
   },
-  office: {
+  company: {
     type: Schema.ObjectId,
     ref: 'Company'
   },
