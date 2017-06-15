@@ -16,7 +16,6 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
     $scope.signup = function (isValid) {
       $scope.error = null;
       $scope.startCall = true;
-
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'userForm');
         $scope.startCall = false;

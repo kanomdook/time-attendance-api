@@ -47,6 +47,9 @@ var CheckinSchema = new Schema({
   lastName: {
     type: String,
   },
+  deviceid: {
+    type: String
+  },
   remark: {
     in: String,
     out: String
