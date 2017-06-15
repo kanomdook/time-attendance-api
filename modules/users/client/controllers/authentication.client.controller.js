@@ -13,6 +13,36 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
       $location.path('/');
     }
 
+    $scope.hideRegisterForm = false;
+    $scope.hideCompanyForm = true;
+
+    $scope.init = function() {
+      $http.get('json/postcode.json').success(function (response) {
+        $scope.postcode = response.postcodeData;
+      }).error(function (error) {
+
+      });
+      $http.get('json/country-language.json').success(function (response) {
+        $scope.country = response.countryData;
+      }).error(function (error) {
+
+      });
+    }
+
+    $scope.nextStep = function(){
+      $scope.hideRegisterForm = true;
+      $scope.hideCompanyForm = false;
+    }
+
+    $scope.backStep = function(){
+      $scope.hideCompanyForm = true;
+      $scope.hideRegisterForm = false;
+    }
+
+    $scope.createData = function(credentials,company){
+      
+    }
+
     $scope.signup = function (isValid) {
       $scope.error = null;
       $scope.startCall = true;
