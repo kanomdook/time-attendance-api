@@ -18,6 +18,10 @@ var EmployeeprofileSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'Company'
   },
+  leader: {
+    type: Schema.ObjectId,
+    ref: 'Employeeprofile'
+  },
   jobTitle: {
     type: String,
   },
