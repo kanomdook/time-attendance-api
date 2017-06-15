@@ -82,7 +82,7 @@ exports.delete = function (req, res) {
  * List of Employeeprofiles
  */
 exports.list = function (req, res) {
-  Employeeprofile.find().sort('-created').populate('user', 'displayName').populate('office').exec(function (err, employeeprofiles) {
+  Employeeprofile.find().sort('-created').populate('user', 'displayName').populate('company').exec(function (err, employeeprofiles) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -104,7 +104,7 @@ exports.employeeprofileByID = function (req, res, next, id) {
     });
   }
 
-  Employeeprofile.findById(id).populate('user', 'displayName').populate('office').exec(function (err, employeeprofile) {
+  Employeeprofile.findById(id).populate('user', 'displayName').populate('company').exec(function (err, employeeprofile) {
     if (err) {
       return next(err);
     } else if (!employeeprofile) {
@@ -118,7 +118,7 @@ exports.employeeprofileByID = function (req, res, next, id) {
 };
 
 exports.email = function (req, res, next, email) {
-  Employeeprofile.find().populate('user', 'displayName').populate('office').exec(function (err, employeeprofile) {
+  Employeeprofile.find().populate('user', 'displayName').populate('company').exec(function (err, employeeprofile) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -152,4 +152,16 @@ exports.checkemail = function (req, res) {
 
   res.jsonp({ employees: employees, firstname: firstname, lastname: lastname });
 
+};
+//  get list by company
+exports.listByCompany = function (req, res) {
+  Employeeprofile.find({ company: req.user.company }).sort('-created').populate('user', 'displayName').populate('company').exec(function (err, employeeprofiles) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(employeeprofiles);
+    }
+  });
 };

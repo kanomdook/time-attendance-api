@@ -9,7 +9,7 @@
   EmployeeprofilesService.$inject = ['$resource'];
 
   function EmployeeprofilesService($resource) {
-    return $resource('api/employeeprofiles/:employeeprofileId', {
+    return $resource('api/employee/company/:employeeprofileId', {
       employeeprofileId: '@_id'
     }, {
       update: {

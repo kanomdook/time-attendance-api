@@ -13,10 +13,17 @@ var EmployeeprofileSchema = new Schema({
   email: {
     type: String,
     required: 'Please fill email',
+    unique: 'Email already exists'
   },
   company: {
     type: Schema.ObjectId,
     ref: 'Company'
+  },
+  shiftin: {
+    type: Date
+  },
+  shiftout: {
+    type: Date
   },
   leader: {
     type: Schema.ObjectId,
