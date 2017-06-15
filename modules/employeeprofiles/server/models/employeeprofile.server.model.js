@@ -19,6 +19,12 @@ var EmployeeprofileSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'Company'
   },
+  shiftin: {
+    type: Date
+  },
+  shiftout: {
+    type: Date
+  },
   leader: {
     type: Schema.ObjectId,
     ref: 'Employeeprofile'
