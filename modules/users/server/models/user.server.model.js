@@ -78,6 +78,10 @@ var UserSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'Employeeprofile'
   },
+  company: {
+    type: Schema.ObjectId,
+    ref: 'Company'
+  },
   provider: {
     type: String,
     required: 'Provider is required'
