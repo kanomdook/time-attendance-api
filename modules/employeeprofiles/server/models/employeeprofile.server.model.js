@@ -57,7 +57,12 @@ var EmployeeprofileSchema = new Schema({
   positionByJob: {
     type: String,
   },
-
+  fingerscannerid: {
+    type: String,
+  },
+  fingerid: {
+    type: String,
+  },
   created: {
     type: Date,
     default: Date.now

@@ -16,7 +16,7 @@
                         </div>
                         <button type="submit" class="btn btn-primary block full-width m-b" ng-disabled="!credentials.username || !credentials.password || startCall"><i class="fa fa-spinner fa-spin" ng-if="startCall"></i> ลงชื่อเข้าใช้</button>
                         <alert type="danger" ng-show="error" class="text-center text-danger">
-                            <span ng-bind="newError"></span>
+                            <span ng-bind="error"></span>
                         </alert>
                         <br>
                         <a href="#"><small>ลืมรหัสผ่าน?</small></a>
