@@ -60,7 +60,7 @@
         <!--///-->
         <section ng-init="init()" ng-hide="hideCompanyForm">
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
-        <form class="form-horizontal" name="companyForm" ng-submit="createData(credentials,company)" validate>
+        <form class="form-horizontal" name="companyForm" validate>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="tabs-container">
@@ -214,10 +214,10 @@
                                             </div>
                                             <div class="col-xs-12 col-md-4">
                                                 <div class="form-group">
-                                                    <button class="btn btn-primary btn-block ladda-button" id="form-submit" data-style="expand-left" ng-disabled="!companyForm.$valid" type="submit"><i class="fa fa-spinner fa-spin" ng-if="startCall"></i> {{vm.company._id ? 'บันทึกข้อมูล' : 'บันทึกข้อมูล'}}</button>
+                                                    <button class="btn btn-primary btn-block ladda-button" id="form-submit" data-style="expand-left" ng-disabled="!companyForm.$valid" ng-click="createData(credentials,company)"><i class="fa fa-spinner fa-spin" ng-if="startCall"></i> {{vm.company._id ? 'บันทึกข้อมูล' : 'บันทึกข้อมูล'}}</button>
                                                 </div>
                                                 <div class="form-group">
-                                                    <button class="btn btn-primary btn-block ladda-button" data-style="expand-left" ng-click="backStep()"> ย้อนกลับ </button>
+                                                    <button class="btn btn-primary btn-block ladda-button" ng-click="backStep()"> ย้อนกลับ </button>
                                                 </div>
                                                 <div class="text-danger" ng-show="vm.error || vm.errorPrice">
                                                     <strong ng-bind="vm.error"></strong>

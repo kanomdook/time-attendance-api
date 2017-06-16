@@ -1,10 +1,11 @@
 'use strict';
 
-angular.module('users').controller('AuthenticationController', ['$scope', '$state', '$http', '$location', '$window', 'Authentication', 'PasswordValidator',
-  function ($scope, $state, $http, $location, $window, Authentication, PasswordValidator) {
+angular.module('users').controller('AuthenticationController', ['$scope', '$state', '$http', '$location', '$window', 'Authentication', 'PasswordValidator', 'CompaniesService',
+  function ($scope, $state, $http, $location, $window, Authentication, PasswordValidator, CompaniesService) {
     $scope.authentication = Authentication;
     $scope.popoverMsg = PasswordValidator.getPopoverMsg();
 
+    var comp = CompaniesService;
     // Get an eventual error defined in the URL query string:
     $scope.error = $location.search().err;
 
@@ -16,7 +17,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
     $scope.hideRegisterForm = false;
     $scope.hideCompanyForm = true;
 
-    $scope.init = function() {
+    $scope.init = function () {
       $http.get('json/postcode.json').success(function (response) {
         $scope.postcode = response.postcodeData;
       }).error(function (error) {
@@ -27,20 +28,42 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
       }).error(function (error) {
 
       });
-    }
+    };
 
-    $scope.nextStep = function(){
+    $scope.nextStep = function () {
       $scope.hideRegisterForm = true;
       $scope.hideCompanyForm = false;
-    }
+    };
 
-    $scope.backStep = function(){
+    $scope.backStep = function () {
       $scope.hideCompanyForm = true;
       $scope.hideRegisterForm = false;
+    };
+
+    $scope.createData = function (credentials, company) {
+      $http.post('/api/auth/signup', credentials).success(function (user) {
+        createCompany(company, user);
+      }).error(function (err) {
+        console.log('Error' + err);
+      });
+    };
+
+    function createCompany(company, user) {
+      company.user = user._id;
+      $http.post('/api/companies', company).success(function (comp) {
+        updateUser(user, comp._id);
+      }).error(function (err) {
+        console.log('Error' + err);
+      });
     }
 
-    $scope.createData = function(credentials,company){
-      
+    function updateUser(user, comp_id) {
+      user.company = comp_id;
+      $http.put('/api/users', user).success(function (res) {
+        $window.location.reload();
+      }).error(function (err) {
+        console.log('Error' + err);
+      });
     }
 
     $scope.signup = function (isValid) {
