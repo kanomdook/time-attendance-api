@@ -7,6 +7,7 @@ var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   mongoose = require('mongoose'),
   passport = require('passport'),
+  crypto = require('crypto'),
   User = mongoose.model('User');
 
 // URLs for which user can't be redirected on signin
@@ -47,6 +48,7 @@ exports.signup = function (req, res) {
         } else {
           User.findById(user._id)
             .populate('employeeprofile')
+            .populate('company')
             .exec(function (err, userp) {
               res.json(userp);
             });
@@ -74,6 +76,7 @@ exports.signin = function (req, res, next) {
         } else {
           User.findById(user._id)
             .populate('employeeprofile')
+            .populate('company')
             .exec(function (err, userp) {
               res.json(userp);
             });
@@ -81,6 +84,7 @@ exports.signin = function (req, res, next) {
       });
     }
   })(req, res, next);
+
 };
 
 /**
