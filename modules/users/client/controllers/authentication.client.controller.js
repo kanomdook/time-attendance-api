@@ -41,23 +41,24 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
 
     $scope.createData = function (credentials, company) {
       $http.post('/api/auth/signup', credentials).success(function (user) {
-        createCompany(company, user);
+        createCompany(company, user,credentials);
       }).error(function (err) {
         console.log('Error' + err);
       });
     };
 
-    function createCompany(company, user) {
+    function createCompany(company, user,credentials) {
       company.user = user._id;
       $http.post('/api/companies', company).success(function (comp) {
-        updateUser(user, comp._id);
+        updateUser(user, comp._id,credentials);
       }).error(function (err) {
         console.log('Error' + err);
       });
     }
 
-    function updateUser(user, comp_id) {
+    function updateUser(user, comp_id,credentials) {
       user.company = comp_id;
+      user.password = credentials.password;
       $http.put('/api/users', user).success(function (res) {
         $window.location.reload();
       }).error(function (err) {
