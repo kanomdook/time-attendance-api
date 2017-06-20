@@ -69,7 +69,9 @@
 
     <!--Load The Socket.io File-->
     <script src="/socket.io/socket.io.js" type="text/javascript"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyATqyCgkKXX1FmgzQJmBMw1olkYYEN7lzE"></script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyATqyCgkKXX1FmgzQJmBMw1olkYYEN7lzE">
+    </script>
     <!--Application JavaScript Files-->
     {% for jsFile in jsFiles %}
     <script src="{{jsFile}}" type="text/javascript"></script>{% endfor %} {% if livereload %}

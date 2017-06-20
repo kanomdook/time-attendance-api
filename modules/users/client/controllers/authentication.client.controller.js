@@ -1,7 +1,17 @@
 'use strict';
 
-angular.module('users').controller('AuthenticationController', ['$scope', '$state', '$http', '$location', '$window', 'Authentication', 'PasswordValidator',
-  function ($scope, $state, $http, $location, $window, Authentication, PasswordValidator) {
+angular.module('users').controller('AuthenticationController', ['$scope', '$state', '$http', '$location', '$window', 'Authentication', 'PasswordValidator', 'NgMap', '$uibModal','$geolocation',
+  function ($scope, $state, $http, $location, $window, Authentication, PasswordValidator, NgMap, $uibModal,$geolocation) {
+    $geolocation.getCurrentPosition({
+            timeout: 60000,
+            enableHighAccuracy: true
+         }).then(function(position) {
+            $scope.myPosition = {
+              lat:position.coords.latitude,
+              lng:position.coords.longitude
+            };
+         });
+
     $scope.authentication = Authentication;
     $scope.popoverMsg = PasswordValidator.getPopoverMsg();
 
@@ -12,6 +22,22 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
     if ($scope.authentication.user) {
       $location.path('/');
     }
+
+    $scope.showGoogleMap = function () {
+      var modal = $uibModal.open({
+        animation: true,
+        templateUrl: 'myModalContent.html',
+        size: 'lg',
+        controller: function ($scope) {
+          $scope.cancel = function () {
+            modal.dismiss('cancel');
+          };
+          $scope.ok = function(){
+            
+          };
+        }
+      });
+    };
 
     $scope.hideRegisterForm = false;
     $scope.hideCompanyForm = true;
@@ -41,22 +67,22 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
 
     $scope.createData = function (credentials, company) {
       $http.post('/api/auth/signup', credentials).success(function (user) {
-        createCompany(company, user,credentials);
+        createCompany(company, user, credentials);
       }).error(function (err) {
         console.log('Error' + err);
       });
     };
 
-    function createCompany(company, user,credentials) {
+    function createCompany(company, user, credentials) {
       company.user = user._id;
       $http.post('/api/companies', company).success(function (comp) {
-        updateUser(user, comp._id,credentials);
+        updateUser(user, comp._id, credentials);
       }).error(function (err) {
         console.log('Error' + err);
       });
     }
 
-    function updateUser(user, comp_id,credentials) {
+    function updateUser(user, comp_id, credentials) {
       user.company = comp_id;
       user.password = credentials.password;
       $http.put('/api/users', user).success(function (res) {
