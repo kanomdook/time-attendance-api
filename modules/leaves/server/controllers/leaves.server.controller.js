@@ -147,13 +147,13 @@ exports.listByCompany = function(req, res) {
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
-            if (leave) {
-                if (leave.length > 0) {
-                    var leaveByCompany = leave.filter(function(obj) {
-                        return obj.user.employeeprofile.company._id.toString() === req.user.company.toString(); });
-                    res.jsonp(leaveByCompany);
-                }
+            var leaveByCompany = [];
+            if (leave.length > 0) {
+                leaveByCompany = leave.filter(function(obj) {
+                    return obj.user.employeeprofile.company._id.toString() === req.user.company.toString();
+                });
             }
+            res.jsonp(leaveByCompany);
         }
     });
 };

@@ -221,17 +221,14 @@ exports.listByCompany = function(req, res) {
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
-            if (checkin) {
-                if (checkin.length > 0) {
-                    var checkinByCompany = checkin.filter(function(obj) {
-                      console.log('+++++++++++++++++' + obj.user.employeeprofile);
-                        if (obj.user.employeeprofile.company && req.user.company) {
-                            return obj.user.employeeprofile.company._id.toString() === req.user.company.toString();
-                        }
-                    });
-                    res.jsonp(checkinByCompany);
-                }
+            var checkinByCompany = [];
+            if (checkin.length > 0) {
+                checkinByCompany = checkin.filter(function(obj) {
+                    return obj.user.employeeprofile.company._id.toString() === req.user.company.toString();
+
+                });
             }
+            res.jsonp(checkinByCompany);
         }
     });
 };
