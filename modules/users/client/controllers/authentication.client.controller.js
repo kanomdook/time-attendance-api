@@ -164,7 +164,8 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
                 $scope.authentication.user = response;
                 $scope.startCall = false;
                 // And redirect to the previous or home page
-                $state.go($state.previous.state.name || 'home', $state.previous.params);
+                // $state.go($state.previous.state.name || 'home', $state.previous.params);
+                $window.location.href = '/companies/' + response.company;
             }).error(function(response) {
                 $scope.startCall = false;
                 $scope.error = response.message;
