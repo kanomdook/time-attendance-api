@@ -1,22 +1,31 @@
 <section>
-  <div class="page-header">
-    <h1>Employeeprofiles</h1>
-  </div>
-  <div class="list-group">
-    <a ng-repeat="employeeprofile in vm.employeeprofiles"
-       ui-sref="employeeprofiles.view({ employeeprofileId: employeeprofile._id })"
-       class="list-group-item">
-      <small class="list-group-item-text">
-        Posted on
-        <span ng-bind="employeeprofile.created | date:'mediumDate'"></span>
-        by
-        <span ng-if="employeeprofile.user" ng-bind="employeeprofile.user.displayName"></span>
-        <span ng-if="!employeeprofile.user">Deleted User</span>
-      </small>
-      <h4 class="list-group-item-heading" ng-bind="employeeprofile.name"></h4>
-    </a>
-  </div>
-  <div class="alert alert-warning text-center" ng-if="vm.employeeprofiles.$resolved && !vm.employeeprofiles.length">
-    No Employeeprofiles yet, why don't you <a ui-sref="employeeprofiles.create">create one</a>?
-  </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="page-header">
+            <h1>พนักงานทั้งหมด</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-3" ng-repeat="employeeprofile in vm.employeeprofiles">
+                <div class="ibox-content product-box">
+                    <div class="product-imitation product-imitation-custom ">
+                        <p ng-if="!employeeprofile.image">[ ไม่มีรูป ]</p>
+                        <img ng-src="{{employeeprofile.image}}" class="employeeprofile-image" alt="รูปพนักงาน" ng-if="employeeprofile.image">
+                    </div>
+                    <div class="product-desc">
+                        <a href="#" class="product-name"> {{employeeprofile.firstname}} {{employeeprofile.lastname}}</a>
+                        <address>
+                            <br> {{employeeprofile.email}}
+                            <br> {{employeeprofile.Tel}}
+                        </address>
+                        <div class="m-t text-righ">
+                            <span class="product-price">{{employeeprofile.jobTitle}}</span>
+                            <a ui-sref="employeeprofiles.view({ employeeprofileId: employeeprofile._id })" class="btn btn-xs btn-outline btn-primary">โปรไฟล์ <i class="fa fa-long-arrow-right"></i> </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="alert alert-warning text-center" ng-if="vm.employeeprofiles.$resolved && !vm.employeeprofiles.length">
+        คุณยังไม่มีรายชื่อพนักงาน <a ui-sref="employeeprofiles.create">เพิ่มพนักงานใหม่</a>?
+    </div>
 </section>

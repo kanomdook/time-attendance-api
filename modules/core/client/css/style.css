@@ -10277,3 +10277,11 @@ body.md-skin {
 .text-center {
     text-align: center!important;
 }
+
+.product-imitation-custom {
+    padding: 10px !important;
+}
+
+.employeeprofile-image {
+    width: 80% !important;
+}
