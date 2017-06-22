@@ -101,15 +101,12 @@
                                         <hr>
                                         <div class="form-group" show-errors>
                                             <label class="col-sm-4 col-md-2 control-label">ที่อยู่</label>
-                                            <div class="col-sm-7 col-md-9" style="display: -webkit-box">
+                                            <div class="col-sm-8 col-md-10" style="display: -webkit-box">
                                                 <input class="form-control" id="address" name="address" ng-model="company.address.address" type="text" required> <span style="margin-left:8px;color:red">*</span>
                                                 <div ng-messages="vm.form.companyForm.address.$error" role="alert">
                                                     <p class="help-block error-text" ng-message="required">กรุณากรอกที่อยู่</p>
                                                 </div>                                                 
-                                            </div>
-                                            <div class="col-sm-1 col-md-1">
-                                                <button type="button" class="btn btn-info" ng-click="showGoogleMap()">แผนที่</button>
-                                            </div>                                            
+                                            </div>                                          
                                         </div>
                                         
                                         <div class="row">
@@ -173,7 +170,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row" style="margin-top:-14px">
                                             <div class="col-xs-12 col-sm-12 col-md-6">
                                                 <div class="form-group" show-errors>
                                                     <label class="col-sm-4 control-label">ละติจูด</label>
