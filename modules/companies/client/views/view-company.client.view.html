@@ -1,26 +1,111 @@
 <section>
-  <div class="page-header">
-    <h1 ng-bind="vm.company.name"></h1>
-  </div>
-  <div class="pull-right"
-       ng-show="vm.company.isCurrentUserOwner">
-    <a class="btn btn-primary"
-       ui-sref="companies.edit({ companyId: vm.company._id })">
-      <i class="glyphicon glyphicon-edit"></i>
-    </a>
-    <a class="btn btn-primary" ng-click="vm.remove()">
-      <i class="glyphicon glyphicon-trash"></i>
-    </a>
-  </div>
-  <small>
-    <em class="text-muted">
-      Posted on
-      <span ng-bind="vm.company.created | date:'mediumDate'"></span>
-      by
-      <span ng-if="vm.company.user"
-            ng-bind="vm.company.user.displayName"></span>
-      <span ng-if="!vm.company.user">Deleted User</span>
-    </em>
-  </small>
-  <p class="lead" ng-bind="vm.company.content"></p>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox">
+                    <div class="mail-box-header">
+                        <div class="pull-right" ng-show="vm.authentication.user.roles[0] === 'admin'">
+                            <a class="btn btn-primary" ui-sref="companies.edit({ companyId: vm.company._id })">
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </a>
+                            <a class="btn btn-primary" ng-click="vm.remove()">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </a>
+                        </div>
+                        <div class="mail-tools tooltip-demo m-t-md">
+                            <h3>
+                                <span class="font-normal"></span>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="ibox-content profile-content">
+                        <div class="row m-b-lg m-t-lg">
+                            <div class="col-md-12">
+                                <div class="profile-image">
+                                    <img ng-src="{{vm.company.images[0]}}" class="m-b-md" alt="profile">
+                                </div>
+                                <div class="profile-info">
+                                    <div class="">
+                                        <div>
+                                            <h2 class="no-margins">
+                                                <strong>{{vm.company.name}}</strong>
+                                            </h2>
+                                            <p>
+                                                {{vm.company.address.address}} {{vm.company.address.district}} {{vm.company.address.subdistrict}} {{vm.company.address.province}} {{vm.company.address.postcode}}, {{vm.company.address.country.en.common}}
+                                                <br>
+                                                <small>{{vm.company.email}}</small>
+                                            </p>
+                                            <small ng-if="vm.company.note"><strong>หมายเหตุ</strong> {{vm.company.note}}<br></small>
+                                            <small><strong>ผู้ติดต่อ</strong> {{vm.company.contact}}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                                <div class="ibox-content">
+                                    <h3>ช่องทางการติดต่อ</h3>
+                                    <div class="row margin-top-small" ng-if="vm.company.telofficeno">
+                                        <div class="col-md-12">
+                                            <img src="./modules/companies/client/img/social/phone.png" alt="tel" width="30px;">
+                                            <label>&nbsp; {{vm.company.telofficeno}}, {{vm.company.telno}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row margin-top-small" ng-if="vm.company.facebook">
+                                        <div class="col-md-12">
+                                            <img src="./modules/companies/client/img/social/facebook.png" alt="tel" width="30px;">
+                                            <label>&nbsp; {{vm.company.facebook}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row margin-top-small" ng-if="vm.company.line">
+                                        <div class="col-md-12">
+                                            <img src="./modules/companies/client/img/social/line.png" alt="tel" width="30px;">
+                                            <label>&nbsp; {{vm.company.line}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row margin-top-small" ng-if="vm.company.whatapp">
+                                        <div class="col-md-12">
+                                            <img src="./modules/companies/client/img/social/whatsapp.png" alt="tel" width="30px;">
+                                            <label>&nbsp; {{vm.company.whatapp}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row margin-top-small" ng-if="vm.company.wechat">
+                                        <div class="col-md-12">
+                                            <img src="./modules/companies/client/img/social/wechat.png" alt="tel" width="30px;">
+                                            <label>&nbsp; {{vm.company.wechat}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row margin-top-small" ng-if="vm.company.kakao">
+                                        <div class="col-md-12">
+                                            <img src="./modules/companies/client/img/social/kakao.png" alt="tel" width="30px;">
+                                            <label>&nbsp; {{vm.company.kakao}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7" ng-hide="errorMap">
+                                <div class="ibox-content" ng-init="vm.getLocation()">
+                                    <ng-map center="{{lat}},{{lng}}" zoom="14">
+                                        <marker position="{{lat}},{{lng}}" title="{{vm.company.name}}" icon="/modules/companies/client/img/marker-50.png" animation="Animation.BOUNCE"></marker>
+                                        <!--  animation="Animation.BOUNCE" -->
+                                    </ng-map>
+                                </div>
+                                <!-- <div class="text-center">
+                                    <a class="btn btn-primary" ng-click="vm.getCurrentPosition()"><i class="fa fa-map-marker"></i> ค้นหาเส้นทาง</a>
+                                </div> -->
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7" ng-show="errorMap">
+                                <div class="ibox-content">
+                                    <div class="text-center">
+                                        <p class="text-danger">*{{errorMapText}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
