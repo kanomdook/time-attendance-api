@@ -173,6 +173,27 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-12 col-md-6">
+                                                <div class="form-group" show-errors>
+                                                    <label class="col-sm-4 control-label">ละติจูด</label>
+                                                    <div class="col-sm-8">
+                                                        <input class="form-control" id="taxid" name="taxid" ng-model="company.address.location.latitude" type="text">
+                                                        <div ng-messages="vm.form.companyForm.taxid.$error" role="alert">
+                                                            <p class="help-block error-text" ng-message="required">กรุณากรอกเลขประจำตัวผู้เสียภาษี</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">ลองจิจูด</label>
+                                                    <div class="col-sm-8">
+                                                        <input class="form-control" id="brunch" name="brunch" ng-model="company.address.location.longitude" type="text">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <hr>
                                         <div class="form-group" show-errors>
                                             <label class="col-sm-4 col-md-2 control-label">เบอร์โทรศัพท์(บริษัท)</label>
