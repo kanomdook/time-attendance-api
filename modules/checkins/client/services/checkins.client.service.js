@@ -9,12 +9,12 @@
   CheckinsService.$inject = ['$resource'];
 
   function CheckinsService($resource) {
-    return $resource('api/checkins/:checkinId', {
+    return $resource('api/checkin/company/:checkinId', {
       checkinId: '@_id'
     }, {
-      update: {
-        method: 'PUT'
-      }
-    });
+        update: {
+          method: 'PUT'
+        }
+      });
   }
 }());
