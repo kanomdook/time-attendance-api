@@ -24,7 +24,7 @@
                 <a href="/"><i class="fa fa-home"></i> <span class="nav-label">หน้าหลัก</span></a>
             </li>
             <li class="dropdown" ng-class="{active: $uiRoute}" ng-if="authentication.user" ui-route="/companies">
-                <a href="/companies"><i class="fa fa-building"></i> <span class="nav-label">ข้อมูลบริษัท</span></a>
+                <a href="/companies/{{authentication.user.company._id}}"><i class="fa fa-building"></i> <span class="nav-label">ข้อมูลบริษัท</span></a>
             </li>
             <li class="dropdown" ng-class="{active: $uiRoute}" ng-if="authentication.user" ui-route="/employeeprofiles">
                 <a href="/employeeprofiles"><i class="fa fa-users"></i> <span class="nav-label">ข้อมูลพนักงาน</span></a>
