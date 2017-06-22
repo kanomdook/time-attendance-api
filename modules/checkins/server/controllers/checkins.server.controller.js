@@ -204,7 +204,7 @@ exports.getById = function (req, res) {
 };
 //  get list by company
 exports.listByCompany = function (req, res) {
-  Checkin.find({ user: { employeeprofile: '5949fcd3284a03100043329e' } }).sort('-created').populate({
+  Checkin.find().sort('-created').populate({
     path: 'user',
     model: 'User',
     populate: {
@@ -221,7 +221,8 @@ exports.listByCompany = function (req, res) {
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.jsonp(checkin);
+      var checkinByCompany = checkin.filter(function (obj) { return obj.user.employeeprofile.company == req.user.company })
+      res.jsonp(checkinByCompany);
     }
   });
 };
