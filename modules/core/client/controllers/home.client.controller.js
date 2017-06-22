@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core').controller('HomeController', ['$scope', 'Authentication', '$state', '$window',
-    function($scope, Authentication, $state, $window) {
+angular.module('core').controller('HomeController', ['$scope', 'Authentication', '$state', '$window', '$location',
+    function($scope, Authentication, $state, $window, $location) {
         // This provides Authentication context.
         $scope.authentication = Authentication;
 
@@ -9,13 +9,8 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         if (!$scope.authentication.user) {
             $state.go('authentication.signin');
         } else {
-            //$scope.helloText = 'สวัสดี คุณ ' + $scope.authentication.user.displayName;
-            $state.go('home');
-            // window.location.href = '/products';
-            // $state.reload('products.list');
-            // window.location.reload('/products');
+            $location.path('/companies/' + $scope.authentication.user.company);
         }
-        // $scope.descriptionText = 'คุณต้องการจัดการเรื่องอะไร';
 
     }
 ]);

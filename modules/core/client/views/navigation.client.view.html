@@ -20,10 +20,10 @@
                     </div>
                 </div>
             </li>
-            <li class="dropdown" ng-class="{active: $uiRoute}" ng-if="authentication.user" ui-route="/">
+            <!-- <li class="dropdown" ng-class="{active: $uiRoute}" ng-if="authentication.user" ui-route="/">
                 <a href="/"><i class="fa fa-home"></i> <span class="nav-label">หน้าหลัก</span></a>
-            </li>
-            <li class="dropdown" ng-class="{active: $uiRoute}" ng-if="authentication.user" ui-route="/companies">
+            </li> -->
+            <li class="dropdown" ng-class="{active: $uiRoute}" ng-if="authentication.user" ui-route="/companies/{{authentication.user.company}}">
                 <a href="/companies/{{authentication.user.company}}"><i class="fa fa-building"></i> <span class="nav-label">ข้อมูลบริษัท</span></a>
             </li>
             <li class="dropdown" ng-class="{active: $uiRoute}" ng-if="authentication.user" ui-route="/employeeprofiles">
