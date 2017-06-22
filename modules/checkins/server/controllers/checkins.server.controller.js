@@ -204,7 +204,18 @@ exports.getById = function (req, res) {
 };
 //  get list by company
 exports.listByCompany = function (req, res) {
-  Checkin.find().sort('-created').populate('user').exec(function (err, checkin) {
+  Checkin.find({ user: { employeeprofile: { company: req.user.company } } }).sort('-created').populate({
+    path: 'user',
+    model: 'User',
+    populate: {
+      path: 'employeeprofile',
+      model: 'Employeeprofile',
+      populate: {
+        path: 'company',
+        model: 'Companies'
+      }
+    }
+  }).exec(function (err, checkin) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
