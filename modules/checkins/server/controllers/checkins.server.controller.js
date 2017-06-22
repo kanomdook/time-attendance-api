@@ -212,7 +212,7 @@ exports.listByCompany = function (req, res) {
       model: 'Employeeprofile',
       populate: {
         path: 'company',
-        model: 'Companies'
+        model: 'Company'
       }
     }
   }).exec(function (err, checkin) {
