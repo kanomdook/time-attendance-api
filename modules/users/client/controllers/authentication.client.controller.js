@@ -1,16 +1,15 @@
 'use strict';
 
-angular.module('users').controller('AuthenticationController', ['$scope', '$state', '$http', '$location', '$window', 'Authentication', 'PasswordValidator', 'NgMap', '$uibModal','$geolocation',
-  function ($scope, $state, $http, $location, $window, Authentication, PasswordValidator, NgMap, $uibModal,$geolocation) {
+angular.module('users').controller('AuthenticationController', ['$scope', '$state', '$http', '$location', '$window', 'Authentication', 'PasswordValidator', 'NgMap', '$uibModal', '$geolocation',
+  function ($scope, $state, $http, $location, $window, Authentication, PasswordValidator, NgMap, $uibModal, $geolocation) {
+    var map;
+    var center;
     $geolocation.getCurrentPosition({
-            timeout: 60000,
-            enableHighAccuracy: true
-         }).then(function(position) {
-            $scope.myPosition = {
-              lat:position.coords.latitude,
-              lng:position.coords.longitude
-            };
-         });
+      timeout: 60000,
+      enableHighAccuracy: true
+    }).then(function (position) {
+      // center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    });
 
     $scope.authentication = Authentication;
     $scope.popoverMsg = PasswordValidator.getPopoverMsg();
@@ -23,17 +22,38 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
       $location.path('/');
     }
 
+    $scope.callback = function (postcode) {
+      $scope.checkAutocomplete(postcode);
+    };
+
+    $scope.checkAutocomplete = function (postcode) {
+      if (postcode) {
+        $scope.company.address.postcode = postcode.postcode;
+        $scope.company.address.district = postcode.district;
+        $scope.company.address.subdistrict = postcode.subdistrict;
+        $scope.company.address.province = postcode.province;
+      } else {
+        $scope.company.address.district = '';
+        $scope.company.address.province = '';
+        $scope.company.address.subdistrict = '';
+      }
+    };
+
     $scope.showGoogleMap = function () {
       var modal = $uibModal.open({
         animation: true,
         templateUrl: 'myModalContent.html',
         size: 'lg',
         controller: function ($scope) {
+          NgMap.getMap().then(function (map) {
+            map = map;
+            map.setCenter(center);
+          });
           $scope.cancel = function () {
             modal.dismiss('cancel');
           };
-          $scope.ok = function(){
-            
+          $scope.ok = function () {
+
           };
         }
       });
@@ -50,6 +70,20 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
       });
       $http.get('json/country-language.json').success(function (response) {
         $scope.country = response.countryData;
+        $scope.company = {
+          address: {
+            country: {
+              "cca2": "TH",
+              "cca3": "THA",
+              "en": {
+                "common": "Thailand",
+                "official": "Kingdom of Thailand"
+              },
+              "th": "ราชอาณาจักรไทย",
+              "currency": "THB"
+            }
+          }
+        };
       }).error(function (error) {
 
       });
@@ -69,7 +103,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
       $http.post('/api/auth/signup', credentials).success(function (user) {
         createCompany(company, user, credentials);
       }).error(function (err) {
-        console.log('Error' + err);
+        console.error(err);
       });
     };
 
@@ -78,7 +112,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
       $http.post('/api/companies', company).success(function (comp) {
         updateUser(user, comp._id, credentials);
       }).error(function (err) {
-        console.log('Error' + err);
+        console.error(err);
       });
     }
 
@@ -86,9 +120,9 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
       user.company = comp_id;
       user.password = credentials.password;
       $http.put('/api/users', user).success(function (res) {
-        $window.location.reload();
+        $location.path('/');
       }).error(function (err) {
-        console.log('Error' + err);
+        console.error(err);
       });
     }
 
