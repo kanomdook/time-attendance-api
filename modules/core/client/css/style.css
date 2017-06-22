@@ -3010,7 +3010,7 @@ label.error {
     filter: alpha(opacity=90);
 }
 
-#toast-container> :hover {
+#toast-container>:hover {
     -moz-box-shadow: 0 0 4px #999;
     -webkit-box-shadow: 0 0 4px #999;
     box-shadow: 0 0 4px #999;
@@ -10272,4 +10272,8 @@ body.md-skin {
     #page-wrapper {
         margin: 0;
     }
+}
+
+.text-center {
+    text-align: center!important;
 }
