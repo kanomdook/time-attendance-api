@@ -147,7 +147,7 @@ exports.listByCompany = function (req, res) {
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      var leaveByCompany = leave.filter(function (obj) { return obj.user.employeeprofile.company._id.toString() === req.user.company.toString() })
+      var leaveByCompany = leave.filter(function (obj) { return obj.user.employeeprofile.company._id.toString() === req.user.company.toString(); });
       res.jsonp(leaveByCompany);
     }
   });
