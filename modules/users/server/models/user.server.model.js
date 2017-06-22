@@ -72,7 +72,7 @@ var UserSchema = new Schema({
   },
   profileImageURL: {
     type: String,
-    default: 'modules/users/client/img/profile/default.png'
+    default: 'default.png'
   },
   employeeprofile: {
     type: Schema.ObjectId,
