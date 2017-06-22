@@ -20,6 +20,12 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/leaves/:leaveId',
       permissions: '*'
+    }, {
+      resources: '/api/leave/company',
+      permissions: '*'
+    }, {
+      resources: '/api/leave/company/:leaveId',
+      permissions: '*'
     }]
   }, {
     roles: ['user'],
@@ -28,6 +34,12 @@ exports.invokeRolesPolicies = function () {
       permissions: ['get', 'post']
     }, {
       resources: '/api/leaves/:leaveId',
+      permissions: ['get']
+    }, {
+      resources: '/api/leave/company',
+      permissions: ['get', 'post']
+    }, {
+      resources: '/api/leave/company/:leaveId',
       permissions: ['get']
     }]
   }, {

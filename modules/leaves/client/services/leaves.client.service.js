@@ -9,7 +9,7 @@
   LeavesService.$inject = ['$resource'];
 
   function LeavesService($resource) {
-    return $resource('api/leaves/:leaveId', {
+    return $resource('api/leave/company/:leaveId', {
       leaveId: '@_id'
     }, {
       update: {

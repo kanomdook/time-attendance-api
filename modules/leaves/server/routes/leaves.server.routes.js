@@ -20,6 +20,16 @@ module.exports = function (app) {
     .put(leaves.update)
     .delete(leaves.delete);
 
+  // Checkins Routes By Company
+  app.route('/api/leave/company').all(leavesPolicy.isAllowed)
+    .get(leaves.listByCompany)
+    .post(leaves.create);
+
+  app.route('/api/leave/company/:leaveId').all(leavesPolicy.isAllowed)
+    .get(leaves.read)
+    .put(leaves.update)
+    .delete(leaves.delete);
+
   // Finish by binding the Leave middleware
   app.param('leaveId', leaves.leaveByID);
   app.param('userid', leaves.getByUserID);

@@ -128,3 +128,27 @@ exports.getByUserID = function (req, res, next, id) {
 exports.getById = function (req, res) {
   res.jsonp(req.leaveByUserID);
 };
+//  get list by company
+exports.listByCompany = function (req, res) {
+  Leave.find().sort('-created').populate({
+    path: 'user',
+    model: 'User',
+    populate: {
+      path: 'employeeprofile',
+      model: 'Employeeprofile',
+      populate: {
+        path: 'company',
+        model: 'Company'
+      }
+    }
+  }).exec(function (err, leave) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      var leaveByCompany = leave.filter(function (obj) { return obj.user.employeeprofile.company._id.toString() === req.user.company.toString() })
+      res.jsonp(leaveByCompany);
+    }
+  });
+};
