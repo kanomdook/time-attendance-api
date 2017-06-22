@@ -224,6 +224,7 @@ exports.listByCompany = function(req, res) {
             if (checkin) {
                 if (checkin.length > 0) {
                     var checkinByCompany = checkin.filter(function(obj) {
+                      console.log('+++++++++++++++++' + obj.user.employeeprofile);
                         if (obj.user.employeeprofile.company && req.user.company) {
                             return obj.user.employeeprofile.company._id.toString() === req.user.company.toString();
                         }
