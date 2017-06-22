@@ -5,38 +5,38 @@
                 <div>
                     <h3>สมัครใช้งาน</h3>
                     <form name="userForm" class="signin" novalidate autocomplete="off">
-                        <div class="form-group" show-errors>
-                            <input type="text" name="firstname" class="form-control" placeholder="ชื่อ" ng-model="credentials.firstName" required>
+                        <div class="form-group" show-errors style="display: -webkit-box">
+                            <input type="text" name="firstname" class="form-control" placeholder="ชื่อ" ng-model="credentials.firstName" required> <span style="margin-left:8px;color:red">*</span>
                             <div class="text-left" ng-messages="userForm.firstname.$error" role="alert">
                                 <p class="help-block error-text" ng-message="required">กรุณากรอกชื่อ</p>
                             </div>
                         </div>
-                        <div class="form-group" show-errors>
-                            <input type="text" name="lastname" class="form-control" placeholder="นามสกุล" ng-model="credentials.lastName" required>
+                        <div class="form-group" show-errors style="display: -webkit-box">
+                            <input type="text" name="lastname" class="form-control" placeholder="นามสกุล" ng-model="credentials.lastName" required> <span style="margin-left:8px;color:red">*</span>
                             <div class="text-left" ng-messages="userForm.lastname.$error" role="alert">
                                 <p class="help-block error-text" ng-message="required">กรุณากรอกนามสกุล</p>
                             </div>
                         </div>
-                        <div class="form-group" show-errors>
-                            <input type="email" name="email" class="form-control" placeholder="อีเมล์" ng-model="credentials.email" required>
+                        <div class="form-group" show-errors style="display: -webkit-box">
+                            <input type="email" name="email" class="form-control" placeholder="อีเมล์" ng-model="credentials.email" required> <span style="margin-left:8px;color:red">*</span>
                             <div class="text-left" ng-messages="userForm.email.$error" role="alert">
                                 <p class="help-block error-text" ng-message="required">กรุณากรอกอีเมล์</p>
                             </div>
                         </div>
-                        <div class="form-group" show-errors>
-                            <input type="text" name="tel" class="form-control" placeholder="เบอร์โทรศัพท์" ng-model="credentials.tel" required>
+                        <div class="form-group" show-errors style="display: -webkit-box">
+                            <input type="text" name="tel" class="form-control" placeholder="เบอร์โทรศัพท์" ng-model="credentials.tel" required> <span style="margin-left:8px;color:red">*</span>
                             <div class="text-left" ng-messages="userForm.tel.$error" role="alert">
                                 <p class="help-block error-text" ng-message="required">กรุณากรอกเบอร์โทรศัพท์</p>
                             </div>
                         </div>
-                        <div class="form-group" show-errors>
-                            <input type="text" name="username" class="form-control" placeholder="ชื่อผู้ใช้" ng-model="credentials.username" required>
+                        <div class="form-group" show-errors style="display: -webkit-box">
+                            <input type="text" name="username" class="form-control" placeholder="ชื่อผู้ใช้" ng-model="credentials.username" required> <span style="margin-left:8px;color:red">*</span>
                             <div class="text-left" ng-messages="userForm.username.$error" role="alert">
                                 <p class="help-block error-text" ng-message="required">กรุณากรอกชื่อผู้ใช้งาน</p>
                             </div>
                         </div>
-                        <div class="form-group" show-errors>
-                            <input type="password" name="password" class="form-control" placeholder="รหัสผ่าน" ng-model="credentials.password" required>
+                        <div class="form-group" show-errors style="display: -webkit-box">
+                            <input type="password" name="password" class="form-control" placeholder="รหัสผ่าน" ng-model="credentials.password" required> <span style="margin-left:8px;color:red">*</span>
                             <div class="text-left" ng-messages="userForm.password.$error" role="alert">
                                 <p class="help-block error-text" ng-message="required">กรุณากรอกรหัสผ่าน</p>
                             </div>
@@ -70,8 +70,8 @@
                                     <fieldset class="form-horizontal">
                                         <div class="form-group" show-errors>
                                             <label class="col-sm-4 col-md-2 control-label">ชื่อบริษัท</label>
-                                            <div class="col-sm-8 col-md-10">
-                                                <input class="form-control" id="name" name="name" ng-model="company.name" type="text" required>
+                                            <div class="col-sm-8 col-md-10" style="display: -webkit-box">
+                                                <input class="form-control" id="name" name="name" ng-model="company.name" type="text" required> <span style="margin-left:8px;color:red">*</span>
                                                 <div ng-messages="vm.form.companyForm.name.$error" role="alert">
                                                     <p class="help-block error-text" ng-message="required">กรุณากรอก ชื่อบริษัท</p>
                                                 </div>
@@ -101,13 +101,13 @@
                                         <hr>
                                         <div class="form-group" show-errors>
                                             <label class="col-sm-4 col-md-2 control-label">ที่อยู่</label>
-                                            <div class="col-sm-6 col-md-8">
-                                                <input class="form-control" id="address" name="address" ng-model="company.address.address" type="text" required>
+                                            <div class="col-sm-7 col-md-9" style="display: -webkit-box">
+                                                <input class="form-control" id="address" name="address" ng-model="company.address.address" type="text" required> <span style="margin-left:8px;color:red">*</span>
                                                 <div ng-messages="vm.form.companyForm.address.$error" role="alert">
                                                     <p class="help-block error-text" ng-message="required">กรุณากรอกที่อยู่</p>
                                                 </div>                                                 
                                             </div>
-                                            <div class="col-sm-2 col-md-2">
+                                            <div class="col-sm-1 col-md-1">
                                                 <button type="button" class="btn btn-info" ng-click="showGoogleMap()">แผนที่</button>
                                             </div>                                            
                                         </div>
@@ -118,7 +118,7 @@
                                                     <label class="col-sm-4 control-label">รหัสไปร์ณีย์</label>
                                                     <div class="col-sm-8">
                                                         <!-- <input type="text" name="postcode" id="postcode" ng-model="vm.company.address.postcode" class="form-control" placeholder="" required> -->
-                                                        <input class="form-control" id="postcode" name="postcode" ng-change="checkAutocomplete(company.address.postcode)" ng-model="company.address.postcode" type="text" autocomplete="true" typeahead="postcode" typeahead-callback="callback">
+                                                        <input class="form-control" id="postcode" name="postcode" ng-click="checkAutocomplete(company.address.postcode)" ng-model="company.address.postcode" type="text" autocomplete="true" typeahead="postcode" typeahead-callback="callback">
                                                         <div ng-messages="vm.form.companyForm.postcode.$error" role="alert">
                                                             <p class="help-block error-text" ng-message="required">กรุณากรอกรหัสไปร์ณีย์</p>
                                                         </div>
@@ -129,7 +129,7 @@
                                                 <div class="form-group" show-errors>
                                                     <label class="col-sm-4 control-label">เขต/อำเภอ</label>
                                                     <div class="col-sm-8">
-                                                        <input class="form-control" id="district" name="district" ng-model="company.address.district" type="text">
+                                                        <input class="form-control" id="district" name="district" ng-model="company.address.district" type="text" disabled>
                                                         <div ng-messages="vm.form.companyForm.district.$error" role="alert">
                                                             <p class="help-block error-text" ng-message="required">กรุณากรอก เขต/อำเภอ</p>
                                                         </div>
@@ -142,7 +142,7 @@
                                                 <div class="form-group" show-errors>
                                                     <label class="col-sm-4 control-label">แขวง/ตำบล</label>
                                                     <div class="col-sm-8">
-                                                        <input class="form-control" id="subdistrict" name="subdistrict" ng-model="company.address.subdistrict" type="text">
+                                                        <input class="form-control" id="subdistrict" name="subdistrict" ng-model="company.address.subdistrict" type="text" disabled>
                                                         <div ng-messages="vm.form.companyForm.subdistrict.$error" role="alert">
                                                             <p class="help-block error-text" ng-message="required">กรุณากรอก แขวง/ตำบล</p>
                                                         </div>
@@ -153,7 +153,7 @@
                                                 <div class="form-group" show-errors>
                                                     <label class="col-sm-4 control-label">จังหวัด</label>
                                                     <div class="col-sm-8">
-                                                        <input class="form-control" id="province" name="province" ng-model="company.address.province" type="text">
+                                                        <input class="form-control" id="province" name="province" ng-model="company.address.province" type="text" disabled>
                                                         <div ng-messages="vm.form.companyForm.province.$error" role="alert">
                                                             <p class="help-block error-text" ng-message="required">กรุณากรอกจังหวัด</p>
                                                         </div>
@@ -176,8 +176,8 @@
                                         <hr>
                                         <div class="form-group" show-errors>
                                             <label class="col-sm-4 col-md-2 control-label">เบอร์โทรศัพท์(บริษัท)</label>
-                                            <div class="col-sm-8 col-md-10">
-                                                <input class="form-control" id="tel" name="tel" ng-model="company.tel" type="text" required>
+                                            <div class="col-sm-8 col-md-10" style="display: -webkit-box">
+                                                <input class="form-control" id="tel" name="tel" ng-model="company.tel" type="text" required> <span style="margin-left:8px;color:red">*</span>
                                                 <div ng-messages="vm.form.companyForm.tel.$error" role="alert">
                                                     <p class="help-block error-text" ng-message="required">กรุณากรอกเบอร์โทรศัพท์</p>
                                                 </div>
@@ -238,6 +238,7 @@
         </form>
     </div>
     </section>
+    
     <!--// google map-->
     <script type="text/ng-template" id="myModalContent.html">
         <div class="modal-header">
@@ -253,7 +254,5 @@
             <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
         </div>
     </script>
-
-
     </div>
 </div>
