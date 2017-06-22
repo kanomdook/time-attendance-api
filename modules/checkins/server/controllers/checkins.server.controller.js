@@ -221,7 +221,7 @@ exports.listByCompany = function (req, res) {
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      var checkinByCompany = checkin.filter(function (obj) { return obj.user.employeeprofile.company._id == req.user.company._id })
+      var checkinByCompany = checkin.filter(function (obj) { console.error(obj.user.employeeprofile.company._id + "---------------" + req.user.company._id); return obj.user.employeeprofile.company._id === req.user.company._id })
       res.jsonp(checkinByCompany);
     }
   });
