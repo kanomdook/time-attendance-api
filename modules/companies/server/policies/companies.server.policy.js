@@ -20,6 +20,12 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/companies/:companyId',
       permissions: '*'
+    }, {
+      resources: '/api/company',
+      permissions: '*'
+    }, {
+      resources: '/api/company/:companyId',
+      permissions: '*'
     }]
   }, {
     roles: ['user'],
@@ -28,6 +34,12 @@ exports.invokeRolesPolicies = function () {
       permissions: ['get', 'post']
     }, {
       resources: '/api/companies/:companyId',
+      permissions: ['get']
+    }, {
+      resources: '/api/company',
+      permissions: ['get', 'post']
+    }, {
+      resources: '/api/company/:companyId',
       permissions: ['get']
     }]
   }, {

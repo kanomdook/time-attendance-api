@@ -9,7 +9,7 @@
   CompaniesService.$inject = ['$resource'];
 
   function CompaniesService($resource) {
-    return $resource('api/companies/:companyId', {
+    return $resource('api/company/:companyId', {
       companyId: '@_id'
     }, {
       update: {

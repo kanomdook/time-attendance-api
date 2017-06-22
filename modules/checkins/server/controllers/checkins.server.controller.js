@@ -202,3 +202,15 @@ exports.getByUserID = function (req, res, next, id) {
 exports.getById = function (req, res) {
   res.jsonp(req.checkinByID);
 };
+//  get list by company
+exports.listByCompany = function (req, res) {
+  Checkin.find().sort('-created').populate('user').exec(function (err, checkin) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(checkin);
+    }
+  });
+};

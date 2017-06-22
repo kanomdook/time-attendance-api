@@ -17,8 +17,18 @@ module.exports = function (app) {
     .put(companies.update)
     .delete(companies.delete);
 
+  // Company Routes By Company
+  app.route('/api/company').all(companiesPolicy.isAllowed)
+    .get(companies.listByCompany)
+    .post(companies.create);
+
+  app.route('/api/company/:companyId').all(companiesPolicy.isAllowed)
+    .get(companies.read)
+    .put(companies.update)
+    .delete(companies.delete);
+
   app.route('/api/companies_picture').post(companies.changeCompaniesPicture);
-  
+
   // Finish by binding the Company middleware
   app.param('companyId', companies.companyByID);
 };

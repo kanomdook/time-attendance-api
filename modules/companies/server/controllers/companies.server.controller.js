@@ -150,3 +150,15 @@ exports.changeCompaniesPicture = function (req, res) {
     });
   }
 };
+//  get list by company
+exports.listByCompany = function (req, res) {
+  Company.find({ _id: req.user.company }).sort('-created').populate('user', 'displayName').exec(function (err, company) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(company);
+    }
+  });
+};

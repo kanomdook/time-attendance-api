@@ -101,12 +101,9 @@
       if (vm.employeeprofile._id) {
         vm.employeeprofile.$update(successCallback, errorCallback);
       } else {
-
-        CompaniesService.query(function (company) {
-          vm.employeeprofile.company = company[0];
-          vm.employeeprofile.leader = null;
-          vm.employeeprofile.$save(successCallback, errorCallback);
-        });
+        vm.employeeprofile.company = vm.authentication.user.company;
+        vm.employeeprofile.leader = null;
+        vm.employeeprofile.$save(successCallback, errorCallback);
       }
 
       function successCallback(res) {
