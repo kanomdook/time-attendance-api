@@ -204,7 +204,7 @@ exports.getById = function (req, res) {
 };
 //  get list by company
 exports.listByCompany = function (req, res) {
-  Checkin.find({ user: { employeeprofile: { company: req.user.company } } }).sort('-created').populate({
+  Checkin.find().sort('-created').populate({
     path: 'user',
     model: 'User',
     populate: {
