@@ -1,8 +1,8 @@
 <section>
   <div class="page-header">
-    <h1>Checkins</h1>
+    <h1>ข้อมูลเวลาเข้า - ออกงาน</h1>
   </div>
-  <div class="list-group">
+  <!--<div class="list-group">
     <a ng-repeat="checkin in vm.checkins"
        ui-sref="checkins.view({ checkinId: checkin._id })"
        class="list-group-item">
@@ -19,5 +19,127 @@
   </div>
   <div class="alert alert-warning text-center" ng-if="vm.checkins.$resolved && !vm.checkins.length">
     No Checkins yet, why don't you <a ui-sref="checkins.create">create one</a>?
+  </div>-->
+  <div class="ibox float-e-margins">
+    <div class="ibox-content">
+
+      <div id="DataTables_Table_2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+        <div class="dataTables_length" id="DataTables_Table_2_length"><label>แสดง <select name="DataTables_Table_2_length" aria-controls="DataTables_Table_2" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> รายการ</label></div>
+        <div
+          id="DataTables_Table_2_filter" class="dataTables_filter" style="text-align:right"><label>ค้นหา:<input type="search" class="form-control input-sm"  aria-controls="DataTables_Table_2"></label></div>
+      <div
+        class="dataTables_info" id="DataTables_Table_2_info" role="status" aria-live="polite">แสดง 1 ถึง 10 จาก 57 รายการ</div>
+    <table datatable="" dt-options="dtOptions" class="table table-striped table-bordered table-hover dataTables-example ng-isolate-scope dataTable"
+      id="DataTables_Table_2" aria-describedby="DataTables_Table_2_info" role="grid">
+      <thead>
+        <tr role="row">
+          <th class="sorting" rowspan="1" colspan="1">ชื่อ - นามสกุล</th>
+          <th class="sorting" rowspan="1" colspan="1">อีเมล</th>
+          <th class="sorting" rowspan="1" colspan="1">เวลาเข้างาน</th>
+          <th class="sorting" rowspan="1" colspan="1">สถานที่เข้างาน</th>
+          <th class="sorting" rowspan="1" colspan="1">เวลาออกงาน</th>
+          <th class="sorting" rowspan="1" colspan="1">สถานที่ออกงาน</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="gradeA odd" role="row">
+          <td class="sorting_1">Gecko</td>
+          <td>Firefox 1.0</td>
+          <td>Win 98+ / OSX.2+</td>
+          <td class="center">1.7</td>
+          <td class="center">A</td>
+          <td class="center">A</td>
+        </tr>
+        <tr class="gradeA even" role="row">
+          <td class="sorting_1">Gecko</td>
+          <td>Firefox 1.5</td>
+          <td>Win 98+ / OSX.2+</td>
+          <td class="center">1.8</td>
+          <td class="center">A</td>
+          <td class="center">A</td>
+        </tr>
+        <tr class="gradeA odd" role="row">
+          <td class="sorting_1">Gecko</td>
+          <td>Firefox 2.0</td>
+          <td>Win 98+ / OSX.2+</td>
+          <td class="center">1.8</td>
+          <td class="center">A</td>
+          <td class="center">A</td>
+        </tr>
+        <tr class="gradeA even" role="row">
+          <td class="sorting_1">Gecko</td>
+          <td>Firefox 3.0</td>
+          <td>Win 2k+ / OSX.3+</td>
+          <td class="center">1.9</td>
+          <td class="center">A</td>
+          <td class="center">A</td>
+        </tr>
+        <tr class="gradeA odd" role="row">
+          <td class="sorting_1">Gecko</td>
+          <td>Camino 1.0</td>
+          <td>OSX.2+</td>
+          <td class="center">A</td>
+          <td class="center">1.8</td>
+          <td class="center">A</td>
+        </tr>
+        <tr class="gradeA even" role="row">
+          <td class="sorting_1">Gecko</td>
+          <td>Camino 1.5</td>
+          <td>OSX.3+</td>
+          <td class="center">1.8</td>
+          <td class="center">A</td>
+          <td class="center">A</td>
+        </tr>
+        <tr class="gradeA odd" role="row">
+          <td class="sorting_1">Gecko</td>
+          <td>Netscape 7.2</td>
+          <td>Win 95+ / Mac OS 8.6-9.2</td>
+          <td class="center">1.7</td>
+          <td class="center">A</td>
+          <td class="center">A</td>
+        </tr>
+        <tr class="gradeA even" role="row">
+          <td class="sorting_1">Gecko</td>
+          <td>Netscape Browser 8</td>
+          <td>Win 98SE+</td>
+          <td class="center">1.7</td>
+          <td class="center">A</td>
+          <td class="center">A</td>
+        </tr>
+        <tr class="gradeA odd" role="row">
+          <td class="sorting_1">Gecko</td>
+          <td>Netscape Navigator 9</td>
+          <td>Win 98+ / OSX.2+</td>
+          <td class="center">1.8</td>
+          <td class="center">A</td>
+          <td class="center">A</td>
+        </tr>
+        <tr class="gradeA even" role="row">
+          <td class="sorting_1">Gecko</td>
+          <td>Mozilla 1.0</td>
+          <td>Win 95+ / OSX.1+</td>
+          <td class="center">1</td>
+          <td class="center">A</td>
+          <td class="center">A</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_2_paginate" style="text-align: right">
+      <ul class="pagination">
+        <li class="paginate_button previous disabled" id="DataTables_Table_2_previous"><a href="#" aria-controls="DataTables_Table_2" data-dt-idx="0" tabindex="0">ย้อนกลับ</a></li>
+        <li class="paginate_button active"><a href="#" aria-controls="DataTables_Table_2" data-dt-idx="1" tabindex="0">1</a></li>
+        <li class="paginate_button "><a href="#" aria-controls="DataTables_Table_2" data-dt-idx="2" tabindex="0">2</a></li>
+        <li class="paginate_button "><a href="#" aria-controls="DataTables_Table_2" data-dt-idx="3" tabindex="0">3</a></li>
+        <li class="paginate_button "><a href="#" aria-controls="DataTables_Table_2" data-dt-idx="4" tabindex="0">4</a></li>
+        <li class="paginate_button "><a href="#" aria-controls="DataTables_Table_2" data-dt-idx="5" tabindex="0">5</a></li>
+        <li class="paginate_button "><a href="#" aria-controls="DataTables_Table_2" data-dt-idx="6" tabindex="0">6</a></li>
+        <li class="paginate_button next"
+          id="DataTables_Table_2_next"><a href="#" aria-controls="DataTables_Table_2" data-dt-idx="7" tabindex="0">ถัดไป</a></li>
+      </ul>
+    </div>
   </div>
+
+  </div>
+  </div>
+
 </section>
