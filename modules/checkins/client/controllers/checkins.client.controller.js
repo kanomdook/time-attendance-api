@@ -25,6 +25,10 @@
       }
     }
 
+    function getCheckinsList(){
+      
+    }
+
     // Save Checkin
     function save(isValid) {
       if (!isValid) {
