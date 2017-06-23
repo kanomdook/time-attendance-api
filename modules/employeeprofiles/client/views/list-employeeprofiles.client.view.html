@@ -4,21 +4,14 @@
             <br>
             <ol class="breadcrumb">
                 <li>
-                    <a href="/employeeprofiles">รายชื่อทั้งหมด</a>
+                    <strong>รายชื่อทั้งหมด<strong> 
                 </li>
-                <!--                 <li>
-                    Extra Pages
-                </li>
-                <li class="active">
-                    <strong>  Search Page</strong>
-                </li> -->
             </ol>
         </div>
     </div>
     <div class="wrapper wrapper-content animated fadeInRight">
-        <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="row wrapper white-bg" ng-if="vm.employeeprofiles.length">
             <br>
-            <div class=" border-bottom">
                 <div class="row">
                     <div class="col-sm-8 col-md-10">
                         <div class="form-group">
@@ -33,26 +26,35 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-3 col-xs-6" ng-repeat="employeeprofile in vm.employeeprofiles | filter : vm.search">
-                        <div class="ibox-content product-box">
-                            <div class="product-imitation product-imitation-custom ">
-                                <p ng-if="!employeeprofile.image">[ ไม่มีรูป ]</p>
-                                <img ng-src="{{employeeprofile.image}}" class="employeeprofile-image" alt="รูปพนักงาน" ng-if="employeeprofile.image">
-                            </div>
-                            <div class="product-desc">
-                                <a href="#" class="product-name"> {{employeeprofile.firstname}} {{employeeprofile.lastname}}</a>
-                                <address>
-                                    <br> {{employeeprofile.email}}
-                                    <br> {{employeeprofile.Tel}}
-                                </address>
-                                <div class="m-t text-righ">
-                                    <span class="product-price">{{employeeprofile.jobTitle}}</span>
-                                    <a ui-sref="employeeprofiles.view({ employeeprofileId: employeeprofile._id })" class="btn btn-xs btn-outline btn-primary">โปรไฟล์ <i class="fa fa-long-arrow-right"></i> </a>
-                                </div>
-                            </div>
+        </div>
+    </div>
+    <div class="wrapper animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-4" ng-repeat="employeeprofile in vm.employeeprofiles | filter : vm.search" ui-sref="employeeprofiles.view({ employeeprofileId: employeeprofile._id })">
+                <div class="contact-box">
+                    <div class="col-sm-4">
+                        <div class="text-center">
+                            <img alt="รูปภาพ" class="img-circle m-t-xs img-responsive-custom" ng-src="{{employeeprofile.image}}">
+                            <div class="m-t-xs font-bold"><br>{{employeeprofile.jobTitle}}</div>
                         </div>
                     </div>
+                    <div class="col-sm-8">
+                        <h3><strong>{{employeeprofile.firstname}}</strong></h3>
+                        <h3><strong>{{employeeprofile.lastname}}</strong></h3>
+                        <address>
+                            <br>
+                            <span class="font-400"><i class="fa fa-map-marker"></i> {{employeeprofile.address.address}}</span>
+                            <br>
+                            <span class="font-400">
+                            {{employeeprofile.address.district}} {{employeeprofile.address.subdistrict}} {{employeeprofile.address.postcode}}
+                            </span>
+                            <br>
+                            <span class="font-400"> {{employeeprofile.address.province}},  {{employeeprofile.address.country.en.common}}</span>
+                            <br>
+                            <span class="font-400">{{employeeprofile.mobile}}</span>
+                        </address>
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>
@@ -61,3 +63,30 @@
         คุณยังไม่มีรายชื่อพนักงาน <a ui-sref="employeeprofiles.create">เพิ่มพนักงานใหม่</a>?
     </div>
 </section>
+<!--    <div class="wrapper animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-3 col-sm-6" ng-repeat="employeeprofile in vm.employeeprofiles | filter : vm.search" ui-sref="employeeprofiles.view({ employeeprofileId: employeeprofile._id })">
+                <div class="contact-box center-version">
+                    <a>
+                        <img alt="รูปภาพ" class="img-circle" ng-src="{{employeeprofile.image}}"/>
+                        <h3 class="m-b-xs"><strong>{{employeeprofile.firstname}} {{employeeprofile.lastname}}</strong></h3>
+                    <div class="font-bold">
+                        {{employeeprofile.jobTitle}}
+                    </div>
+                    <address>
+                        <br>
+                        <span class="font-400">{{employeeprofile.address.address}}</span>
+                        <br>
+                        <span class="font-400">
+                        {{employeeprofile.address.district}} {{employeeprofile.address.subdistrict}} {{employeeprofile.address.postcode}}
+                        </span>
+                        <br>
+                        <span class="font-400"> {{employeeprofile.address.province}},  {{employeeprofile.address.country.en.common}}</span>
+                        <br>
+                        <span class="font-400">{{employeeprofile.mobile}}</span>
+                    </address>
+                    </a>
+        </div>
+    </div>
+    </div>
+    </div> -->

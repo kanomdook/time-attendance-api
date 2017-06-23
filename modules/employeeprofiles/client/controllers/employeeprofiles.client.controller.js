@@ -23,7 +23,6 @@
         $scope.language = null;
 
         if (!vm.employeeprofile._id) {
-            vm.employeeprofile.images = [];
             vm.employeeprofile.address = {
                 country: {
                     cca2: "TH",
@@ -36,6 +35,14 @@
                     currency: "THB"
                 }
             };
+        } else {
+            if (vm.employeeprofile.shiftin) {
+                vm.employeeprofile.shiftin = new Date(vm.employeeprofile.shiftin);
+            }
+
+            if (vm.employeeprofile.shiftout) {
+                vm.employeeprofile.shiftout = new Date(vm.employeeprofile.shiftout);
+            }
         }
 
         function init() {
@@ -54,7 +61,7 @@
 
         // Create file uploader instance
         $scope.uploader = new FileUploader({
-            url: 'api/users/picture',
+            url: 'api/companies_picture',
             alias: 'newProfilePicture'
         });
 
@@ -85,9 +92,10 @@
         $scope.uploader.onSuccessItem = function(fileItem, response, status, headers) {
             // Show success message
             $scope.success = true;
+            $scope.status = false;
 
             // Populate user object
-            //  vm.employeeprofile.image = response;
+            vm.employeeprofile.image = response.image.url;
 
             // Clear upload buttons
             $scope.cancelUpload();
@@ -150,5 +158,22 @@
                 vm.error = res.data.message;
             }
         }
+
+        $scope.callback = function(postcode) {
+            $scope.checkAutocomplete(postcode);
+        };
+
+        $scope.checkAutocomplete = function(postcode) {
+            if (postcode) {
+                vm.employeeprofile.address.postcode = postcode.postcode;
+                vm.employeeprofile.address.district = postcode.district;
+                vm.employeeprofile.address.subdistrict = postcode.subdistrict;
+                vm.employeeprofile.address.province = postcode.province;
+            } else {
+                vm.employeeprofile.address.district = '';
+                vm.employeeprofile.address.province = '';
+                vm.employeeprofile.address.subdistrict = '';
+            }
+        };
     }
 }());
