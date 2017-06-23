@@ -8,7 +8,8 @@ var employeeprofilesPolicy = require('../policies/employeeprofiles.server.policy
 
 module.exports = function (app) {
   // Employeeprofiles Routes
-  app.route('/api/employeeprofiles').all(employeeprofilesPolicy.isAllowed)
+  app.route('/api/employeeprofiles')
+  .all(employeeprofilesPolicy.isAllowed)
     .get(employeeprofiles.list)
     .post(employeeprofiles.create);
 

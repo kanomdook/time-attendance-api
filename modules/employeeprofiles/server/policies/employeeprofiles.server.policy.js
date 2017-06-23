@@ -30,10 +30,12 @@ exports.invokeRolesPolicies = function () {
     }]
   }, {
     roles: ['user'],
-    allows: [{
+    allows: [
+      {
       resources: '/api/employeeprofiles',
       permissions: ['get', 'post']
-    }, {
+    }, 
+    {
       resources: '/api/employeeprofiles/:employeeprofileId',
       permissions: ['get']
     }, {

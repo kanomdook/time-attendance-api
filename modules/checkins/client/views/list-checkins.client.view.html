@@ -45,9 +45,9 @@
         <tr class="gradeA odd" role="row" ng-repeat="checkin in vm.checkins">
           <td>{{checkin.user.employeeprofile.firstname}} {{checkin.user.employeeprofile.lastname}}</td>
           <td>{{checkin.email}}</td>
-          <td>{{checkin.dateTimeIn}}</td>
+          <td>{{checkin.dateTimeIn | date:'medium'}}</td>
           <td>{{checkin.locationIn}}</td>
-          <td>{{checkin.dateTimeOut}}</td>
+          <td>{{checkin.dateTimeOut | date:'medium'}}</td>
           <td>{{checkin.locationOut}}</td>
 
           <!--<td ng-if="vm.checkins.length < 0">ไม่มีข้อมูล</td>          -->
