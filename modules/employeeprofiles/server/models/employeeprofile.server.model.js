@@ -15,6 +15,12 @@ var EmployeeprofileSchema = new Schema({
         required: 'Please fill email',
         unique: 'Email already exists'
     },
+    firstname: {
+        type: String,
+    },
+    lastname: {
+        type: String,
+    },
     company: {
         type: Schema.ObjectId,
         ref: 'Company'
@@ -79,22 +85,16 @@ var EmployeeprofileSchema = new Schema({
     jobTitle: {
         type: String,
     },
-    Line: {
+    line: {
         type: String,
     },
     image: {
         type: String,
     },
-    firstname: {
+    tel: {
         type: String,
     },
-    lastname: {
-        type: String,
-    },
-    Tel: {
-        type: String,
-    },
-    Facebook: {
+    facebook: {
         type: String,
     },
     deviceId: {

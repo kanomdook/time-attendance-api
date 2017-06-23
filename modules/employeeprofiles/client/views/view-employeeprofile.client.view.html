@@ -1,26 +1,185 @@
 <section>
-  <div class="page-header">
-    <h1 ng-bind="vm.employeeprofile.name"></h1>
-  </div>
-  <div class="pull-right"
-       ng-show="vm.employeeprofile.isCurrentUserOwner">
-    <a class="btn btn-primary"
-       ui-sref="employeeprofiles.edit({ employeeprofileId: vm.employeeprofile._id })">
-      <i class="glyphicon glyphicon-edit"></i>
-    </a>
-    <a class="btn btn-primary" ng-click="vm.remove()">
-      <i class="glyphicon glyphicon-trash"></i>
-    </a>
-  </div>
-  <small>
-    <em class="text-muted">
-      Posted on
-      <span ng-bind="vm.employeeprofile.created | date:'mediumDate'"></span>
-      by
-      <span ng-if="vm.employeeprofile.user"
-            ng-bind="vm.employeeprofile.user.displayName"></span>
-      <span ng-if="!vm.employeeprofile.user">Deleted User</span>
-    </em>
-  </small>
-  <p class="lead" ng-bind="vm.employeeprofile.content"></p>
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-9">
+            <br>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/employeeprofiles">รายชื่อทั้งหมด</a>
+                </li>
+                <li>
+                    <strong>ข้อมูล {{vm.employeeprofile.firstname}} {{vm.employeeprofile.lastname}}</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="pull-right" ng-show="vm.employeeprofile.isCurrentUserOwner">
+        <a class="btn btn-primary" ui-sref="employeeprofiles.edit({ employeeprofileId: vm.employeeprofile._id })">
+            <i class="glyphicon glyphicon-edit"></i>
+        </a>
+        <a class="btn btn-primary" ng-click="vm.remove()">
+            <i class="glyphicon glyphicon-trash"></i>
+        </a>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row m-b-lg m-t-lg">
+            <div class="col-md-6">
+                <div class="profile-image">
+                    <img ng-src="{{vm.employeeprofile.image}}" class="img-circle circle-border m-b-md" alt="รูปภาพ">
+                </div>
+                <div class="profile-info">
+                    <div class="">
+                        <div>
+                            <h2 class="no-margins">
+                                    {{vm.employeeprofile.firstname}} {{vm.employeeprofile.lastname}}
+                                </h2>
+                            <h4>{{vm.employeeprofile.jobTitle}}</h4>
+                            <small>
+                                    {{vm.employeeprofile.company.name}}
+                                </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <table class="table small m-b-xs">
+                    <tbody>
+                        <tr>
+                            <td>
+                                จำนวนวันทำงานทั้งหมด <strong>142</strong>
+                            </td>
+                            <td>
+                                จำนวนวันทำงานภายในเดือน <strong>15</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                จำนวนวันที่ลาทั้งหมด <strong>30</strong>
+                            </td>
+                            <td>
+                                จำนวนวันที่ลาภายในเดือน <strong>2</strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 m-b-lg">
+                    <div id="vertical-timeline" class="vertical-container light-timeline no-margins">
+                        <div class="vertical-timeline-block">
+                            <div class="vertical-timeline-icon yellow-bg">
+                                <i class="fa fa-home"></i>
+                            </div>
+                            <div class="vertical-timeline-content">
+                                <h2>ข้อมูลติดต่อ</h2>
+                                <p>
+                                    {{vm.employeeprofile.address.address}} {{vm.employeeprofile.address.district}} {{vm.employeeprofile.address.subdistrict}} {{vm.employeeprofile.address.postcode}} {{vm.employeeprofile.address.province}} {{vm.employeeprofile.address.country.en.common}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="vertical-timeline-block">
+                            <div class="vertical-timeline-icon navy-bg">
+                                <i class="fa fa-briefcase"></i>
+                            </div>
+                            <div class="vertical-timeline-content">
+                                <h2>ข้อมูลการทำงานภายในเดือน</h2>
+                                <!-- <div class="ibox-content"> -->
+                                <table class="table table-stripped small m-t-md">
+                                    <tbody>
+                                        <tr>
+                                            <td class="no-borders">
+                                                01/01/2560
+                                            </td>
+                                            <td class="no-borders">
+                                                <i class="fa fa-circle text-navy"></i> 09:00
+                                            </td>
+                                            <td class="no-borders">
+                                            </td>
+                                            <td class="no-borders">
+                                                <i class="fa fa-circle text-danger"></i> 18:00
+                                            </td>
+                                            <td class="no-borders">
+                                                <i class="fa fa-check text-navy"></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="no-borders">
+                                                02/01/2560
+                                            </td>
+                                            <td class="no-borders">
+                                                <i class="fa fa-circle text-navy"></i> 09:00
+                                            </td>
+                                            <td class="no-borders">
+                                            </td>
+                                            <td class="no-borders">
+                                                <i class="fa fa-circle text-danger"></i> 18:00
+                                            </td>
+                                            <td class="no-borders">
+                                                <i class="fa fa-check text-navy"></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="no-borders">
+                                                03/01/2560
+                                            </td>
+                                            <td class="no-borders">
+                                                <i class="fa fa-circle text-navy"></i> 09:00
+                                            </td>
+                                            <td class="no-borders">
+                                            </td>
+                                            <td class="no-borders">
+                                                <i class="fa fa-circle text-danger"></i> 18:00
+                                            </td>
+                                            <td class="no-borders">
+                                                <i class="fa fa-check text-navy"></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="no-borders">
+                                                03/01/2560
+                                            </td>
+                                            <td class="no-borders">
+                                                <i class="fa fa-circle text-navy"></i> 09:00
+                                            </td>
+                                            <td class="no-borders">
+                                            </td>
+                                            <td class="no-borders">
+                                                <!-- <i class="fa fa-circle text-danger"></i> 18:00 -->
+                                            </td>
+                                            <td class="no-borders">
+                                                <i class="fa fa-times text-danger"></i>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- </div> -->
+                            </div>
+                            <div class="vertical-timeline-block">
+                                <div class="vertical-timeline-icon blue-bg">
+                                    <i class="fa fa-file-text"></i>
+                                </div>
+                                <div class="vertical-timeline-content">
+                                    <div class="ibox-content">
+                                        <table class="table table-striped">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                    <i class="fa fa-play-circle text-navy"></i> 15/01/2560 &nbsp;
+                                                    <i class="fa fa-stop-circle text-danger"></i> 15/01/2560 &nbsp;
+                                                    &nbsp; หมอนัดทำฟัน
+                                                    </td>
+                                                    <td class="no-borders">
+                                                    <i class="fa fa-exclamation-triangle text-yellow"></i>
+                                                  </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="lead" ng-bind="vm.employeeprofile.content"></p>
 </section>
