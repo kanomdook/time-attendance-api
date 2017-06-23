@@ -49,44 +49,6 @@ exports.invokeRolesPolicies = function() {
             permissions: ['get']
         }]
     }, {
-<<<<<<< HEAD
-      resources: '/api/employee/company/:employeeprofileId',
-      permissions: '*'
-    }]
-  }, {
-    roles: ['user'],
-    allows: [
-      {
-      resources: '/api/employeeprofiles',
-      permissions: ['get', 'post']
-    }, 
-    {
-      resources: '/api/employeeprofiles/:employeeprofileId',
-      permissions: ['get']
-    }, {
-      resources: '/api/employee/company',
-      permissions: ['get', 'post']
-    }, {
-      resources: '/api/employee/company/:employeeprofileId',
-      permissions: ['get']
-    }]
-  }, {
-    roles: ['guest'],
-    allows: [{
-      resources: '/api/employeeprofiles',
-      permissions: ['get']
-    }, {
-      resources: '/api/employeeprofiles/:employeeprofileId',
-      permissions: ['get']
-    }, {
-      resources: '/api/employee/company',
-      permissions: ['get']
-    }, {
-      resources: '/api/employee/company/:employeeprofileId',
-      permissions: ['get']
-    }]
-  }]);
-=======
         roles: ['guest'],
         allows: [{
             resources: '/api/employeeprofiles',
@@ -105,7 +67,6 @@ exports.invokeRolesPolicies = function() {
             permissions: ['get']
         }]
     }]);
->>>>>>> 0dc0e34f0b913c9e90c82ca13c4186ed565e5130
 };
 
 /**
