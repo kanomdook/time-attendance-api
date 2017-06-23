@@ -1,6 +1,6 @@
 <section ng-init="vm.init()">
     <div class="row wrapper border-bottom white-bg page-heading">
-        <div class="col-lg-9">
+        <div class="col-lg-9" ng-if="!vm.employeeprofile._id">
             <br>
             <ol class="breadcrumb">
                 <li>
@@ -8,6 +8,20 @@
                 </li>
                 <li>
                     <strong>เพิ่มพนักงานใหม่</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-9" ng-if="vm.employeeprofile._id">
+            <br>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/employeeprofiles">รายชื่อทั้งหมด</a>
+                </li>
+                <li>
+                    <a ui-sref="employeeprofiles.view({ employeeprofileId: vm.employeeprofile._id })">ข้อมูล {{vm.employeeprofile.firstname}} {{vm.employeeprofile.lastname}}</a>
+                </li>
+                <li>
+                    <strong>แก้ไข ข้อมูล {{vm.employeeprofile.firstname}} {{vm.employeeprofile.lastname}}</strong>
                 </li>
             </ol>
         </div>

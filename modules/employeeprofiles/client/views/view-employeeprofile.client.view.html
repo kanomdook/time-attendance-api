@@ -12,15 +12,15 @@
             </ol>
         </div>
     </div>
-    <div class="pull-right" ng-show="vm.employeeprofile.isCurrentUserOwner">
-        <a class="btn btn-primary" ui-sref="employeeprofiles.edit({ employeeprofileId: vm.employeeprofile._id })">
-            <i class="glyphicon glyphicon-edit"></i>
-        </a>
-        <a class="btn btn-primary" ng-click="vm.remove()">
-            <i class="glyphicon glyphicon-trash"></i>
-        </a>
-    </div>
     <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="pull-right" ng-show="vm.employeeprofile.isCurrentUserOwner">
+            <a class="btn btn-primary" ui-sref="employeeprofiles.edit({ employeeprofileId: vm.employeeprofile._id })">
+                <i class="glyphicon glyphicon-edit"></i>
+            </a>
+            <a class="btn btn-primary" ng-click="vm.remove()">
+                <i class="glyphicon glyphicon-trash"></i>
+            </a>
+        </div>
         <div class="row m-b-lg m-t-lg">
             <div class="col-md-6">
                 <div class="profile-image">
@@ -72,7 +72,13 @@
                             <div class="vertical-timeline-content">
                                 <h2>ข้อมูลติดต่อ</h2>
                                 <p>
-                                    {{vm.employeeprofile.address.address}} {{vm.employeeprofile.address.district}} {{vm.employeeprofile.address.subdistrict}} {{vm.employeeprofile.address.postcode}} {{vm.employeeprofile.address.province}} {{vm.employeeprofile.address.country.en.common}}
+                                    <i class="fa fa-map-marker"></i> &nbsp;&nbsp; {{vm.employeeprofile.address.address}} {{vm.employeeprofile.address.district}} {{vm.employeeprofile.address.subdistrict}} {{vm.employeeprofile.address.postcode}} {{vm.employeeprofile.address.province}} {{vm.employeeprofile.address.country.en.common}}
+                                </p>
+                                <p>
+                                    <i class="fa fa-phone"></i> &nbsp;&nbsp; เบอร์โทร : {{vm.employeeprofile.mobile}}
+                                </p>
+                                <p>
+                                    <i class="fa fa-envelope"></i> &nbsp;&nbsp; อีเมล์ : {{vm.employeeprofile.email}}
                                 </p>
                             </div>
                         </div>
@@ -135,7 +141,7 @@
                                         </tr>
                                         <tr>
                                             <td class="no-borders">
-                                                03/01/2560
+                                                04/01/2560
                                             </td>
                                             <td class="no-borders">
                                                 <i class="fa fa-circle text-navy"></i> 09:00
@@ -158,18 +164,18 @@
                                     <i class="fa fa-file-text"></i>
                                 </div>
                                 <div class="vertical-timeline-content">
+                                    <h2>ข้อมูลการลาภายในเดือน</h2>
                                     <div class="ibox-content">
                                         <table class="table table-striped">
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                    <i class="fa fa-play-circle text-navy"></i> 15/01/2560 &nbsp;
-                                                    <i class="fa fa-stop-circle text-danger"></i> 15/01/2560 &nbsp;
-                                                    &nbsp; หมอนัดทำฟัน
+                                                        <i class="fa fa-play-circle text-navy"></i> 15/01/2560 &nbsp;
+                                                        <i class="fa fa-stop-circle text-danger"></i> 15/01/2560 &nbsp; &nbsp; หมอนัดทำฟัน
                                                     </td>
                                                     <td class="no-borders">
-                                                    <i class="fa fa-exclamation-triangle text-yellow"></i>
-                                                  </td>
+                                                        <i class="fa fa-exclamation-triangle text-warning"></i>
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>
