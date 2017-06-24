@@ -15,6 +15,9 @@ var EmployeeprofileSchema = new Schema({
         required: 'Please fill email',
         unique: 'Email already exists'
     },
+    employeeid:{
+        type: String,
+    },
     firstname: {
         type: String,
     },

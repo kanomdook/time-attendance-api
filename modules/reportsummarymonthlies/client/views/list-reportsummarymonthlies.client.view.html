@@ -1,0 +1,22 @@
+<section>
+  <div class="page-header">
+    <h1>Reportsummarymonthlies</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="reportsummarymonthly in vm.reportsummarymonthlies"
+       ui-sref="reportsummarymonthlies.view({ reportsummarymonthlyId: reportsummarymonthly._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="reportsummarymonthly.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="reportsummarymonthly.user" ng-bind="reportsummarymonthly.user.displayName"></span>
+        <span ng-if="!reportsummarymonthly.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="reportsummarymonthly.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="vm.reportsummarymonthlies.$resolved && !vm.reportsummarymonthlies.length">
+    No Reportsummarymonthlies yet, why don't you <a ui-sref="reportsummarymonthlies.create">create one</a>?
+  </div>
+</section>
