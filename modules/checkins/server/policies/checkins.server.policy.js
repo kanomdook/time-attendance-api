@@ -29,10 +29,12 @@ exports.invokeRolesPolicies = function () {
         }]
     }, {
         roles: ['user'],
-        allows: [{
+        allows: [
+            {
             resources: '/api/checkins',
             permissions: ['get', 'post']
-        }, {
+        }, 
+        {
             resources: '/api/checkins/:checkinId',
             permissions: ['get', 'post']
         }, {

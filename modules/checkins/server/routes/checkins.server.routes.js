@@ -8,7 +8,8 @@ var checkinsPolicy = require('../policies/checkins.server.policy'),
 
 module.exports = function (app) {
   // Checkins Routes
-  app.route('/api/checkins').all(checkinsPolicy.isAllowed)
+  app.route('/api/checkins')
+  .all(checkinsPolicy.isAllowed)
     .get(checkins.list)
     .post(checkins.create);
 

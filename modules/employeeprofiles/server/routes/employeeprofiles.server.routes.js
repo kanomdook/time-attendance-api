@@ -4,6 +4,7 @@
  * Module dependencies
  */
 var employeeprofilesPolicy = require('../policies/employeeprofiles.server.policy'),
+
     employeeprofiles = require('../controllers/employeeprofiles.server.controller');
 
 module.exports = function(app) {
