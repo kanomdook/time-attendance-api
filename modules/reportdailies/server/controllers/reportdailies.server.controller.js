@@ -230,7 +230,7 @@ exports.exportByDate = function (req, res, next) {
             }
         },
         default: {
-             fill: {
+            fill: {
                 fgColor: {
                     rgb: 'FFC0C0C0'
                 }
@@ -257,6 +257,11 @@ exports.exportByDate = function (req, res, next) {
             headerStyle: styles.default, // <- Header style 
             width: 120 // <- width in pixels 
         },
+        employeeid: { // <- the key should match the actual data key 
+            displayName: 'รหัสพนักงาน', // <- Here you specify the column header 
+            headerStyle: styles.default, // <- Header style 
+            width: 120 // <- width in pixels 
+        },
         firstname: { // <- the key should match the actual data key 
             displayName: 'ชื่อ', // <- Here you specify the column header 
             headerStyle: styles.default, // <- Header style 
@@ -274,8 +279,9 @@ exports.exportByDate = function (req, res, next) {
     req._reportdaily.data.forEach(function (i, index) {
         dataset.push({
             number: (index + 1),
-            firstname: i.user.employeeprofile.firstname,
-            lastname: i.user.employeeprofile.lastname
+            employeeid: i.employeeid,
+            firstname: i.firstname,
+            lastname: i.lastname
         })
     });
 
