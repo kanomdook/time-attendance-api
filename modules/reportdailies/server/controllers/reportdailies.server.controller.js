@@ -284,8 +284,11 @@ exports.exportByDate = function(req, res, next) {
     // that are listed in the report specification 
     var dataset = [
         { customer_name: 'สวัสดีครับ', status_id: 1, note: 'some สวัสดีครับ', misc: 'not shown' },
-        { customer_name: 'สวัสดีครับ', status_id: 0, note: 'some note' },
-        { customer_name: 'สวัสดีครับ', status_id: 0, note: 'some note', misc: 'not shown' }
+        { customer_name: 'สวัสดีครับ', status_id: 2, note: 'some note' },
+        { customer_name: 'สวัสดีครับ', status_id: 3, note: 'some note', misc: 'not shown' }
+        { customer_name: 'สวัสดีครับ', status_id: 4, note: 'some note', misc: 'not shown' }
+        { customer_name: 'สวัสดีครับ', status_id: 5, note: 'some note', misc: 'not shown' }
+
     ];
 
     // Define an array of merges. 1-1 = A:1 
