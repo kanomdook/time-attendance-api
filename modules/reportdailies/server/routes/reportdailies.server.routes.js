@@ -22,7 +22,7 @@ module.exports = function(app) {
         .get(reportdailies.reportdaily);
 
     app.route('/api/reportdaily/export/excel').all(reportdailiesPolicy.isAllowed)
-        .post(reportdailies.exportExcel);
+        .get(reportdailies.exportExcel);
 
     // Finish by binding the Reportdaily middleware
     app.param('reportdate', reportdailies.reportdailyByDate);
