@@ -211,84 +211,80 @@ exports.reportdaily = function (req, res, next) {
 
 exports.exportByDate = function (req, res, next) {
     console.dir(req._reportdaily);
-    var date = req._reportdaily.date.split('-')[2] + '/' + req._reportdaily.date.split('-')[1]+ '/' + req._reportdaily.date.split('-')[0];
+    req._reportdaily.date = req._reportdaily.date.split(':')[1];
+    var date = req._reportdaily.date.split('-')[2] + '/' + req._reportdaily.date.split('-')[1] + '/' + req._reportdaily.date.split('-')[0];
     var styles = {
         headerDark: {
             fill: {
+                fgColor: {
+                    rgb: 'FFFFFFFF'
+                }
+            },
+            font: {
+                color: {
+                    rgb: 'FF000000'
+                },
+                sz: 12,
+                bold: false,
+                underline: false
+            }
+        },
+        default: {
+             fill: {
                 fgColor: {
                     rgb: 'FFC0C0C0'
                 }
             },
             font: {
                 color: {
-                    rgb: 'FFFFFFFF'
+                    rgb: 'FF000000'
                 },
-                sz: 14,
-                bold: true,
-                underline: true
-            }
-        },
-        cellPink: {
-            fill: {
-                fgColor: {
-                    rgb: 'FFFFCCFF'
-                }
-            }
-        },
-        cellGreen: {
-            fill: {
-                fgColor: {
-                    rgb: 'FF00FF00'
-                }
+                sz: 12,
+                bold: false,
+                underline: false
             }
         }
     };
 
-    //Array of objects representing heading rows (very top) 
     var heading = [
         [{ value: 'รายงานการมาทำงานของพนักงาน (รายวัน)', style: styles.headerDark }], // <-- It can be only values 
         ['วันที่', date]
     ];
 
-    //Here you specify the export structure 
     var specification = {
-        customer_name: { // <- the key should match the actual data key 
-            displayName: 'Customer', // <- Here you specify the column header 
-            headerStyle: styles.headerDark, // <- Header style 
+        number: { // <- the key should match the actual data key 
+            displayName: 'ลำดับ', // <- Here you specify the column header 
+            headerStyle: styles.default, // <- Header style 
             width: 120 // <- width in pixels 
         },
-        note: {
-            displayName: 'Description',
-            headerStyle: styles.headerDark,
-            cellStyle: styles.cellPink, // <- Cell style 
-            width: 220 // <- width in pixels 
-        }
+        firstname: { // <- the key should match the actual data key 
+            displayName: 'ชื่อ', // <- Here you specify the column header 
+            headerStyle: styles.default, // <- Header style 
+            width: 120 // <- width in pixels 
+        },
+        lastname: { // <- the key should match the actual data key 
+            displayName: 'นามสกุล', // <- Here you specify the column header 
+            headerStyle: styles.default, // <- Header style 
+            width: 120 // <- width in pixels 
+        },
     };
 
-    // The data set should have the following shape (Array of Objects) 
-    // The order of the keys is irrelevant, it is also irrelevant if the 
-    // dataset contains more fields as the report is build based on the 
-    // specification provided above. But you should have all the fields 
-    // that are listed in the report specification 
-    var dataset = [
-        { customer_name: 'สวัสดีครับ', note: 'some สวัสดีครับ' },
-        { customer_name: 'สวัสดีครับ', note: 'some note' },
-        { customer_name: 'สวัสดีครับ', note: 'some note' },
-        { customer_name: 'สวัสดีครับ', note: 'some note' },
-        { customer_name: 'สวัสดีครับ', note: 'some note' }
-    ];
+    var dataset = [];
 
-    // Define an array of merges. 1-1 = A:1 
-    // The merges are independent of the data. 
-    // A merge will overwrite all data _not_ in the top-left cell. 
+    req._reportdaily.data.forEach(function (i, index) {
+        dataset.push({
+            number: (index + 1),
+            firstname: i.user.employeeprofile.firstname,
+            lastname: i.user.employeeprofile.lastname
+        })
+    });
+
     var merges = [
         { start: { row: 1, column: 1 }, end: { row: 1, column: 13 } }
     ];
 
-    // Create the excel report. 
-    // This function will return Buffer 
     var report = excel.buildExport(
-        [ // <- Notice that this is an array. Pass multiple sheets to create multi sheet report 
+        [
             {
                 name: 'Report', // <- Specify sheet name (optional) 
                 heading: heading, // <- Raw heading array (optional) 
@@ -299,9 +295,6 @@ exports.exportByDate = function (req, res, next) {
         ]
     );
 
-    // You can then return this straight 
-    // res.attachment('report.xlsx'); // This is sails.js specific (in general you need to set headers) 
-    // return res.send(report);
     req.export = report;
     next();
 };
