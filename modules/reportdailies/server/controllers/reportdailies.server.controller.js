@@ -148,7 +148,7 @@ exports.reportdailyByDate = function(req, res, next, reportdate) {
         } else {
             var checkinByCompany = [];
             if (reportdaily.length > 0) {
-                checkinByCompany = checkin.filter(function(obj) {
+                checkinByCompany = reportdaily.filter(function(obj) {
                     return obj.user.employeeprofile.company._id.toString() === req.user.company.toString();
 
                 });
