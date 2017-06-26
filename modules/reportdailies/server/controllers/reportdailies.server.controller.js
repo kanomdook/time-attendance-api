@@ -168,7 +168,7 @@ exports.reportdailyByDate = function(req, res, next, reportdate) {
                     }
                     checkinByCompany.forEach(function(i, index) {
                         reportDailyData.push({
-                            employeeid: i.user.employeeprofile.employeeid,
+                            employeeid: null,
                             firstname: i.user.employeeprofile.firstname,
                             lastname: i.user.employeeprofile.lastname,
                             timein: i.dateTimeIn,
