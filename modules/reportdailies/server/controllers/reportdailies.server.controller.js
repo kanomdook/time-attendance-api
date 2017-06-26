@@ -7,6 +7,7 @@ var path = require('path'),
     mongoose = require('mongoose'),
     Reportdaily = mongoose.model('Reportdaily'),
     Checkin = mongoose.model('Checkin'),
+    Company = mongoose.model('Company'),
     errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
     _ = require('lodash');
 
@@ -118,7 +119,6 @@ exports.reportdailyByID = function(req, res, next, id) {
 };
 
 exports.reportdailyByDate = function(req, res, next, reportdate) {
-    // body...
     var newDate = new Date(reportdate);
     var reportEndDate = null;
     var returnReportDaily = {};
@@ -131,69 +131,78 @@ exports.reportdailyByDate = function(req, res, next, reportdate) {
     //     reportEndDate = new Date(newDate).setMonth(new Date(newDate).getMonth() + 1);
     // }
     // { created: { $gte: newDate, $lt: new Date(reportEndDate) } }
-    Checkin.find({ created: { $gte: newDate, $lt: reportEndDate } }).populate({
-        path: 'user',
-        model: 'User',
-        populate: {
-            path: 'employeeprofile',
-            model: 'Employeeprofile',
-            populate: {
-                path: 'company',
-                model: 'Company'
-            }
-        }
-    }).exec(function(err, reportdaily) {
+    Company.findById(id).populate('user', 'displayName').exec(function(err, company) {
         if (err) {
             return next(err);
-        } else if (!reportdaily) {
+        } else if (!company) {
             return res.status(404).send({
-                message: 'No Reportdaily with that identifier has been found'
+                message: 'No Company with that identifier has been found'
             });
         } else {
-            var checkinByCompany = [];
-            var reportDailyData = [];
-            if (reportdaily.length > 0) {
-                checkinByCompany = reportdaily.filter(function(obj) {
-                    return obj.user.employeeprofile.company._id.toString() === req.user.company.toString();
+            Checkin.find({ created: { $gte: newDate, $lt: reportEndDate } }).populate({
+                path: 'user',
+                model: 'User',
+                populate: {
+                    path: 'employeeprofile',
+                    model: 'Employeeprofile',
+                    populate: {
+                        path: 'company',
+                        model: 'Company'
+                    }
+                }
+            }).exec(function(err, reportdaily) {
+                if (err) {
+                    return next(err);
+                } else if (!reportdaily) {
+                    return res.status(404).send({
+                        message: 'No Reportdaily with that identifier has been found'
+                    });
+                } else {
+                    var checkinByCompany = [];
+                    var reportDailyData = [];
+                    if (reportdaily.length > 0) {
+                        checkinByCompany = reportdaily.filter(function(obj) {
+                            return obj.user.employeeprofile.company._id.toString() === req.user.company.toString();
 
-                });
-            }
-            checkinByCompany.forEach(function(i, index) {
-                reportDailyData.push({
-                    employeeid: i.user.employeeprofile.employeeid,
-                    firstname: i.user.employeeprofile.firstname,
-                    lastname: i.user.employeeprofile.lastname,
-                    timein: i.dateTimeIn,
-                    timeout: i.dateTimeOut,
-                    timelate: null,
-                    locationIn: {
-                        lat: i.locationIn.lat,
-                        lng: i.locationIn.lng
-                    },
-                    locationOut: {
-                        lat: i.locationOut.lat,
-                        lng: i.locationOut.lng
-                    },
-                    device: i.user.deviceID,
-                    distance: null,
-                    workinghours: null,
-                    overtime: null,
-                    remark: {
-                        timein: i.remark.in,
-                        timeout: i.remark.out
-                    },
-                });
+                        });
+                    }
+                    checkinByCompany.forEach(function(i, index) {
+                        reportDailyData.push({
+                            employeeid: i.user.employeeprofile.employeeid,
+                            firstname: i.user.employeeprofile.firstname,
+                            lastname: i.user.employeeprofile.lastname,
+                            timein: i.dateTimeIn,
+                            timeout: i.dateTimeOut,
+                            timelate: null,
+                            locationIn: {
+                                lat: i.locationIn.lat,
+                                lng: i.locationIn.lng
+                            },
+                            locationOut: {
+                                lat: i.locationOut.lat,
+                                lng: i.locationOut.lng
+                            },
+                            device: i.user.deviceID,
+                            distance: null,
+                            workinghours: null,
+                            overtime: null,
+                            remark: {
+                                timein: i.remark.in,
+                                timeout: i.remark.out
+                            },
+                        });
+                    });
+                    returnReportDaily.date = reportdate;
+                    returnReportDaily.company = company[0];
+                    returnReportDaily.data = reportDailyData;
+                    req._reportdaily = returnReportDaily;
+                    next();
+                }
             });
-            returnReportDaily.company = checkinByCompany[0] ? checkinByCompany[0].user.employeeprofile.company : null;
-            returnReportDaily.data = reportDailyData;
-            req._reportdaily = returnReportDaily;
-            next();
         }
     });
 };
 
 exports.reportdaily = function(req, res, next) {
-    // body...
     res.jsonp(req._reportdaily);
-    // res.send('OK');
 };
