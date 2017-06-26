@@ -23,7 +23,7 @@
                 </div>
                 <div class="col-sm-4 col-md-3">
                     <div class="form-group">
-                        <a class="btn btn-primary btn-block" ng-click="vm.searchReport(vm.reportDate)">ค้นหา</a>
+                        <a class="btn btn-primary btn-block" ng-disabled="!vm.reportDate" ng-click="vm.searchReport(vm.reportDate)">ค้นหา</a>
                     </div>
                 </div>
             </div>
