@@ -147,14 +147,41 @@ exports.reportdailyByDate = function(req, res, next, reportdate) {
             });
         } else {
             var checkinByCompany = [];
+            var reportDailyData = [];
             if (reportdaily.length > 0) {
                 checkinByCompany = reportdaily.filter(function(obj) {
                     return obj.user.employeeprofile.company._id.toString() === req.user.company.toString();
 
                 });
             }
+            checkinByCompany.forEach(function(i, index) {
+                reportDailyData.push({
+                    employeeid: i.employeeid,
+                    firstname: i.user.employeeprofile.firstname,
+                    lastname: i.user.employeeprofile.lastname,
+                    timein: i.dateTimeIn,
+                    timeout: i.dateTimeOut,
+                    timelate: null,
+                    locationIn: {
+                        lat: i.lat,
+                        lng: i.lng
+                    },
+                    locationOut: {
+                        lat: i.lat,
+                        lng: i.lng
+                    },
+                    device: i.user.deviceID,
+                    distance: null,
+                    workinghours: null,
+                    overtime: null,
+                    remark: {
+                        timein: i.remark.in,
+                        timeout: i.remark.out
+                    },
+                });
+            });
             returnReportDaily.company = checkinByCompany[0] ? checkinByCompany[0].user.employeeprofile.company : null;
-            returnReportDaily.data = checkinByCompany;
+            returnReportDaily.data = reportDailyData;
             req._reportdaily = returnReportDaily;
             next();
         }
