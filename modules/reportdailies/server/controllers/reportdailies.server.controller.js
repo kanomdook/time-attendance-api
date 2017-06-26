@@ -122,12 +122,16 @@ exports.reportdailyByDate = function(req, res, next, reportdate) {
     var newDate = new Date(reportdate);
     var reportEndDate = null;
     var returnReportDaily = {};
-    if (newDate.getMonth() > 10) {
-        reportEndDate = new Date(newDate.getFullYear() + 1 + '-01');
-    } else {
-        reportEndDate = new Date(newDate).setMonth(new Date(newDate).getMonth() + 1);
-    }
-    Checkin.find({ created: { $gte: newDate, $lt: new Date(reportEndDate) } }).populate({
+    reportEndDate = new Date(reportdate + '11:13:00');
+    console.log(newDate +'&&&&&&&&&&&'+ reportEndDate);
+    // รายเดือน 
+    // if (newDate.getMonth() > 10) {
+    //     reportEndDate = new Date(newDate.getFullYear() + 1 + '-01');
+    // } else {
+    //     reportEndDate = new Date(newDate).setMonth(new Date(newDate).getMonth() + 1);
+    // }
+    // { created: { $gte: newDate, $lt: new Date(reportEndDate) } }
+    Checkin.find({ created: { $gte: newDate, $lt: reportEndDate } }).populate({
         path: 'user',
         model: 'User',
         populate: {
