@@ -43,7 +43,7 @@
       </thead>
       <tbody>
         <tr class="gradeA odd" role="row" ng-repeat="checkin in vm.checkins">
-          <td>{{checkin.user.employeeprofile.firstname}} {{checkin.user.employeeprofile.lastname}}</td>
+          <td ui-sref="checkins.edit({ checkinId: checkin._id })">{{checkin.user.employeeprofile.firstname}} {{checkin.user.employeeprofile.lastname}}</td>
           <td>{{checkin.email}}</td>
           <td>{{checkin.dateTimeIn | date:'medium'}}</td>
           <td>{{checkin.locationIn}}</td>
