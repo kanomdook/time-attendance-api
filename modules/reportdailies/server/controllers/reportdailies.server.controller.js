@@ -246,7 +246,7 @@ exports.exportByDate = function(req, res, next) {
     //Array of objects representing heading rows (very top) 
     var heading = [
         [{ value: 'ทดสอบ สวัสดีครับ', style: styles.headerDark }], // <-- It can be only values 
-        ['a2', 'b2', 'c2']
+        ['วันที่']
     ];
 
     //Here you specify the export structure 
@@ -307,7 +307,7 @@ exports.exportByDate = function(req, res, next) {
 };
 
 exports.exportExcel = function(req, res, next) {
-    res.attachment('report.xlsx'); // This is sails.js specific (in general you need to set headers) 
+    res.attachment(req._reportdaily.date + 'reportdaily.xlsx'); // This is sails.js specific (in general you need to set headers) 
     return res.send(req.export);
 };
 

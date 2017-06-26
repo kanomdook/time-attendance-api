@@ -155,7 +155,7 @@ exports.excel = function(req, res) {
     //Array of objects representing heading rows (very top) 
     var heading = [
         [{ value: 'ทดสอบ สวัสดีครับ', style: styles.headerDark }, { value: 'b1', style: styles.headerDark }, { value: 'c1', style: styles.headerDark }],
-        ['วันที่'] // <-- It can be only values 
+        ['a2', 'b2', 'c2'] // <-- It can be only values 
     ];
 
     //Here you specify the export structure 
