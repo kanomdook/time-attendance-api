@@ -11,7 +11,7 @@
         var vm = this;
         vm.reportDate = new Date();
         vm.searchReport = searchReport;
-        vm.exportReport = exportReport;
+        // vm.exportReport = exportReport;
         vm.reportdailies = ReportdailiesService.query();
         vm.reportData = null;
         vm.showNull = false;
