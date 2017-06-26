@@ -9,6 +9,7 @@
             </ol>
         </div>
     </div>
+
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row wrapper white-bg" ng-if="vm.employeeprofiles.length">
             <br>
@@ -26,10 +27,7 @@
                         </div>
                     </div>
                 </div>
-        </div>
-    </div>
-    <div class="wrapper animated fadeInRight">
-        <div class="row">
+                <div class="row">
             <div class="col-lg-4" ng-repeat="employeeprofile in vm.employeeprofiles | filter : vm.search" ui-sref="employeeprofiles.view({ employeeprofileId: employeeprofile._id })">
                 <div class="contact-box">
                     <div class="col-sm-4">
@@ -58,7 +56,10 @@
                 </div>
             </div>
         </div>
+
+        </div>
     </div>
+
     <div class="alert alert-warning text-center" ng-if="vm.employeeprofiles.$resolved && !vm.employeeprofiles.length">
         คุณยังไม่มีรายชื่อพนักงาน <a ui-sref="employeeprofiles.create">เพิ่มพนักงานใหม่</a>?
     </div>
