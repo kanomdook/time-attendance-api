@@ -10,21 +10,19 @@
             </ol>
         </div>
     </div>
-    <div class="wrapper-content animated fadeInRight">
-        <div class="row wrapper white-bg">
-            <br>
-            <div class="row">
-                <div class="col-sm-4 col-md-3">
+    <br>
+    <div class="animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-4 col-md-3">
+            </div>
+            <div class="col-sm-4 col-md-4">
+                <div class="form-group">
+                    <input class="form-control" id="search" name="search" ng-model="vm.reportDate" type="date" placeholder="ค้นหา">
                 </div>
-                <div class="col-sm-4 col-md-4">
-                    <div class="form-group">
-                        <input class="form-control" id="search" name="search" ng-model="vm.reportDate" type="date" placeholder="ค้นหา">
-                    </div>
-                </div>
-                <div class="col-sm-4 col-md-3">
-                    <div class="form-group">
-                        <a class="btn btn-primary btn-block" ng-disabled="!vm.reportDate" ng-click="vm.searchReport(vm.reportDate)">ค้นหา</a>
-                    </div>
+            </div>
+            <div class="col-sm-4 col-md-3">
+                <div class="form-group">
+                    <a class="btn btn-primary btn-block" ng-disabled="!vm.reportDate" ng-click="vm.searchReport(vm.reportDate)">ค้นหา</a>
                 </div>
             </div>
         </div>
@@ -53,11 +51,11 @@
                         <td>{{item.employeeid}}</td>
                         <td>{{item.firstname}}</td>
                         <td>{{item.lastname}}</td>
-                        <td>{{item.timein | date :'dd/MM/yyyy'}}</td>
-                        <td>{{item.timeout| date :'dd/MM/yyyy'}}</td>
-                        <td>{{item.timelate}}</td>
+                        <td>{{item.timein | date :'HH:mm:ss'}}</td>
+                        <td>{{item.timeout| date :'HH:mm:ss'}}</td>
                         <td>{{item.device}}</td>
                         <td>{{item.distance}}</td>
+                        <td>{{item.timelate}}</td>
                         <td>{{item.workinghours}}</td>
                         <td>{{item.overtime}}</td>
                     </tr>

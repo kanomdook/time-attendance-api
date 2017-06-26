@@ -67,6 +67,19 @@
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-12 col-md-6">
                                                 <div class="form-group" show-errors>
+                                                    <label class="col-sm-4 control-label">รหัสพนักงาน</label>
+                                                    <div class="col-sm-8">
+                                                        <input class="form-control" id="employeeid" name="employeeid" ng-model="vm.employeeprofile.employeeid" type="text" placeholder required>
+                                                        <div ng-messages="vm.form.employeeprofileForm.employeeid.$error" role="alert">
+                                                            <p class="help-block error-text" ng-message="required">กรุณาระบุรหัสพนักงาน</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-12 col-md-6">
+                                                <div class="form-group" show-errors>
                                                     <label class="col-sm-4 control-label">ตำแหน่ง</label>
                                                     <div class="col-sm-8">
                                                         <input class="form-control" id="jobTitle" name="jobTitle" ng-model="vm.employeeprofile.jobTitle" type="text" placeholder required>
