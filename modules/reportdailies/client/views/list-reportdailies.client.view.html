@@ -51,13 +51,13 @@
                 <tbody>
                     <tr class="gradeA" role="row" ng-repeat="item in vm.reportData.data">
                         <td class="text-right">{{$index + 1}}</td>
-                        <td class="text-right">{{item.employeeid}}</td>
+                        <td class="text-center">{{item.employeeid}}</td>
                         <td>{{item.firstname}}</td>
                         <td>{{item.lastname}}</td>
                         <td class="text-center">{{item.timein | date :'HH:mm:ss'}}</td>
                         <td class="text-center">{{item.timeout| date :'HH:mm:ss'}}</td>
-                        <td class="text-right">{{item.device}}</td>
-                        <td class="text-right">{{item.distance}}</td>
+                        <td class="text-center">{{item.device}}</td>
+                        <td class="text-center">{{item.distance}}</td>
                         <td class="text-right">{{item.timelate}}</td>
                         <td class="text-right">{{item.workinghours}}</td>
                         <td class="text-right">{{item.overtime}}</td>
