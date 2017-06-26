@@ -193,7 +193,7 @@ exports.reportdailyByDate = function(req, res, next, reportdate) {
                         });
                     });
                     returnReportDaily.date = reportdate;
-                    returnReportDaily.company = company[0];
+                    returnReportDaily.company = company;
                     returnReportDaily.data = reportDailyData;
                     req._reportdaily = returnReportDaily;
                     next();
