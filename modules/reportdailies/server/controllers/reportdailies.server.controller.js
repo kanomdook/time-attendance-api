@@ -15,11 +15,11 @@ var path = require('path'),
 /**
  * Create a Reportdaily
  */
-exports.create = function(req, res) {
+exports.create = function (req, res) {
     var reportdaily = new Reportdaily(req.body);
     reportdaily.user = req.user;
 
-    reportdaily.save(function(err) {
+    reportdaily.save(function (err) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -33,7 +33,7 @@ exports.create = function(req, res) {
 /**
  * Show the current Reportdaily
  */
-exports.read = function(req, res) {
+exports.read = function (req, res) {
     // convert mongoose document to JSON
     var reportdaily = req.reportdaily ? req.reportdaily.toJSON() : {};
 
@@ -47,12 +47,12 @@ exports.read = function(req, res) {
 /**
  * Update a Reportdaily
  */
-exports.update = function(req, res) {
+exports.update = function (req, res) {
     var reportdaily = req.reportdaily;
 
     reportdaily = _.extend(reportdaily, req.body);
 
-    reportdaily.save(function(err) {
+    reportdaily.save(function (err) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -66,10 +66,10 @@ exports.update = function(req, res) {
 /**
  * Delete an Reportdaily
  */
-exports.delete = function(req, res) {
+exports.delete = function (req, res) {
     var reportdaily = req.reportdaily;
 
-    reportdaily.remove(function(err) {
+    reportdaily.remove(function (err) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -83,8 +83,8 @@ exports.delete = function(req, res) {
 /**
  * List of Reportdailies
  */
-exports.list = function(req, res) {
-    Reportdaily.find().sort('-created').populate('user', 'displayName').exec(function(err, reportdailies) {
+exports.list = function (req, res) {
+    Reportdaily.find().sort('-created').populate('user', 'displayName').exec(function (err, reportdailies) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -98,7 +98,7 @@ exports.list = function(req, res) {
 /**
  * Reportdaily middleware
  */
-exports.reportdailyByID = function(req, res, next, id) {
+exports.reportdailyByID = function (req, res, next, id) {
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(400).send({
@@ -106,7 +106,7 @@ exports.reportdailyByID = function(req, res, next, id) {
         });
     }
 
-    Reportdaily.findById(id).populate('user', 'displayName').exec(function(err, reportdaily) {
+    Reportdaily.findById(id).populate('user', 'displayName').exec(function (err, reportdaily) {
         if (err) {
             return next(err);
         } else if (!reportdaily) {
@@ -119,7 +119,7 @@ exports.reportdailyByID = function(req, res, next, id) {
     });
 };
 
-exports.reportdailyByDate = function(req, res, next, reportdate) {
+exports.reportdailyByDate = function (req, res, next, reportdate) {
     var newDate = new Date(reportdate);
     var reportEndDate = null;
     var returnReportDaily = {};
@@ -132,7 +132,7 @@ exports.reportdailyByDate = function(req, res, next, reportdate) {
     //     reportEndDate = new Date(newDate).setMonth(new Date(newDate).getMonth() + 1);
     // }
     // { created: { $gte: newDate, $lt: new Date(reportEndDate) } }
-    Company.findById(req.user.company).populate('user', 'displayName').exec(function(err, company) {
+    Company.findById(req.user.company).populate('user', 'displayName').exec(function (err, company) {
         if (err) {
             return next(err);
         } else if (!company) {
@@ -151,7 +151,7 @@ exports.reportdailyByDate = function(req, res, next, reportdate) {
                         model: 'Company'
                     }
                 }
-            }).exec(function(err, reportdaily) {
+            }).exec(function (err, reportdaily) {
                 if (err) {
                     return next(err);
                 } else if (!reportdaily) {
@@ -162,12 +162,12 @@ exports.reportdailyByDate = function(req, res, next, reportdate) {
                     var checkinByCompany = [];
                     var reportDailyData = [];
                     if (reportdaily.length > 0) {
-                        checkinByCompany = reportdaily.filter(function(obj) {
+                        checkinByCompany = reportdaily.filter(function (obj) {
                             return obj.user.employeeprofile.company._id.toString() === req.user.company.toString();
 
                         });
                     }
-                    checkinByCompany.forEach(function(i, index) {
+                    checkinByCompany.forEach(function (i, index) {
                         var distance = getDistanceFromLatLonInKm(i.locationIn.lat, i.locationIn.lng, company.address.location.latitude, company.address.location.longitude);
                         reportDailyData.push({
                             employeeid: i.user.employeeprofile.employeeid,
@@ -205,12 +205,13 @@ exports.reportdailyByDate = function(req, res, next, reportdate) {
     });
 };
 
-exports.reportdaily = function(req, res, next) {
+exports.reportdaily = function (req, res, next) {
     res.jsonp(req._reportdaily);
 };
 
-exports.exportByDate = function(req, res, next) {
+exports.exportByDate = function (req, res, next) {
     console.dir(req._reportdaily);
+    var date = req._reportdaily.date.split('-')[2] + '/' + req._reportdaily.date.split('-')[1]+ '/' + req._reportdaily.date.split('-')[0];
     var styles = {
         headerDark: {
             fill: {
@@ -246,7 +247,7 @@ exports.exportByDate = function(req, res, next) {
     //Array of objects representing heading rows (very top) 
     var heading = [
         [{ value: 'รายงานการมาทำงานของพนักงาน (รายวัน)', style: styles.headerDark }], // <-- It can be only values 
-        ['วันที่','2']
+        ['วันที่', date]
     ];
 
     //Here you specify the export structure 
@@ -281,9 +282,7 @@ exports.exportByDate = function(req, res, next) {
     // The merges are independent of the data. 
     // A merge will overwrite all data _not_ in the top-left cell. 
     var merges = [
-        { start: { row: 1, column: 1 }, end: { row: 1, column: 10 } },
-        { start: { row: 2, column: 1 }, end: { row: 2, column: 1 } },
-        { start: { row: 2, column: 2 }, end: { row: 2, column: 2 } }
+        { start: { row: 1, column: 1 }, end: { row: 1, column: 13 } }
     ];
 
     // Create the excel report. 
@@ -307,7 +306,7 @@ exports.exportByDate = function(req, res, next) {
     next();
 };
 
-exports.exportExcel = function(req, res, next) {
+exports.exportExcel = function (req, res, next) {
     res.attachment('reportdaily' + req._reportdaily.date + '.xlsx'); // This is sails.js specific (in general you need to set headers) 
     return res.send(req.export);
 };
