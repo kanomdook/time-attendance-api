@@ -22,12 +22,12 @@ module.exports = function(app) {
         .get(reportdailies.reportdaily);
 
     app.route('/api/reportdaily/export/excel/:exportdate').all(reportdailiesPolicy.isAllowed)
-        .get(reportdailies.exportExcel);
+        .get(reportdailies.exportByDate, reportdailies.exportExcel);
 
     // Finish by binding the Reportdaily middleware
     app.param('reportdate', reportdailies.reportdailyByDate);
 
-    app.param('exportdate', reportdailies.exportByDate);
+    app.param('exportdate', reportdailies.reportdailyByDate);
 
     app.param('reportdailyId', reportdailies.reportdailyByID);
 };

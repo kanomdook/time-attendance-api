@@ -209,8 +209,8 @@ exports.reportdaily = function(req, res, next) {
     res.jsonp(req._reportdaily);
 };
 
-exports.exportByDate = function(req, res, next, date) {
-    console.log(date);
+exports.exportByDate = function(req, res, next) {
+    console.dir(req._reportdaily);
     var styles = {
         headerDark: {
             fill: {
