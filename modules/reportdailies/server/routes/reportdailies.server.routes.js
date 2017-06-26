@@ -18,7 +18,7 @@ module.exports = function(app) {
         .delete(reportdailies.delete);
 
     // Reportdailies Routes
-    app.route('/api/reportdaily/:reportdate').all(reportdailiesPolicy.isAllowed)
+    app.route('/api/reportdaily/:reportdate')//.all(reportdailiesPolicy.isAllowed)
         .get(reportdailies.reportdaily);
 
     // Finish by binding the Reportdaily middleware

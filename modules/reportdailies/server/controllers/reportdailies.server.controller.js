@@ -122,8 +122,8 @@ exports.reportdailyByDate = function(req, res, next, reportdate) {
     var newDate = new Date(reportdate);
     var reportEndDate = null;
     var returnReportDaily = {};
-    reportEndDate = new Date(reportdate + '11:13:00');
-    console.log(newDate +'&&&&&&&&&&&'+ reportEndDate);
+    reportEndDate = new Date(reportdate + ' 23:59:59');
+    console.log(newDate + "-" + reportEndDate);
     // รายเดือน 
     // if (newDate.getMonth() > 10) {
     //     reportEndDate = new Date(newDate.getFullYear() + 1 + '-01');
