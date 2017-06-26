@@ -145,8 +145,16 @@ exports.reportdailyByDate = function(req, res, next, reportdate) {
             return res.status(404).send({
                 message: 'No Reportdaily with that identifier has been found'
             });
+        } else {
+            var checkinByCompany = [];
+            if (reportdaily.length > 0) {
+                checkinByCompany = checkin.filter(function(obj) {
+                    return obj.user.employeeprofile.company._id.toString() === req.user.company.toString();
+
+                });
+            }
         }
-        req.reportdaily = reportdaily;
+        req.reportdaily = checkinByCompany;
         next();
     });
 };
