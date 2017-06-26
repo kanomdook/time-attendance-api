@@ -153,9 +153,10 @@ exports.reportdailyByDate = function(req, res, next, reportdate) {
 
                 });
             }
+
+            req.reportdaily = checkinByCompany;
+            next();
         }
-        req.reportdaily = checkinByCompany;
-        next();
     });
 };
 
