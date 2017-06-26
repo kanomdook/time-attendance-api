@@ -210,7 +210,7 @@ exports.reportdaily = function(req, res, next) {
 };
 
 exports.exportExcel = function(req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     var styles = {
         headerDark: {
             fill: {

@@ -31,6 +31,7 @@
             });
             return deferred.promise;
         };
+        
         this.exportReportDailies = function(report) {
             $http.get('/api/reportdaily/export/excel')
         };

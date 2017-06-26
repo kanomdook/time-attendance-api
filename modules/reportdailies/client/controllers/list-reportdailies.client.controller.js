@@ -40,7 +40,7 @@
         }
 
         function exportReport(report) {
-            ReportdailiesDayService.exportReportDailies(report);
+            // ReportdailiesDayService.exportReportDailies(report);
         }
     }
 }());
