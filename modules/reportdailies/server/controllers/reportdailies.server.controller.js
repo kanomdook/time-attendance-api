@@ -307,7 +307,7 @@ exports.exportByDate = function(req, res, next) {
 };
 
 exports.exportExcel = function(req, res, next) {
-    res.attachment(req._reportdaily.date + 'reportdaily.xlsx'); // This is sails.js specific (in general you need to set headers) 
+    res.attachment('reportdaily' + req._reportdaily.date + '.xlsx'); // This is sails.js specific (in general you need to set headers) 
     return res.send(req.export);
 };
 
