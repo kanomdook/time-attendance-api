@@ -12,6 +12,7 @@
         vm.reportDate = new Date();
         vm.searchReport = searchReport;
         vm.reportdailies = ReportdailiesService.query();
+        vm.reportData = null;
 
         function searchReport(reportDate) {
             var date = new Date(reportDate).getDate();
@@ -21,6 +22,7 @@
             console.warn(inputDate);
             ReportdailiesDayService.getReportDailies(inputDate).then(function(report) {
                 console.log(report);
+                vm.reportData = report;
             }, function(error) {
                 console.error(error);
             });

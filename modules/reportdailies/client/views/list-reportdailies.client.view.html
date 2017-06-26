@@ -29,7 +29,7 @@
             </div>
         </div>
     </div>
-    <div class="animated fadeInRight">
+    <div class="animated fadeInRight" ng-if="vm.reportData.data.length > 0">
         <div class="contact-box table-responsive">
             <table class="table table-striped table-bordered table-hover dataTables-example ng-isolate-scope dataTable" id="DataTables_Table_2" role="grid" aria-describedby="DataTables_Table_2_info" datatable dt-options="dtOptions">
                 <thead>
@@ -49,19 +49,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="gradeA" role="row">
-                        <td>ลำดับ</td>
-                        <td>ลำดับ</td>
-                        <td>ลำดับ</td>
-                        <td>ลำดับ</td>
-                        <td>ลำดับลำดับลำดับ</td>
-                        <td>ลำดับลำดับ</td>
-                        <td>ลำดับ</td>
-                        <td>ลำดับ</td>
-                        <td>ลำดับลำดับ</td>
-                        <td>ลำดับ</td>
-                        <td>ลำดับลำดับ</td>
-                        <td>ลำดับ</td>
+                    <tr class="gradeA" role="row" ng-repeat="item in vm.reportData.data">
+                        <td>{{$index}}</td>
+                        <td>{{item.employeeid}}</td>
+                        <td>{{item.firstname}}</td>
+                        <td>{{item.lastname}}</td>
+                        <td>{{item.timein}}</td>
+                        <td>{{item.timeout}}</td>
+                        <td>{{item.timelate}}</td>
+                        <td>{{item.device}}</td>
+                        <td>{{item.distance}}</td>
+                        <td>{{item.workinghours}}</td>
+                        <td>{{item.overtime}}</td>
                     </tr>
                 </tbody>
             </table>
