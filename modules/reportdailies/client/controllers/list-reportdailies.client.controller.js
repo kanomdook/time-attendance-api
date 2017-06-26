@@ -27,7 +27,7 @@
                 vm.reportData = report;
                 vm.startCall = false;
                 if (vm.reportData.data.length) {
-                    vm.showNull = true;
+                    vm.showNull = false;
                 } else {
                     vm.showNull = true;
                 }
