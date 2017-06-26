@@ -121,12 +121,12 @@ exports.reportdailyByDate = function(req, res, next, reportdate) {
     // body...
     var newDate = new Date(reportdate);
     var reportEndDate = null;
+    var returnReportDaily = {};
     if (newDate.getMonth() > 10) {
         reportEndDate = new Date(newDate.getFullYear() + 1 + '-01');
     } else {
         reportEndDate = new Date(newDate).setMonth(new Date(newDate).getMonth() + 1);
     }
-    console.log('{ created: { $gte: ' + newDate + ',$lt: ' + new Date(reportEndDate) + ' } }');
     Checkin.find({ created: { $gte: newDate, $lt: new Date(reportEndDate) } }).populate({
         path: 'user',
         model: 'User',
@@ -153,8 +153,9 @@ exports.reportdailyByDate = function(req, res, next, reportdate) {
 
                 });
             }
-
-            req._reportdaily = checkinByCompany;
+            returnReportDaily.company = req.user.company;
+            returnReportDaily.data = checkinByCompany;
+            req._reportdaily = returnReportDaily;
             next();
         }
     });
