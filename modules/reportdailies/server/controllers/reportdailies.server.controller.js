@@ -245,8 +245,8 @@ exports.exportByDate = function(req, res, next) {
 
     //Array of objects representing heading rows (very top) 
     var heading = [
-        [{ value: 'ทดสอบ สวัสดีครับ', style: styles.headerDark }], // <-- It can be only values 
-        ['วันที่']
+        [{ value: 'รายงานการมาทำงานของพนักงาน (รายวัน)', style: styles.headerDark }], // <-- It can be only values 
+        ['วันที่','2']
     ];
 
     //Here you specify the export structure 
