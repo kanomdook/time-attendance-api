@@ -12,6 +12,7 @@
         vm.reportDate = new Date();
         vm.searchReport = searchReport;
         vm.reportdailies = ReportdailiesService.query();
+        vm.reportData = null;
 
         function searchReport(reportDate) {
             var date = new Date(reportDate).getDate();
@@ -19,8 +20,9 @@
             var year = new Date(reportDate).getFullYear();
             var inputDate = year + "-" + ((month) < 10 ? "0" + month : month) + "-" + (date < 10 ? "0" + date : date);
             console.warn(inputDate);
-            ReportdailiesDayService.getReportDailies('2017-06-25').then(function(report) {
+            ReportdailiesDayService.getReportDailies(inputDate).then(function(report) {
                 console.log(report);
+                vm.reportData = report;
             }, function(error) {
                 console.error(error);
             });
