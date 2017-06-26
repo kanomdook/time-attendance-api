@@ -13,8 +13,10 @@
         vm.searchReport = searchReport;
         vm.reportdailies = ReportdailiesService.query();
         vm.reportData = null;
+        vm.showNull = false;
 
         function searchReport(reportDate) {
+            vm.startCall = true;
             var date = new Date(reportDate).getDate();
             var month = new Date(reportDate).getMonth() + 1;
             var year = new Date(reportDate).getFullYear();
@@ -23,8 +25,16 @@
             ReportdailiesDayService.getReportDailies(inputDate).then(function(report) {
                 console.log(report);
                 vm.reportData = report;
+                vm.startCall = false;
+                if (vm.reportData.data.length) {
+                    vm.showNull = true;
+                } else {
+                    vm.showNull = true;
+                }
             }, function(error) {
                 console.error(error);
+                vm.startCall = false;
+                vm.showNull = true;
             });
         }
     }

@@ -22,10 +22,13 @@
             </div>
             <div class="col-sm-4 col-md-3">
                 <div class="form-group">
-                    <a class="btn btn-primary btn-block" ng-disabled="!vm.reportDate" ng-click="vm.searchReport(vm.reportDate)">ค้นหา</a>
+                    <a class="btn btn-primary btn-block" ng-disabled="!vm.reportDate" ng-click="vm.searchReport(vm.reportDate)"><i class="fa fa-spinner fa-spin" ng-if="vm.startCall"></i> ค้นหา</a>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="text-center" ng-if="vm.showNull">
+        <p>ไม่มีข้อมูลรายงาน</p>
     </div>
     <div class="animated fadeInRight" ng-if="vm.reportData.data.length > 0">
         <div class="contact-box table-responsive">
