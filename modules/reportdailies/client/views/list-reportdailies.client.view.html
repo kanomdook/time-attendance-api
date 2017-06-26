@@ -64,9 +64,15 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
-        <div class="text-right" ng-if="vm.reportData.data.length > 0">
-            <a class="btn btn-primary btn-block" ng-click="vm.exportReport(vm.reportDate)">></i> Excel</a>
+            <div class="text-right">
+                <div class="row">
+                    <div class="col col-md-4"></div>
+                    <div class="col col-md-4"></div>
+                    <div class="col col-md-4">
+                        <a class="btn btn-primary btn-block" ng-click="vm.exportReport(vm.reportDate)">Excel</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
