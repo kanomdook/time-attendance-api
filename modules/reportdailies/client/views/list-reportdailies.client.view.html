@@ -42,7 +42,7 @@
                         <th class="sorting" rowspan="1" colspan="1" style="text-align: center">เวลาเข้า</th>
                         <th class="sorting" rowspan="1" colspan="1" style="text-align: center">เวลาออก</th>
                         <th class="sorting" rowspan="1" colspan="1" style="text-align: center">เครื่องแสกน</th>
-                        <th class="sorting" rowspan="1" colspan="1" style="text-align: center">ระยะห่าง</th>
+                        <th class="sorting" rowspan="1" colspan="1" style="text-align: center">ระยะห่าง(ก.ม)</th>
                         <th class="sorting" rowspan="1" colspan="1" style="text-align: center">สาย(ชม.นาที)</th>
                         <th class="sorting" rowspan="1" colspan="1" style="text-align: center">ชั่วโมงทำงาน</th>
                         <th class="sorting" rowspan="1" colspan="1" style="text-align: center">โอที(ชม.นาที)</th>
@@ -50,17 +50,17 @@
                 </thead>
                 <tbody>
                     <tr class="gradeA" role="row" ng-repeat="item in vm.reportData.data">
-                        <td>{{$index + 1}}</td>
-                        <td>{{item.employeeid}}</td>
+                        <td class="text-right">{{$index + 1}}</td>
+                        <td class="text-right">{{item.employeeid}}</td>
                         <td>{{item.firstname}}</td>
                         <td>{{item.lastname}}</td>
-                        <td>{{item.timein | date :'HH:mm:ss'}}</td>
-                        <td>{{item.timeout| date :'HH:mm:ss'}}</td>
-                        <td>{{item.device}}</td>
-                        <td>{{item.distance}}</td>
-                        <td>{{item.timelate}}</td>
-                        <td>{{item.workinghours}}</td>
-                        <td>{{item.overtime}}</td>
+                        <td class="text-center">{{item.timein | date :'HH:mm:ss'}}</td>
+                        <td class="text-center">{{item.timeout| date :'HH:mm:ss'}}</td>
+                        <td class="text-right">{{item.device}}</td>
+                        <td class="text-right">{{item.distance}}</td>
+                        <td class="text-right">{{item.timelate}}</td>
+                        <td class="text-right">{{item.workinghours}}</td>
+                        <td class="text-right">{{item.overtime}}</td>
                     </tr>
                 </tbody>
             </table>
