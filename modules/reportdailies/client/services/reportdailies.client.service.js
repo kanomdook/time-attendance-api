@@ -32,7 +32,7 @@
             return deferred.promise;
         };
         this.exportReportDailies = function(report) {
-            $http.post('/api/reportdaily/export/excel', report)
+            $http.get('/api/reportdaily/export/excel', report)
         };
     }
 
