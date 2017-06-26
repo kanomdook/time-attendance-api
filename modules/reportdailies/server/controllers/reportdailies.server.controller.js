@@ -154,7 +154,7 @@ exports.reportdailyByDate = function(req, res, next, reportdate) {
                 });
             }
 
-            req.reportdaily = checkinByCompany;
+            req._reportdaily = checkinByCompany;
             next();
         }
     });
@@ -162,6 +162,6 @@ exports.reportdailyByDate = function(req, res, next, reportdate) {
 
 exports.reportdaily = function(req, res, next) {
     // body...
-    res.jsonp(req.reportdaily);
+    res.jsonp(req._reportdaily);
     // res.send('OK');
 };
