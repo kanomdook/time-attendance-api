@@ -163,12 +163,12 @@ exports.reportdailyByDate = function(req, res, next, reportdate) {
                     timeout: i.dateTimeOut,
                     timelate: null,
                     locationIn: {
-                        lat: i.lat,
-                        lng: i.lng
+                        lat: i.locationIn.lat,
+                        lng: i.locationIn.lng
                     },
                     locationOut: {
-                        lat: i.lat,
-                        lng: i.lng
+                        lat: i.locationOut.lat,
+                        lng: i.locationOut.lng
                     },
                     device: i.user.deviceID,
                     distance: null,
