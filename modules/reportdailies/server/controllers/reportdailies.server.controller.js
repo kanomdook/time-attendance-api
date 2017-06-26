@@ -245,11 +245,17 @@ exports.exportByDate = function(req, res, next) {
 
     //Array of objects representing heading rows (very top) 
     var heading = [
-        [{ value: 'ทดสอบ สวัสดีครับ', style: styles.headerDark },{ value: 'ทดสอบ สวัสดีครับ', style: styles.headerDark }] // <-- It can be only values 
+        [{ value: 'ทดสอบ สวัสดีครับ', style: styles.headerDark }], // <-- It can be only values 
+        ['a2', 'b2', 'c2']
     ];
 
     //Here you specify the export structure 
     var specification = {
+        customer_name: { // <- the key should match the actual data key 
+            displayName: 'Customer', // <- Here you specify the column header 
+            headerStyle: styles.headerDark, // <- Header style 
+            width: 120 // <- width in pixels 
+        },
         note: {
             displayName: 'Description',
             headerStyle: styles.headerDark,
@@ -264,11 +270,11 @@ exports.exportByDate = function(req, res, next) {
     // specification provided above. But you should have all the fields 
     // that are listed in the report specification 
     var dataset = [
-        { customer_name: 'สวัสดีครับ', status_id: 1, note: 'some สวัสดีครับ', misc: 'not shown' },
-        { customer_name: 'สวัสดีครับ', status_id: 2, note: 'some note' },
-        { customer_name: 'สวัสดีครับ', status_id: 3, note: 'some note', misc: 'not shown' },
-        { customer_name: 'สวัสดีครับ', status_id: 4, note: 'some note', misc: 'not shown' },
-        { customer_name: 'สวัสดีครับ', status_id: 5, note: 'some note', misc: 'not shown' }
+        { customer_name: 'สวัสดีครับ', note: 'some สวัสดีครับ' },
+        { customer_name: 'สวัสดีครับ', note: 'some note' },
+        { customer_name: 'สวัสดีครับ', note: 'some note' },
+        { customer_name: 'สวัสดีครับ', note: 'some note' },
+        { customer_name: 'สวัสดีครับ', note: 'some note' }
     ];
 
     // Define an array of merges. 1-1 = A:1 
