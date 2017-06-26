@@ -221,5 +221,5 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
 }
 
 function deg2rad(deg) {
-    return deg * (Math.PI / 180);
+    return (deg * (Math.PI / 180)).toFixed(2);;
 }
