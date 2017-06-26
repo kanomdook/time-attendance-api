@@ -282,7 +282,8 @@ exports.exportByDate = function(req, res, next) {
     // A merge will overwrite all data _not_ in the top-left cell. 
     var merges = [
         { start: { row: 1, column: 1 }, end: { row: 1, column: 10 } },
-        { start: { row: 2, column: 1 }, end: { row: 2, column: 10 } }
+        { start: { row: 2, column: 1 }, end: { row: 2, column: 1 } },
+        { start: { row: 2, column: 2 }, end: { row: 2, column: 2 } }
     ];
 
     // Create the excel report. 
