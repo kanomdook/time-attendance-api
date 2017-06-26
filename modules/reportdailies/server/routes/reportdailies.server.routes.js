@@ -21,11 +21,13 @@ module.exports = function(app) {
     app.route('/api/reportdaily/:reportdate').all(reportdailiesPolicy.isAllowed)
         .get(reportdailies.reportdaily);
 
-    app.route('/api/reportdaily/export/excel').all(reportdailiesPolicy.isAllowed)
+    app.route('/api/reportdaily/export/excel/:exportdate').all(reportdailiesPolicy.isAllowed)
         .get(reportdailies.exportExcel);
 
     // Finish by binding the Reportdaily middleware
     app.param('reportdate', reportdailies.reportdailyByDate);
+
+    app.param('exportdate', reportdailies.exportByDate);
 
     app.param('reportdailyId', reportdailies.reportdailyByID);
 };

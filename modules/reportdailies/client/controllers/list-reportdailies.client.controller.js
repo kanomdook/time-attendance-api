@@ -39,8 +39,8 @@
             });
         }
 
-        function exportReport(report) {
+        // function exportReport(report) {
             // ReportdailiesDayService.exportReportDailies(report);
-        }
+        // }
     }
 }());

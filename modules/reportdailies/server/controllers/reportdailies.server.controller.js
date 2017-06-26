@@ -209,7 +209,7 @@ exports.reportdaily = function(req, res, next) {
     res.jsonp(req._reportdaily);
 };
 
-exports.exportExcel = function(req, res) {
+exports.exportByDate = function(req, res, next) {
     // console.log(req.body);
     var styles = {
         headerDark: {
@@ -312,8 +312,15 @@ exports.exportExcel = function(req, res) {
     );
 
     // You can then return this straight 
+    // res.attachment('report.xlsx'); // This is sails.js specific (in general you need to set headers) 
+    // return res.send(report);
+    req.export = report;
+    next();
+};
+
+exports.exportExcel = function(req, res, next) {
     res.attachment('report.xlsx'); // This is sails.js specific (in general you need to set headers) 
-    return res.send(report);
+    return res.send(req.export);
 };
 
 function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {

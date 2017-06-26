@@ -24,7 +24,7 @@ exports.invokeRolesPolicies = function() {
             resources: '/api/reportdaily/:reportdate',
             permissions: '*'
         }, {
-            resources: '/api/reportdaily/export/excel',
+            resources: '/api/reportdaily/export/excel/:exportdate',
             permissions: '*'
         }]
     }, {
@@ -39,7 +39,7 @@ exports.invokeRolesPolicies = function() {
             resources: '/api/reportdaily/:reportdate',
             permissions: ['get']
         }, {
-            resources: '/api/reportdaily/export/excel',
+            resources: '/api/reportdaily/export/excel/:exportdate',
             permissions: ['get']
         }]
     }, {
