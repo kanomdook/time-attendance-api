@@ -1,5 +1,5 @@
 <section ng-init="vm.init()">
-  <div class="wrapper wrapper-content animated fadeInRight ecommerce">
+    <div class="wrapper wrapper-content animated fadeInRight ecommerce">
         <form class="form-horizontal" name="vm.form.companyForm" ng-submit="vm.save(vm.form.companyForm.$valid)" novalidate>
             <div class="row">
                 <div class="col-lg-12">
@@ -105,7 +105,6 @@
                                             <label class="col-sm-4 col-md-2 control-label">ประเทศ</label>
                                             <div class="col-sm-8 col-md-10">
                                                 <select class="form-control m-b" id="country" name="country" ng-model="vm.company.address.country" ng-options="item as item.en.common for item in country track by item.cca2" required></select>
-
                                                 <!--<input type="text" id="country" name="country" class="form-control" autocomplete="false" typeahead-language="country" ng-model="vm.company.address.country.th" typeahead-callback="callbackLanguage" placeholder="" required>-->
                                                 <!--<input type="text" name="country" id="country" ng-model="vm.company.address.country" class="form-control" placeholder="" required>-->
                                                 <div ng-messages="vm.form.companyForm.country.$error" role="alert">
@@ -113,6 +112,19 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 col-md-2 control-label">ละติจูด</label>
+                                            <div class="col-sm-8 col-md-10">
+                                                <input class="form-control" id="latitude" name="latitude" ng-model="vm.company.address.location.latitude" type="text" placeholder>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 col-md-2 control-label">ลองจิจูด</label>
+                                            <div class="col-sm-8 col-md-10">
+                                                <input class="form-control" id="longitude" name="longitude" ng-model="vm.company.address.location.longitude" type="text" placeholder>
+                                            </div>
+                                        </div>
+                                        <p class="error-text">*สามารถดูได้จาก Google Map</p>
                                         <hr>
                                         <div class="form-group" show-errors>
                                             <label class="col-sm-4 col-md-2 control-label">เบอร์โทรศัพท์(บริษัท)</label>
