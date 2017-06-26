@@ -65,5 +65,8 @@
                 </tbody>
             </table>
         </div>
+        <div class="text-right" ng-if="vm.reportData.data.length > 0">
+            <a class="btn btn-primary btn-block" ng-click="vm.exportReport(vm.reportDate)">></i> Excel</a>
+        </div>
     </div>
 </section>
