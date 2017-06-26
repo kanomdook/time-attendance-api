@@ -216,7 +216,7 @@ exports.exportByDate = function (req, res, next) {
         headerDark: {
             fill: {
                 fgColor: {
-                    rgb: 'FF000000'
+                    rgb: 'FFC0C0C0'
                 }
             },
             font: {
