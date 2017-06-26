@@ -45,17 +45,16 @@
                         <th class="sorting" rowspan="1" colspan="1" style="text-align: center">สาย(ชม.นาที)</th>
                         <th class="sorting" rowspan="1" colspan="1" style="text-align: center">ชั่วโมงทำงาน</th>
                         <th class="sorting" rowspan="1" colspan="1" style="text-align: center">โอที(ชม.นาที)</th>
-                        <th class="sorting" rowspan="1" colspan="1" style="text-align: center">หมายเหตุ</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="gradeA" role="row" ng-repeat="item in vm.reportData.data">
-                        <td>{{$index}}</td>
+                        <td>{{$index + 1}}</td>
                         <td>{{item.employeeid}}</td>
                         <td>{{item.firstname}}</td>
                         <td>{{item.lastname}}</td>
-                        <td>{{item.timein}}</td>
-                        <td>{{item.timeout}}</td>
+                        <td>{{item.timein | date :'dd/MM/yyyy'}}</td>
+                        <td>{{item.timeout| date :'dd/MM/yyyy'}}</td>
                         <td>{{item.timelate}}</td>
                         <td>{{item.device}}</td>
                         <td>{{item.distance}}</td>
