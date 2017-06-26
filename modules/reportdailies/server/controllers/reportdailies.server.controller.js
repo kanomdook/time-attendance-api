@@ -167,6 +167,7 @@ exports.reportdailyByDate = function(req, res, next, reportdate) {
                         });
                     }
                     checkinByCompany.forEach(function(i, index) {
+                        var distance = getDistanceFromLatLonInKm(i.locationIn.lat, i.locationIn.lng, company.address.location.latitude, company.address.location.longitude);
                         reportDailyData.push({
                             employeeid: i.user.employeeprofile.employeeid,
                             firstname: i.user.employeeprofile.firstname,
@@ -183,7 +184,7 @@ exports.reportdailyByDate = function(req, res, next, reportdate) {
                                 lng: i.locationOut.lng
                             },
                             device: i.user.deviceID,
-                            distance: getDistanceFromLatLonInKm(i.locationIn.lat, i.locationIn.lng, company.address.location.latitude, company.address.location.longitude),
+                            distance: distance.toFixed(2),
                             workinghours: null,
                             overtime: null,
                             remark: {
@@ -221,5 +222,5 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
 }
 
 function deg2rad(deg) {
-    return (deg * (Math.PI / 180)).toFixed(2);;
+    return deg * (Math.PI / 180);
 }
