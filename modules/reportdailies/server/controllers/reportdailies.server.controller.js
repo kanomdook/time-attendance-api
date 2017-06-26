@@ -131,7 +131,7 @@ exports.reportdailyByDate = function(req, res, next, reportdate) {
     //     reportEndDate = new Date(newDate).setMonth(new Date(newDate).getMonth() + 1);
     // }
     // { created: { $gte: newDate, $lt: new Date(reportEndDate) } }
-    Company.findById(id).populate('user', 'displayName').exec(function(err, company) {
+    Company.findById(req.user.company).populate('user', 'displayName').exec(function(err, company) {
         if (err) {
             return next(err);
         } else if (!company) {
