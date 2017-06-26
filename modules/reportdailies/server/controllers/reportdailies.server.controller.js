@@ -210,7 +210,7 @@ exports.reportdaily = function(req, res, next) {
 };
 
 exports.exportByDate = function(req, res, next, date) {
-    console.log(date);
+    console.log(JSON.parse(date));
     var styles = {
         headerDark: {
             fill: {
