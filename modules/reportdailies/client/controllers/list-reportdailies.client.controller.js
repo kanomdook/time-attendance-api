@@ -11,6 +11,7 @@
         var vm = this;
         vm.reportDate = new Date();
         vm.searchReport = searchReport;
+        vm.exportReport = exportReport;
         vm.reportdailies = ReportdailiesService.query();
         vm.reportData = null;
         vm.showNull = false;
@@ -36,6 +37,10 @@
                 vm.startCall = false;
                 vm.showNull = true;
             });
+        }
+
+        function exportReport(report) {
+            ReportdailiesDayService.exportReportDailies(report);
         }
     }
 }());

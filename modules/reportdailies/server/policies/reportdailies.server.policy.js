@@ -23,6 +23,9 @@ exports.invokeRolesPolicies = function() {
         }, {
             resources: '/api/reportdaily/:reportdate',
             permissions: '*'
+        }, {
+            resources: '/api/reportdaily/export/excel',
+            permissions: '*'
         }]
     }, {
         roles: ['user'],
@@ -35,6 +38,9 @@ exports.invokeRolesPolicies = function() {
         }, {
             resources: '/api/reportdaily/:reportdate',
             permissions: ['get']
+        }, {
+            resources: '/api/reportdaily/export/excel',
+            permissions: ['post']
         }]
     }, {
         roles: ['guest'],

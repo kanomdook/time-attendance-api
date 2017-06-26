@@ -18,8 +18,11 @@ module.exports = function(app) {
         .delete(reportdailies.delete);
 
     // Reportdailies Routes
-    app.route('/api/reportdaily/:reportdate')//.all(reportdailiesPolicy.isAllowed)
+    app.route('/api/reportdaily/:reportdate').all(reportdailiesPolicy.isAllowed)
         .get(reportdailies.reportdaily);
+
+    app.route('/api/reportdaily/export/excel').all(reportdailiesPolicy.isAllowed)
+        .post(reportdailies.exportExcel);
 
     // Finish by binding the Reportdaily middleware
     app.param('reportdate', reportdailies.reportdailyByDate);

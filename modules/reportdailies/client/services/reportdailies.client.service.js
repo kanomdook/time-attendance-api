@@ -18,7 +18,7 @@
             }
         });
     }
-    
+
     ReportdailiesDayService.$inject = ['$http', '$q'];
 
     function ReportdailiesDayService($http, $q) {
@@ -30,6 +30,9 @@
                 deferred.reject(error);
             });
             return deferred.promise;
+        };
+        this.exportReportDailies = function(report) {
+            $http.post('/api/reportdaily/export/excel', report)
         };
     }
 
