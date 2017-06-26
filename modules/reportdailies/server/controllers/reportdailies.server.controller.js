@@ -153,7 +153,7 @@ exports.reportdailyByDate = function(req, res, next, reportdate) {
 
                 });
             }
-            returnReportDaily.company = req.user.company;
+            returnReportDaily.company = checkinByCompany[0] ? checkinByCompany[0].user.employeeprofile.company : null;
             returnReportDaily.data = checkinByCompany;
             req._reportdaily = returnReportDaily;
             next();
