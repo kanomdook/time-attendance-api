@@ -17,6 +17,7 @@
         vm.startCall = false;
 
         function searchReport(reportDate) {
+            vm.reportData = null;
             var date = new Date(reportDate).getDate();
             var month = new Date(reportDate).getMonth() + 1;
             var year = new Date(reportDate).getFullYear();
@@ -25,11 +26,10 @@
             ReportdailiesDayService.getReportDailies(inputDate).then(function (report) {
                 console.log(report);
                 vm.reportData = report;
-                vm.startCall = false;
                 if (vm.reportData.data.length) {
-                    vm.startCall = true;
-                } else {
                     vm.startCall = false;
+                } else {
+                    vm.startCall = true;
                 }
             }, function (error) {
                 console.error(error);

@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     // Employeeprofiles controller
@@ -6,9 +6,9 @@
         .module('employeeprofiles')
         .controller('EmployeeprofilesController', EmployeeprofilesController);
 
-    EmployeeprofilesController.$inject = ['$scope', '$state', '$window', 'Authentication', 'employeeprofileResolve', 'FileUploader', '$timeout', '$http'];
+    EmployeeprofilesController.$inject = ['$scope', '$state', '$window', 'Authentication', 'employeeprofileResolve', 'FileUploader', '$timeout', '$http', 'EmployeeService'];
 
-    function EmployeeprofilesController($scope, $state, $window, Authentication, employeeprofile, FileUploader, $timeout, $http) {
+    function EmployeeprofilesController($scope, $state, $window, Authentication, employeeprofile, FileUploader, $timeout, $http, EmployeeService) {
         var vm = this;
 
         vm.authentication = Authentication;
@@ -18,6 +18,7 @@
         vm.remove = remove;
         vm.save = save;
         vm.init = init;
+        vm.initView = initView;
 
         $scope.postcode = null;
         $scope.language = null;
@@ -46,14 +47,14 @@
         }
 
         function init() {
-            $http.get('json/postcode.json').success(function(response) {
+            $http.get('json/postcode.json').success(function (response) {
                 $scope.postcode = response.postcodeData;
-            }).error(function(error) {
+            }).error(function (error) {
 
             });
-            $http.get('json/country-language.json').success(function(response) {
+            $http.get('json/country-language.json').success(function (response) {
                 $scope.country = response.countryData;
-            }).error(function(error) {
+            }).error(function (error) {
 
             });
         }
@@ -68,20 +69,20 @@
         // Set file uploader image filter
         $scope.uploader.filters.push({
             name: 'imageFilter',
-            fn: function(item, options) {
+            fn: function (item, options) {
                 var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
                 return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
             }
         });
 
         // Called after the user selected a new picture file
-        $scope.uploader.onAfterAddingFile = function(fileItem) {
+        $scope.uploader.onAfterAddingFile = function (fileItem) {
             if ($window.FileReader) {
                 var fileReader = new FileReader();
                 fileReader.readAsDataURL(fileItem._file);
 
-                fileReader.onload = function(fileReaderEvent) {
-                    $timeout(function() {
+                fileReader.onload = function (fileReaderEvent) {
+                    $timeout(function () {
                         vm.employeeprofile.image = fileReaderEvent.target.result;
                     }, 0);
                 };
@@ -89,7 +90,7 @@
         };
 
         // Called after the user has successfully uploaded a new picture
-        $scope.uploader.onSuccessItem = function(fileItem, response, status, headers) {
+        $scope.uploader.onSuccessItem = function (fileItem, response, status, headers) {
             // Show success message
             $scope.success = true;
             $scope.status = false;
@@ -102,7 +103,7 @@
         };
 
         // Called after the user has failed to uploaded a new picture
-        $scope.uploader.onErrorItem = function(fileItem, response, status, headers) {
+        $scope.uploader.onErrorItem = function (fileItem, response, status, headers) {
             // Clear upload buttons
             $scope.cancelUpload();
 
@@ -111,7 +112,7 @@
         };
 
         // Change user profile picture
-        $scope.uploadProfilePicture = function() {
+        $scope.uploadProfilePicture = function () {
             // Clear messages
             $scope.success = $scope.error = null;
 
@@ -120,7 +121,7 @@
         };
 
         // Cancel the upload process
-        $scope.cancelUpload = function() {
+        $scope.cancelUpload = function () {
             $scope.uploader.clearQueue();
             $scope.imageURL = vm.employeeprofile.image;
         };
@@ -159,11 +160,11 @@
             }
         }
 
-        $scope.callback = function(postcode) {
+        $scope.callback = function (postcode) {
             $scope.checkAutocomplete(postcode);
         };
 
-        $scope.checkAutocomplete = function(postcode) {
+        $scope.checkAutocomplete = function (postcode) {
             if (postcode) {
                 vm.employeeprofile.address.postcode = postcode.postcode;
                 vm.employeeprofile.address.district = postcode.district;
@@ -175,5 +176,23 @@
                 vm.employeeprofile.address.subdistrict = '';
             }
         };
+
+        function initView() {
+            var newDate = new Date().getFullYear() + '' + (new Date().getMonth() + 1);
+            console.warn(newDate);
+            EmployeeService.getChenckinByMonth(newDate, vm.authentication.user._id).then(function (checkins) {
+                vm.checkins = checkins;
+                console.log(vm.checkins);
+            }, function (error) {
+                console.error(error);
+            });
+
+            EmployeeService.getleaveByUser(vm.authentication.user._id).then(function (leaves) {
+                vm.leaves = leaves;
+                console.log(vm.leaves);
+            }, function (error) {
+                console.error(error);
+            });
+        }
     }
 }());

@@ -344,8 +344,8 @@ exports.exportByDate = function (req, res, next) {
     req._reportdaily.data.forEach(function (i, index) {
         var startdate = new Date(i.timein);
         var enddate = new Date(i.timeout);
-        var startdateText = startdate.getHours() + ':' + startdate.getMinutes() + ':' + startdate.getSeconds();
-        var enddateText = enddate.getHours() + ':' + enddate.getMinutes() + ':' + enddate.getSeconds();
+        var startdateText = (startdate.getUTCHours() + 7) + ':' + startdate.getUTCMinutes() + ':' + startdate.getUTCSeconds();
+        var enddateText = (enddate.getUTCHours() + 7) + ':' + enddate.getUTCMinutes() + ':' + enddate.getUTCSeconds();
         dataset.push({
             number: (index + 1),
             employeeid: i.employeeid,
@@ -368,7 +368,7 @@ exports.exportByDate = function (req, res, next) {
     });
 
     var merges = [
-        { start: { row: 1, column: 1 }, end: { row: 1, column: 13 } }
+        { start: { row: 1, column: 1 }, end: { row: 1, column: 17 } }
     ];
 
     var report = excel.buildExport(

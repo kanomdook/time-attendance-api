@@ -30,14 +30,14 @@
             <li class="dropdown" ng-class="{active: $uiRoute}" ng-if="authentication.user" ui-route="/employeeprofiles">
                 <a href="/employeeprofiles"><i class="fa fa-users"></i> <span class="nav-label">ข้อมูลพนักงาน</span></a>
             </li>
-            <li class="dropdown" ng-class="{active: $uiRoute}" ng-if="authentication.user" ui-route="/checkins">
+            <!--<li class="dropdown" ng-class="{active: $uiRoute}" ng-if="authentication.user" ui-route="/checkins">
                 <a href="/checkins"><i class="fa fa-clock-o"></i> <span class="nav-label">ข้อมูลเวลา</span></a>
-            </li>
+            </li>-->
             <li class="dropdown" ng-class="{active: $uiRoute}" ng-if="authentication.user" ui-route="/leaves">
                 <a href="/leaves"><i class="fa fa-book"></i> <span class="nav-label">ข้อมูลการลา</span></a>
             </li>
             <li ng-show="authentication.user">
-                <a><i class="fa fa-file-text"></i> <span class="nav-label">รายงาน</span> <span class="fa arrow"></span></a>
+                <a><i class="fa fa-file-text"></i> <span class="nav-label">ข้อมูลการลงชื่อ</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li ng-class="{active: $uiRoute}" ui-route="/reportdailies"><a href="/reportdailies">รายวัน</a></li>
                     <li ng-class="{active: $uiRoute}" ui-route="/reportmonthlies"><a href="/reportmonthlies">รายเดือน</a></li>
