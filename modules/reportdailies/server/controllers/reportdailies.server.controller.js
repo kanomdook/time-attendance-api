@@ -171,7 +171,7 @@ exports.reportdailyByDate = function (req, res, next, reportdate) {
                         var distance = getDistanceFromLatLonInKm(i.locationIn.lat, i.locationIn.lng, company.address.location.latitude, company.address.location.longitude);
                         var workhours = null;
                         if (i.dateTimeIn && i.dateTimeOut) {
-                            workhours = workingHoursBetweenDates(i.dateTimeIn, i.dateTimeOut);
+                            workhours = workingHoursBetweenDates(i.user.employeeprofile.shiftin, i.user.employeeprofile.shiftout, i.dateTimeIn, i.dateTimeOut);
                         }
                         reportDailyData.push({
                             employeeid: i.user.employeeprofile.employeeid,
@@ -412,21 +412,11 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
 function deg2rad(deg) {
     return deg * (Math.PI / 180);
 }
-
-function workingHoursBetweenDates(startDate, endDate) {
-    // Store minutes worked
-    var minutesWorked = 0;
-
-    // Validate input
-    if (endDate < startDate) { return 0; }
-
-    // Loop from your Start to End dates (by hour)
-    var current = startDate;
-
-    // Define work range
-    var workHoursStart = 9;
-    var workHoursEnd = 18;
-    var includeWeekends = false;
-    
+// get hours
+function workingHoursBetweenDates(shiftin, shiftout, startDate, endDate) {
+    var baseDiff = Math.abs(new Date(shiftin).getTime() - new Date(shiftout).getTime()) / 3600000;
+    console.log(baseDiff);
+    var diff = Math.abs(new Date(startDate).getTime() - new Date(endDate).getTime()) / 3600000;
+    console.log(diff);
     return 0;
 }
