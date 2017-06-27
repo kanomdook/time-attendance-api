@@ -368,7 +368,7 @@ exports.exportByDate = function (req, res, next) {
     });
 
     var merges = [
-        { start: { row: 1, column: 1 }, end: { row: 1, column: 13 } }
+        { start: { row: 1, column: 1 }, end: { row: 1, column: 17 } }
     ];
 
     var report = excel.buildExport(
