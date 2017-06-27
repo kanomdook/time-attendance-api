@@ -177,8 +177,8 @@ exports.reportdailyByDate = function (req, res, next, reportdate) {
                             employeeid: i.user.employeeprofile.employeeid,
                             firstname: i.user.employeeprofile.firstname,
                             lastname: i.user.employeeprofile.lastname,
-                            timein: i.dateTimeIn,
-                            timeout: i.dateTimeOut,
+                            datetimein: i.dateTimeIn,
+                            datetimeout: i.dateTimeOut,
                             timelate: null,
                             locationIn: {
                                 lat: i.locationIn.lat,
@@ -346,8 +346,8 @@ exports.exportByDate = function (req, res, next) {
     var dataset = [];
 
     req._reportdaily.data.forEach(function (i, index) {
-        var startdate = new Date(i.timein);
-        var enddate = new Date(i.timeout);
+        var startdate = new Date(i.datetimein);
+        var enddate = new Date(i.datetimeout);
         var startdateText = (startdate.getUTCHours() + 7) + ':' + startdate.getUTCMinutes() + ':' + startdate.getUTCSeconds();
         var enddateText = (enddate.getUTCHours() + 7) + ':' + enddate.getUTCMinutes() + ':' + enddate.getUTCSeconds();
         dataset.push({
