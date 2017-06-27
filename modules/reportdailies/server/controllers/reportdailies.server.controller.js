@@ -170,8 +170,10 @@ exports.reportdailyByDate = function (req, res, next, reportdate) {
                     checkinByCompany.forEach(function (i, index) {
                         var distance = getDistanceFromLatLonInKm(i.locationIn.lat, i.locationIn.lng, company.address.location.latitude, company.address.location.longitude);
                         var workhours = null;
+                        var timelate = null;
                         if (i.dateTimeIn && i.dateTimeOut) {
                             workhours = workingHoursBetweenDates(i.dateTimeIn, i.dateTimeOut);
+                            timelate = workingHoursBetweenDates(i.user.employeeprofile.shiftin, i.dateTimeIn);
                         }
                         reportDailyData.push({
                             employeeid: i.user.employeeprofile.employeeid,
@@ -179,7 +181,8 @@ exports.reportdailyByDate = function (req, res, next, reportdate) {
                             lastname: i.user.employeeprofile.lastname,
                             datetimein: i.dateTimeIn,
                             datetimeout: i.dateTimeOut,
-                            timelate: null,
+                            timelate: timelate,
+                            workinghours: workhours,
                             locationIn: {
                                 lat: i.locationIn.lat,
                                 lng: i.locationIn.lng
@@ -191,7 +194,6 @@ exports.reportdailyByDate = function (req, res, next, reportdate) {
                             type: i.type,
                             device: i.user.deviceID,
                             distance: distance.toFixed(2),
-                            workinghours: workhours,
                             remark: {
                                 timein: i.remark.in,
                                 timeout: i.remark.out
