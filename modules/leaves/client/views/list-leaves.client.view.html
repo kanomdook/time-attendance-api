@@ -51,6 +51,7 @@
           <th class="sorting" rowspan="1" colspan="1" style="text-align: center">รายละเอียดการลา</th>
           <th class="sorting" rowspan="1" colspan="1" style="text-align: center">วันที่เริ่มลางาน</th>
           <th class="sorting" rowspan="1" colspan="1" style="text-align: center">วันที่สิ้นสุดการลา</th>
+          <th class="sorting" rowspan="1" colspan="1" style="text-align: center">สถานะ</th>          
         </tr>
       </thead>
       <tbody>
@@ -61,6 +62,7 @@
           <td>{{leave.leaveDetail}}</td>
           <td>{{leave.leaveStartDateTime | date:'medium'}}</td>
           <td>{{leave.leaveEndDateTime | date:'medium'}}</td>
+          <td>{{leave.leaveStatus}}</td>
 
           <!--<td ng-if="vm.checkins.length < 0">ไม่มีข้อมูล</td>          -->
         </tr>

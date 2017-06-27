@@ -6,9 +6,9 @@
     .module('leaves')
     .controller('LeavesController', LeavesController);
 
-  LeavesController.$inject = ['$scope', '$state', '$window', 'Authentication', 'leaveResolve'];
+  LeavesController.$inject = ['$scope', '$state', '$window', 'Authentication', 'leaveResolve','$http'];
 
-  function LeavesController ($scope, $state, $window, Authentication, leave) {
+  function LeavesController($scope, $state, $window, Authentication, leave, $http) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -17,6 +17,8 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
+    vm.approve = approve;
+    vm.reject = reject;
 
     // Remove existing Leave
     function remove() {
@@ -25,12 +27,24 @@
       }
     }
 
-    function approve(leaveID){
-      console.log(leaveID);
+    function approve() {
+      vm.leave.leaveStatus = 'Approve';
+      console.log(vm.leave.leaveStatus);
+      $http.put('/api/leaves/'+vm.leave._id, vm.leave).success(function (res) {
+        console.log(res);
+      }).error(function (err) {
+        console.error(err);
+      });
     }
 
-    function reject(leaveID){
-      console.log(leaveID);
+    function reject() {
+      vm.leave.leaveStatus = 'Reject';
+      console.log(vm.leave.leaveStatus);
+      $http.put('/api/leaves/'+vm.leave._id, vm.leave).success(function (res) {
+        console.log(res);
+      }).error(function (err) {
+        console.error(err);
+      });
     }
 
     // Save Leave
