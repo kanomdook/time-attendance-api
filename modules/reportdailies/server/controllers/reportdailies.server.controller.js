@@ -184,10 +184,10 @@ exports.reportdailyByDate = function (req, res, next, reportdate) {
                                 lat: i.locationOut.lat,
                                 lng: i.locationOut.lng
                             },
+                            type: i.type,
                             device: i.user.deviceID,
                             distance: distance.toFixed(2),
                             workinghours: null,
-                            overtime: null,
                             remark: {
                                 timein: i.remark.in,
                                 timeout: i.remark.out
@@ -302,6 +302,11 @@ exports.exportByDate = function (req, res, next) {
             headerStyle: styles.default, // <- Header style 
             width: 80 // <- width in pixels 
         },
+        type: { // <- the key should match the actual data key 
+            displayName: 'ประเภท', // <- Here you specify the column header 
+            headerStyle: styles.default, // <- Header style 
+            width: 100 // <- width in pixels 
+        },
         device: { // <- the key should match the actual data key 
             displayName: 'เครื่อง', // <- Here you specify the column header 
             headerStyle: styles.default, // <- Header style 
@@ -321,11 +326,6 @@ exports.exportByDate = function (req, res, next) {
             displayName: 'ชั่วโมงทำงาน', // <- Here you specify the column header 
             headerStyle: styles.default, // <- Header style 
             width: 100 // <- width in pixels 
-        },
-        overtime: { // <- the key should match the actual data key 
-            displayName: 'OT', // <- Here you specify the column header 
-            headerStyle: styles.default, // <- Header style 
-            width: 40 // <- width in pixels 
         },
         remarkin: { // <- the key should match the actual data key 
             displayName: 'หมายเหตุ(เข้างาน)', // <- Here you specify the column header 
@@ -357,11 +357,11 @@ exports.exportByDate = function (req, res, next) {
             longitudein: i.locationIn.lng,
             latitudeout: i.locationOut.lat,
             longitudeout: i.locationOut.lng,
+            type: i.type,
             device: i.device,
             distance: i.distance,
             timelate: i.timelate,
             workinghours: i.workinghours,
-            overtime: i.overtime,
             remarkin: i.remark.timein,
             remarkout: i.remark.timeout
         });

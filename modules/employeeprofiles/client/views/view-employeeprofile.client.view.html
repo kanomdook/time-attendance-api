@@ -24,7 +24,7 @@
         <div class="row m-b-lg m-t-lg">
             <div class="col-md-6">
                 <div class="profile-image">
-                    <img ng-src="{{vm.employeeprofile.image}}" class="img-circle circle-border m-b-md" alt="รูปภาพ">
+                    <img class="img-circle circle-border m-b-md" ng-src="{{vm.employeeprofile.image}}" alt="รูปภาพ">
                 </div>
                 <div class="profile-info">
                     <div class="">
@@ -66,7 +66,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12 m-b-lg">
-                    <div id="vertical-timeline" class="vertical-container light-timeline no-margins">
+                    <div class="vertical-container light-timeline no-margins" id="vertical-timeline">
                         <div class="vertical-timeline-block">
                             <div class="vertical-timeline-icon yellow-bg">
                                 <i class="fa fa-home"></i>
@@ -93,68 +93,21 @@
                                 <!-- <div class="ibox-content"> -->
                                 <table class="table table-striped">
                                     <tbody>
-                                        <tr>
+                                        <tr ng-repeat="item in vm.checkins">
                                             <td class="no-borders">
-                                                01/01/2560
+                                                {{item.dateTimeIn | date:'dd/MM/yyyy'}}
                                             </td>
                                             <td class="no-borders">
-                                                <i class="fa fa-circle text-navy"></i> 09:00
-                                            </td>
-                                            <td class="no-borders">
-                                            </td>
-                                            <td class="no-borders">
-                                                <i class="fa fa-circle text-danger"></i> 18:00
-                                            </td>
-                                            <td class="no-borders">
-                                                <i class="fa fa-check text-navy"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="no-borders">
-                                                02/01/2560
-                                            </td>
-                                            <td class="no-borders">
-                                                <i class="fa fa-circle text-navy"></i> 09:00
+                                                <i class="fa fa-circle text-navy"></i> {{item.dateTimeIn | date:'HH:mm'}}
                                             </td>
                                             <td class="no-borders">
                                             </td>
                                             <td class="no-borders">
-                                                <i class="fa fa-circle text-danger"></i> 18:00
+                                                <i class="fa fa-circle text-danger" ng-if="item.dateTimeOut"></i> {{item.dateTimeOut | date:'HH:mm'}}
                                             </td>
                                             <td class="no-borders">
-                                                <i class="fa fa-check text-navy"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="no-borders">
-                                                03/01/2560
-                                            </td>
-                                            <td class="no-borders">
-                                                <i class="fa fa-circle text-navy"></i> 09:00
-                                            </td>
-                                            <td class="no-borders">
-                                            </td>
-                                            <td class="no-borders">
-                                                <i class="fa fa-circle text-danger"></i> 18:00
-                                            </td>
-                                            <td class="no-borders">
-                                                <i class="fa fa-check text-navy"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="no-borders">
-                                                04/01/2560
-                                            </td>
-                                            <td class="no-borders">
-                                                <i class="fa fa-circle text-navy"></i> 09:00
-                                            </td>
-                                            <td class="no-borders">
-                                            </td>
-                                            <td class="no-borders">
-                                                <!-- <i class="fa fa-circle text-danger"></i> 18:00 -->
-                                            </td>
-                                            <td class="no-borders">
-                                                <i class="fa fa-times text-danger"></i>
+                                                <i class="fa fa-check text-navy" ng-if="item.dateTimeOut"></i>
+                                                <i class="fa fa-times text-danger" ng-if="!item.dateTimeOut"></i>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -190,4 +143,4 @@
             </div>
         </div>
         <p class="lead" ng-bind="vm.employeeprofile.content"></p>
-</section>
+</div></section>

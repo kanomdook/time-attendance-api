@@ -54,6 +54,9 @@ var CheckinSchema = new Schema({
     in: String,
     out: String
   },
+  type: {
+    type: String,
+  },
   created: {
     type: Date,
     default: Date.now
