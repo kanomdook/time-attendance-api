@@ -12,7 +12,7 @@ module.exports = function (app) {
     .get(leaves.list)
     .post(leaves.create);
 
-  app.route('/api/leaves/userid/:userid')
+  app.route('/api/leaves/userid/:userid').all(leavesPolicy.isAllowed)
     .get(leaves.getById);
 
   app.route('/api/leaves/:leaveId').all(leavesPolicy.isAllowed)
@@ -30,8 +30,12 @@ module.exports = function (app) {
     .put(leaves.update)
     .delete(leaves.delete);
 
+  app.route('/api/leaves/employeeid/:empid').all(leavesPolicy.isAllowed)
+    .get(leaves.getByEmployeeId);
+
   // Finish by binding the Leave middleware
   app.param('leaveId', leaves.leaveByID);
   app.param('userid', leaves.getByUserID);
+  app.param('empid', leaves.leaveByEmpID);
 
 };
