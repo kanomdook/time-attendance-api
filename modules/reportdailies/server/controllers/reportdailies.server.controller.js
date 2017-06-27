@@ -413,10 +413,37 @@ function deg2rad(deg) {
     return deg * (Math.PI / 180);
 }
 // get hours
+// function workingHoursBetweenDates(shiftin, shiftout, startDate, endDate) {
+//     var baseDiff = Math.abs(new Date(shiftin).getTime() - new Date(shiftout).getTime()) / 3600000;
+//     var diff = Math.abs(new Date(startDate).getTime() - new Date(endDate).getTime()) / 3600000;
+//     if (diff > baseDiff) {
+//         var shiftoutMin = new Date(shiftout).getMinutes();
+//         var shiftoutMin = new Date(endDate).getMinutes();
+//     } else {
+//         var shiftinMin = new Date(shiftin).getMinutes();
+//         var shiftinMin = new Date(endDate).getMinutes();
+//     }
+
+//     console.log(baseDiff);
+//     console.log(diff);
+//     return diff;
+// }
+
 function workingHoursBetweenDates(shiftin, shiftout, startDate, endDate) {
-    var baseDiff = Math.abs(new Date(shiftin).getTime() - new Date(shiftout).getTime()) / 3600000;
-    console.log(baseDiff);
-    var diff = Math.abs(new Date(startDate).getTime() - new Date(endDate).getTime()) / 3600000;
-    console.log(diff);
-    return diff;
+    var start = new Date(startDate).getMinutes() + ":" + new Date(startDate).getMinutes();
+    var end = new Date(endDate).getMinutes() + ":" + new Date(endDate).getMinutes();    
+    start = start.split(":");
+    end = end.split(":");
+    var startDate = new Date(0, 0, 0, start[0], start[1], 0);
+    var endDate = new Date(0, 0, 0, end[0], end[1], 0);
+    var diff = endDate.getTime() - startDate.getTime();
+    var hours = Math.floor(diff / 1000 / 60 / 60);
+    diff -= hours * 1000 * 60 * 60;
+    var minutes = Math.floor(diff / 1000 / 60);
+
+    // If using time pickers with 24 hours format, add the below line get exact hours
+    if (hours < 0)
+        hours = hours + 24;
+
+    return (hours <= 9 ? "0" : "") + hours + ":" + (minutes <= 9 ? "0" : "") + minutes;
 }
