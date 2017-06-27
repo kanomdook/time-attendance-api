@@ -178,6 +178,7 @@ exports.getByUserID = function (req, res, next, id) {
     console.log(reqYearMonth);
     console.log(id);
     Checkin.find({ user: id }).populate({ path: 'user', select: 'displayName profileImageURL' }).exec(function (err, checkin) {
+        console.log(checkin.length);
         if (reqYearMonth && reqYearMonth !== "All") {
             for (var i = 0; i < checkin.length; i++) {
                 var checkinDate = new Date(checkin[i].created);
