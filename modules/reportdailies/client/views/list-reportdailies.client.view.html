@@ -41,11 +41,11 @@
                         <th class="sorting" rowspan="1" colspan="1" style="text-align: center">นามสกุล</th>
                         <th class="sorting" rowspan="1" colspan="1" style="text-align: center">เวลาเข้า</th>
                         <th class="sorting" rowspan="1" colspan="1" style="text-align: center">เวลาออก</th>
+                        <th class="sorting" rowspan="1" colspan="1" style="text-align: center">ประเภท</th>
                         <th class="sorting" rowspan="1" colspan="1" style="text-align: center">เครื่องแสกน</th>
                         <th class="sorting" rowspan="1" colspan="1" style="text-align: center">ระยะห่าง(ก.ม)</th>
                         <th class="sorting" rowspan="1" colspan="1" style="text-align: center">สาย(ชม.นาที)</th>
                         <th class="sorting" rowspan="1" colspan="1" style="text-align: center">ชั่วโมงทำงาน</th>
-                        <th class="sorting" rowspan="1" colspan="1" style="text-align: center">โอที(ชม.นาที)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,11 +56,11 @@
                         <td>{{item.lastname}}</td>
                         <td class="text-center">{{item.timein | date :'HH:mm:ss'}}</td>
                         <td class="text-center">{{item.timeout| date :'HH:mm:ss'}}</td>
+                        <td class="text-center">{{item.type}}</td>
                         <td class="text-center">{{item.device}}</td>
                         <td class="text-center">{{item.distance}}</td>
                         <td class="text-right">{{item.timelate}}</td>
                         <td class="text-right">{{item.workinghours}}</td>
-                        <td class="text-right">{{item.overtime}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -70,7 +70,7 @@
                     <div class="col col-md-4"></div>
                     <div class="col col-md-4">
                         <!--  ng-click="vm.exportReport(vm.reportDate)" -->
-                        <a class="btn btn-default btn-block" href="https://time-attendance.herokuapp.com/api/reportdaily/export/excel/:{{vm.reportData.date}}" target="_self">Excel</a>
+                        <a class="btn btn-default btn-block" href="https://time-attendance.herokuapp.com/api/reportdaily/export/excel/:{{vm.reportData.date}}" target="_self">Export</a>
                     </div>
                 </div>
             </div>
