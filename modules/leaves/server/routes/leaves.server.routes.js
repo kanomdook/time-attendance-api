@@ -30,7 +30,7 @@ module.exports = function (app) {
     .put(leaves.update)
     .delete(leaves.delete);
 
-  app.route('/api/leaves/employeeid/:empid').all(leavesPolicy.isAllowed)
+  app.route('/api/leave/employeeid/:empid').all(leavesPolicy.isAllowed)
     .get(leaves.getByEmployeeId);
 
   // Finish by binding the Leave middleware

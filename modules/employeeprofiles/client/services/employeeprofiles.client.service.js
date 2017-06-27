@@ -34,7 +34,7 @@
 
     this.getleaveByUser = function (userid) {
       var deferred = $q.defer();
-      $http.get('/api/leaves/employeeid/' + userid).success(function (leaves) {
+      $http.get('/api/leave/employeeid/' + userid).success(function (leaves) {
         deferred.resolve(leaves);
       }).error(function (error) {
         deferred.reject(error);
