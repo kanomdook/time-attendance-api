@@ -27,10 +27,9 @@
             </div>
         </div>
     </div>
-    <!-- <div class="text-center" ng-if="vm.showNull">
+    <div class="text-center"  ng-if="vm.startCall">
         <p>ไม่มีข้อมูลรายงาน</p>
-    </div> -->
-    <i class="fa fa-spinner fa-spin" ng-if="vm.startCall"></i>
+    </div> 
     <div class="animated fadeInRight" ng-if="vm.reportData.data.length > 0">
         <div class="contact-box table-responsive">
             <table class="table table-striped table-bordered table-hover dataTables-example ng-isolate-scope dataTable" id="DataTables_Table_2" role="grid" aria-describedby="DataTables_Table_2_info" datatable dt-options="dtOptions">
