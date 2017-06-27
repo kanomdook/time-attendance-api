@@ -344,8 +344,8 @@ exports.exportByDate = function (req, res, next) {
     req._reportdaily.data.forEach(function (i, index) {
         var startdate = new Date(i.timein);
         var enddate = new Date(i.timeout);
-        var startdateText = startdate.getHours() + ':' + startdate.getMinutes() + ':' + startdate.getSeconds();
-        var enddateText = enddate.getHours() + ':' + enddate.getMinutes() + ':' + enddate.getSeconds();
+        var startdateText = startdate.getUTCHours() + ':' + startdate.getUTCMinutes() + ':' + startdate.getUTCSeconds();
+        var enddateText = enddate.getUTCHours() + ':' + enddate.getUTCMinutes() + ':' + enddate.getUTCSeconds();
         dataset.push({
             number: (index + 1),
             employeeid: i.employeeid,
