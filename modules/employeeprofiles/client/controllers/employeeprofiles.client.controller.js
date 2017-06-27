@@ -182,14 +182,14 @@
             console.warn(newDate);
             EmployeeService.getChenckinByMonth(newDate, vm.authentication.user._id).then(function (checkins) {
                 vm.checkins = checkins;
-                console.error(vm.checkins);
+                console.log(vm.checkins);
             }, function (error) {
                 console.error(error);
             });
 
             EmployeeService.getleaveByUser(vm.authentication.user._id).then(function (leaves) {
                 vm.leaves = leaves;
-                console.error(vm.leaves);
+                console.log(vm.leaves);
             }, function (error) {
                 console.error(error);
             });
