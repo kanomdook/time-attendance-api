@@ -133,14 +133,9 @@
                                                     <td>
                                                        {{leave.leaveDetail}}
                                                     </td>
-                                                    <td class="no-borders">
-                                                        <!--<i class="fa fa-exclamation-triangle text-warning" ng-if="leave.leaveStatus === 'Request'"></i>-->
-                                                        <div class="text-left">
-                                                            <button class="btn btn-xs btn-primary" ng-if="leave.leaveStatus === 'Request'">Approve</button>            
-                                                            <button class="btn btn-xs btn-danger" ng-if="leave.leaveStatus === 'Request'">Reject </button>
-                                                        </div>
-                                                        <!--<button class="btn btn-xs btn-primary" ng-if="leave.leaveStatus === 'Request'">Approve</button>            
-                                                        <button class="btn btn-xs btn-danger" ng-if="leave.leaveStatus === 'Request'">Reject </button>-->
+                                                    <td class="no-borders text-left">
+                                                        <button class="btn btn-xs btn-danger" ng-if="leave.leaveStatus === 'Request'">Reject </button>
+                                                        <button class="btn btn-xs btn-primary" ng-if="leave.leaveStatus === 'Request'">Approve</button>
                                                         <i class="fa fa-check text-navy" ng-if="leave.leaveStatus === 'Approve'"></i>
                                                         <i class="fa fa-times text-danger" ng-if="leave.leaveStatus === 'Reject'"></i>
                                                     </td>
