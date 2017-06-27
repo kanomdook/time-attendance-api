@@ -183,8 +183,8 @@ exports.getByUserID = function(req, res, next, id) {
                 var checkinMonth = checkinDate.getUTCMonth() + 1;
                 var checkinYearMonth = checkinYear + "" + checkinMonth; // 20171
 
-                // console.log(checkinYearMonth);
-                // console.log(reqYearMonth);
+                console.log(checkinYearMonth);
+                console.log(reqYearMonth);
 
                 if (checkinYearMonth === reqYearMonth) {
                     checkinData.push(checkin[i]);
