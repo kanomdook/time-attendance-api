@@ -27,7 +27,7 @@ exports.invokeRolesPolicies = function () {
             resources: '/api/checkin/company/:checkinId',
             permissions: '*'
         }, {
-            resources: '/api/checkins/employeeid/:empid',
+            resources: '/api/checkins/employeeid/:ym/:empid',
             permissions: '*'
         }]
     }, {
@@ -47,7 +47,7 @@ exports.invokeRolesPolicies = function () {
                 resources: '/api/checkin/company/:checkinId',
                 permissions: ['get', 'post']
             }, {
-                resources: '/api/checkins/employeeid/:empid',
+                resources: '/api/checkins/employeeid/:ym/:empid',
                 permissions: ['get']
             }]
     }, {

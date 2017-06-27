@@ -235,18 +235,14 @@ exports.listByCompany = function (req, res) {
 
 exports.getByEmpID = function (req, res, next, empid) {
 
-    var reqYearMonth = req.yearMonth;
+    var reqYearMonth = req.ym;
     var checkinData = [];
     Checkin.find().sort('-created').populate({
         path: 'user',
         model: 'User',
         populate: {
             path: 'employeeprofile',
-            model: 'Employeeprofile',
-            populate: {
-                path: 'company',
-                model: 'Company'
-            }
+            model: 'Employeeprofile'
         }
     }).exec(function (err, checkin) {
         if (err) {
@@ -261,7 +257,20 @@ exports.getByEmpID = function (req, res, next, empid) {
 
                 });
             }
-            req.checkinByEmpId = checkinByCompany;
+            for (var i = 0; i < checkinByCompany.length; i++) {
+                var checkinDate = new Date(checkinByCompany[i].created);
+                var checkinYear = checkinDate.getUTCFullYear();
+                var checkinMonth = checkinDate.getUTCMonth() + 1;
+                var checkinYearMonth = checkinYear + "" + checkinMonth; // 20171
+
+                console.log(checkinYearMonth);
+                console.log(reqYearMonth);
+
+                if (checkinYearMonth === reqYearMonth) {
+                    checkinData.push(checkinByCompany[i]);
+                }
+            }
+            req.checkinByEmpId = checkinData;
             next();
         }
     });

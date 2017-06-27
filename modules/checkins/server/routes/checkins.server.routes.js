@@ -19,7 +19,7 @@ module.exports = function (app) {
   app.route('/api/checkins/yearmonth&userid/:yearMonth/:id')
     .get(checkins.getById);
 
-  app.route('/api/checkins/employeeid/:empid')
+  app.route('/api/checkins/employeeid/:ym/:empid')
     .get(checkins.getByEmployeeId);
 
   app.route('/api/checkins/:checkinId').all(checkinsPolicy.isAllowed)
@@ -44,6 +44,10 @@ module.exports = function (app) {
   app.param('id', checkins.getByUserID);
   app.param('yearMonth', function (req, res, next, yearMonth) {
     req.yearMonth = yearMonth;
+    next();
+  });
+  app.param('ym', function (req, res, next, ym) {
+    req.ym = ym;
     next();
   });
 };
