@@ -171,7 +171,7 @@ exports.reportdailyByDate = function (req, res, next, reportdate) {
                         var distance = getDistanceFromLatLonInKm(i.locationIn.lat, i.locationIn.lng, company.address.location.latitude, company.address.location.longitude);
                         var workhours = null;
                         if (i.dateTimeIn && i.dateTimeOut) {
-                            workhours = parseInt(workingHoursBetweenDates(i.dateTimeIn, i.dateTimeOut));
+                            workhours = workingHoursBetweenDates(i.dateTimeIn, i.dateTimeOut);
                         }
                         reportDailyData.push({
                             employeeid: i.user.employeeprofile.employeeid,
