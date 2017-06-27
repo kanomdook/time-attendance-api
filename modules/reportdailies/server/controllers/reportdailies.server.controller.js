@@ -169,6 +169,10 @@ exports.reportdailyByDate = function (req, res, next, reportdate) {
                     }
                     checkinByCompany.forEach(function (i, index) {
                         var distance = getDistanceFromLatLonInKm(i.locationIn.lat, i.locationIn.lng, company.address.location.latitude, company.address.location.longitude);
+                        var workhours = null;
+                        if (i.dateTimeIn && i.dateTimeOut) {
+                            workhours = parseInt(workingHoursBetweenDates(i.dateTimeIn, i.dateTimeOut));
+                        }
                         reportDailyData.push({
                             employeeid: i.user.employeeprofile.employeeid,
                             firstname: i.user.employeeprofile.firstname,
@@ -187,7 +191,7 @@ exports.reportdailyByDate = function (req, res, next, reportdate) {
                             type: i.type,
                             device: i.user.deviceID,
                             distance: distance.toFixed(2),
-                            workinghours: null,
+                            workinghours: workhours,
                             remark: {
                                 timein: i.remark.in,
                                 timeout: i.remark.out
@@ -407,4 +411,34 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
 
 function deg2rad(deg) {
     return deg * (Math.PI / 180);
+}
+
+function workingHoursBetweenDates(startDate, endDate) {
+    // Store minutes worked
+    var minutesWorked = 0;
+
+    // Validate input
+    if (endDate < startDate) { return 0; }
+
+    // Loop from your Start to End dates (by hour)
+    var current = startDate;
+
+    // Define work range
+    var workHoursStart = 9;
+    var workHoursEnd = 18;
+    var includeWeekends = false;
+
+    // Loop while currentDate is less than end Date (by minutes)
+    while (current <= endDate) {
+        // Is the current time within a work day (and if it occurs on a weekend or not)
+        if (current.getHours() >= workHoursStart && current.getHours() <= workHoursEnd && (includeWeekends ? current.getDay() !== 0 && current.getDay() !== 6 : true)) {
+            minutesWorked++;
+        }
+
+        // Increment current time
+        current.setTime(current.getTime() + 1000 * 60);
+    }
+    // console.log(minutesWorked / 60);
+    // Return the number of hours
+    return minutesWorked / 60;
 }
