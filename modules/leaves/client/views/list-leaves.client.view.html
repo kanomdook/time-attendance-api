@@ -59,8 +59,8 @@
           <td ui-sref="leaves.edit({ leaveId: leave._id })">{{leave.user.employeeprofile.firstname}} {{leave.user.employeeprofile.lastname}}</td>
           <td>{{leave.leaveType}}</td>
           <td>{{leave.leaveDetail}}</td>
-          <td>{{leave.leaveStartDateTime | date:'dMMMy'}}</td>
-          <td>{{leave.leaveEndDateTime | date:'dMMMy'}}</td>
+          <td>{{leave.leaveStartDateTime | date:'d MMM y'}}</td>
+          <td>{{leave.leaveEndDateTime | date:'d MMM y'}}</td>
           <td><span ng-if="!leave.leaveHalf">{{leave.leaveDay}} วัน</span><span ng-if="leave.leaveHalf">{{leave.leaveTime}} ชม.</span></td>
           <td class="text-navy" ng-if="leave.leaveStatus == 'Approve'">{{leave.leaveStatus}}</td>
           <td class="text-danger" ng-if="leave.leaveStatus == 'Reject'">{{leave.leaveStatus}}</td>
