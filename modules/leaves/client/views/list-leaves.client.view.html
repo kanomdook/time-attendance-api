@@ -46,23 +46,25 @@
       <thead>
         <tr role="row">
           <th class="sorting" rowspan="1" colspan="1" style="text-align: center">ชื่อ - นามสกุล</th>
-          <th class="sorting" rowspan="1" colspan="1" style="text-align: center">อีเมล</th>
           <th class="sorting" rowspan="1" colspan="1" style="text-align: center">ประเภทการลา</th>
           <th class="sorting" rowspan="1" colspan="1" style="text-align: center">รายละเอียดการลา</th>
           <th class="sorting" rowspan="1" colspan="1" style="text-align: center">วันที่เริ่มลางาน</th>
           <th class="sorting" rowspan="1" colspan="1" style="text-align: center">วันที่สิ้นสุดการลา</th>
+          <th class="sorting" rowspan="1" colspan="1" style="text-align: center">จำนวนวันที่ลา</th>
           <th class="sorting" rowspan="1" colspan="1" style="text-align: center">สถานะ</th>          
         </tr>
       </thead>
       <tbody>
-        <tr class="gradeA odd" role="row" ng-repeat="leave in vm.leaves">
-          <td ui-sref="leaves.edit({ leaveId: leave._id })">{{leave.user.displayName}}</td>
-          <td>{{leave.email}}</td>
-          <td>{{leave.leaveType}}</td>
+        <tr class="gradeA odd" role="row" ng-repeat="leave in vm.leaves | filter:{ leaveStatus: '!Draft'}" ui-sref="leaves.edit({ leaveId: leave._id })">
+          <td>{{leave.user.employeeprofile.firstname}} {{leave.user.employeeprofile.lastname}}</td>
+          <td style="text-align: center">{{leave.leaveType}}</td>
           <td>{{leave.leaveDetail}}</td>
-          <td>{{leave.leaveStartDateTime | date:'medium'}}</td>
-          <td>{{leave.leaveEndDateTime | date:'medium'}}</td>
-          <td>{{leave.leaveStatus}}</td>
+          <td style="text-align: center">{{leave.leaveStartDateTime | date:'d MMM y'}}</td>
+          <td style="text-align: center">{{leave.leaveEndDateTime | date:'d MMM y'}}</td>
+          <td style="text-align: center"><span ng-if="!leave.leaveHalf">{{leave.leaveDay}} วัน</span><span ng-if="leave.leaveHalf">{{leave.leaveTime}} ชม.</span></td>
+          <td class="text-navy" ng-if="leave.leaveStatus == 'Approve'" style="text-align: center">{{leave.leaveStatus}}</td>
+          <td class="text-danger" ng-if="leave.leaveStatus == 'Reject'" style="text-align: center">{{leave.leaveStatus}}</td>
+          <td ng-if="leave.leaveStatus == 'Request'" style="text-align: center">{{leave.leaveStatus}}</td>
 
           <!--<td ng-if="vm.checkins.length < 0">ไม่มีข้อมูล</td>          -->
         </tr>
