@@ -124,7 +124,7 @@ exports.reportdailyByDate = function (req, res, next, reportdate) {
     var reportEndDate = null;
     var returnReportDaily = {};
     reportEndDate = new Date(reportdate + ' 23:59:59');
-    console.log(newDate + "-" + reportEndDate);
+    // console.log(newDate + "-" + reportEndDate);
     // รายเดือน 
     // if (newDate.getMonth() > 10) {
     //     reportEndDate = new Date(newDate.getFullYear() + 1 + '-01');
@@ -216,7 +216,7 @@ exports.reportdaily = function (req, res, next) {
 };
 
 exports.exportByDate = function (req, res, next) {
-    console.dir(req._reportdaily);
+    // console.dir(req._reportdaily);
     req._reportdaily.date = req._reportdaily.date.split(':')[1];
     var date = req._reportdaily.date.split('-')[2] + '/' + req._reportdaily.date.split('-')[1] + '/' + req._reportdaily.date.split('-')[0];
     var styles = {
