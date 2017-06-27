@@ -19,7 +19,7 @@
         <div class="widget-text-box">
           <h4 class="media-heading">{{vm.leave.leaveType}}</h4>
           <p>{{vm.leave.leaveDetail}}</p>
-          <div class="text-right">
+          <div class="text-right" ng-show="vm.leave.leaveStatus=='Request'">
             <button class="btn btn-xs btn-primary" ng-click="vm.approve(vm.leave._id)"><i class="fa fa-heart"></i> Approve</button>            
             <button class="btn btn-xs btn-danger" ng-click="vm.reject(vm.leave._id)"><i class="fa fa-thumbs-up"></i> Reject </button>
           </div>
