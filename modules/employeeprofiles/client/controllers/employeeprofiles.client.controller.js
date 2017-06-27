@@ -196,12 +196,14 @@
         }
 
         function updateLeace(item, status) {
-            item.leaveStatus = status;
-            EmployeeService.updateLeaveStatus(item).then(function (leave) {
-                item = leave;
-            }, function (error) {
-                console.error(error);
-            });
+            if ($window.confirm('คุณต้องการ' + status + '?')) {
+                item.leaveStatus = status;
+                EmployeeService.updateLeaveStatus(item).then(function (leave) {
+                    item = leave;
+                }, function (error) {
+                    console.error(error);
+                });
+            }
         }
     }
 }());
