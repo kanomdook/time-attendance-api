@@ -416,7 +416,7 @@ function deg2rad(deg) {
 function workingHoursBetweenDates(shiftin, shiftout, startDate, endDate) {
     var baseDiff = Math.abs(new Date(shiftin).getTime() - new Date(shiftout).getTime()) / 3600000;
     console.log(baseDiff);
-    var diff = Math.abs(new Date(startDate).getTime() - new Date(endDate).getTime()) / 3600000;
+    var diff = Math.abs(new Date(endDate).getTime() - new Date(startDate).getTime()) / 3600000;
     console.log(diff);
     return diff;
 }
