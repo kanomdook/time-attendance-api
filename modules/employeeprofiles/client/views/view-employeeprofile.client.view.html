@@ -134,11 +134,8 @@
                                                        {{leave.leaveDetail}}
                                                     </td>
                                                     <td class="no-borders">
-                                                        <a class="btn btn-primary" ui-sref="employeeprofiles.edit({ employeeprofileId: vm.employeeprofile._id })">
-                                                            <i class="glyphicon glyphicon-edit"></i>
-                                                        </a>
-                                                        <!--<button class="btn btn-xs btn-danger" ng-if="leave.leaveStatus === 'Request'">Reject </button>
-                                                        <button class="btn btn-xs btn-primary" ng-if="leave.leaveStatus === 'Request'">Approve</button>-->
+                                                        <button class="btn btn-xs btn-danger" ng-if="leave.leaveStatus === 'Request'">Reject </button>
+                                                        <button class="btn btn-xs btn-primary" ng-if="leave.leaveStatus === 'Request'">Approve</button>
                                                         <i class="fa fa-check text-navy" ng-if="leave.leaveStatus === 'Approve'"></i>
                                                         <i class="fa fa-times text-danger" ng-if="leave.leaveStatus === 'Reject'"></i>
                                                     </td>
