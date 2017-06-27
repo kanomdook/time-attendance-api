@@ -55,8 +55,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="gradeA odd" role="row" ng-repeat="leave in vm.leaves | filter:{ leaveStatus: '!Draft'}">
-          <td ui-sref="leaves.edit({ leaveId: leave._id })">{{leave.user.employeeprofile.firstname}} {{leave.user.employeeprofile.lastname}}</td>
+        <tr class="gradeA odd" role="row" ng-repeat="leave in vm.leaves | filter:{ leaveStatus: '!Draft'}" ui-sref="leaves.edit({ leaveId: leave._id })">
+          <td>{{leave.user.employeeprofile.firstname}} {{leave.user.employeeprofile.lastname}}</td>
           <td>{{leave.leaveType}}</td>
           <td>{{leave.leaveDetail}}</td>
           <td>{{leave.leaveStartDateTime | date:'d MMM y'}}</td>
