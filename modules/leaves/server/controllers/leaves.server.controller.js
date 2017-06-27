@@ -180,6 +180,7 @@ exports.leaveByEmpID = function (req, res, next, empid) {
                 });
             }
             req.leaveByEmployee = leaveByEmployee;
+            next();
         }
     });
 };
