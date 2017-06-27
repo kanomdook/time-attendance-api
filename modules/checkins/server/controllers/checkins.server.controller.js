@@ -12,11 +12,11 @@ var path = require('path'),
 /**
  * Create a Checkin
  */
-exports.create = function(req, res) {
+exports.create = function (req, res) {
     var checkin = new Checkin(req.body);
     checkin.user = req.user;
 
-    checkin.save(function(err) {
+    checkin.save(function (err) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -30,7 +30,7 @@ exports.create = function(req, res) {
 /**
  * Show the current Checkin
  */
-exports.read = function(req, res) {
+exports.read = function (req, res) {
     // convert mongoose document to JSON
     var checkin = req.checkin ? req.checkin.toJSON() : {};
 
@@ -44,12 +44,12 @@ exports.read = function(req, res) {
 /**
  * Update a Checkin
  */
-exports.update = function(req, res) {
+exports.update = function (req, res) {
     var checkin = req.checkin;
 
     checkin = _.extend(checkin, req.body);
 
-    checkin.save(function(err) {
+    checkin.save(function (err) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -63,10 +63,10 @@ exports.update = function(req, res) {
 /**
  * Delete an Checkin
  */
-exports.delete = function(req, res) {
+exports.delete = function (req, res) {
     var checkin = req.checkin;
 
-    checkin.remove(function(err) {
+    checkin.remove(function (err) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -80,8 +80,8 @@ exports.delete = function(req, res) {
 /**
  * List of Checkins
  */
-exports.list = function(req, res) {
-    Checkin.find().sort('-created').populate({ path: 'user', select: 'displayName profileImageURL' }).exec(function(err, checkins) {
+exports.list = function (req, res) {
+    Checkin.find().sort('-created').populate({ path: 'user', select: 'displayName profileImageURL' }).exec(function (err, checkins) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -95,7 +95,7 @@ exports.list = function(req, res) {
 /**
  * Checkin middleware
  */
-exports.checkinByID = function(req, res, next, id) {
+exports.checkinByID = function (req, res, next, id) {
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(400).send({
@@ -103,7 +103,7 @@ exports.checkinByID = function(req, res, next, id) {
         });
     }
 
-    Checkin.findById(id).populate({ path: 'user', select: 'displayName profileImageURL' }).exec(function(err, checkin) {
+    Checkin.findById(id).populate({ path: 'user', select: 'displayName profileImageURL' }).exec(function (err, checkin) {
         if (err) {
             return next(err);
         } else if (!checkin) {
@@ -116,11 +116,11 @@ exports.checkinByID = function(req, res, next, id) {
     });
 };
 
-exports.userById = function(req, res, next, userid) {
+exports.userById = function (req, res, next, userid) {
     var status = '';
     var data = null;
     // console.log(userid);
-    Checkin.find({ user: userid }).populate({ path: 'user', select: 'displayName profileImageURL' }).exec(function(err, users) {
+    Checkin.find({ user: userid }).populate({ path: 'user', select: 'displayName profileImageURL' }).exec(function (err, users) {
         if (err) {
             return next(err);
         } else if (!users) {
@@ -167,15 +167,15 @@ exports.userById = function(req, res, next, userid) {
     });
 };
 
-exports.userids = function(req, res) {
+exports.userids = function (req, res) {
     res.jsonp(req.status);
 };
 
-exports.getByUserID = function(req, res, next, id) {
+exports.getByUserID = function (req, res, next, id) {
 
     var reqYearMonth = req.yearMonth;
     var checkinData = [];
-    Checkin.find({ user: id }).populate({ path: 'user', select: 'displayName profileImageURL' }).exec(function(err, checkin) {
+    Checkin.find({ user: id }).populate({ path: 'user', select: 'displayName profileImageURL' }).exec(function (err, checkin) {
         if (reqYearMonth && reqYearMonth !== "All") {
             for (var i = 0; i < checkin.length; i++) {
                 var checkinDate = new Date(checkin[i].created);
@@ -199,11 +199,11 @@ exports.getByUserID = function(req, res, next, id) {
 
 };
 
-exports.getById = function(req, res) {
+exports.getById = function (req, res) {
     res.jsonp(req.checkinByID);
 };
 //  get list by company
-exports.listByCompany = function(req, res) {
+exports.listByCompany = function (req, res) {
     Checkin.find().sort('-created').populate({
         path: 'user',
         model: 'User',
@@ -215,7 +215,7 @@ exports.listByCompany = function(req, res) {
                 model: 'Company'
             }
         }
-    }).exec(function(err, checkin) {
+    }).exec(function (err, checkin) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -223,7 +223,7 @@ exports.listByCompany = function(req, res) {
         } else {
             var checkinByCompany = [];
             if (checkin.length > 0) {
-                checkinByCompany = checkin.filter(function(obj) {
+                checkinByCompany = checkin.filter(function (obj) {
                     return obj.user.employeeprofile.company._id.toString() === req.user.company.toString();
 
                 });
@@ -231,4 +231,52 @@ exports.listByCompany = function(req, res) {
             res.jsonp(checkinByCompany);
         }
     });
+};
+
+exports.getByEmpID = function (req, res, next, empid) {
+
+    var reqYearMonth = req.ym;
+    var checkinData = [];
+    Checkin.find().sort('-created').populate({
+        path: 'user',
+        model: 'User',
+        populate: {
+            path: 'employeeprofile',
+            model: 'Employeeprofile'
+        }
+    }).exec(function (err, checkin) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            var checkinByCompany = [];
+            if (checkin.length > 0) {
+                checkinByCompany = checkin.filter(function (obj) {
+                    return obj.user.employeeprofile._id.toString() === empid;
+
+                });
+            }
+            for (var i = 0; i < checkinByCompany.length; i++) {
+                var checkinDate = new Date(checkinByCompany[i].created);
+                var checkinYear = checkinDate.getUTCFullYear();
+                var checkinMonth = checkinDate.getUTCMonth() + 1;
+                var checkinYearMonth = checkinYear + "" + checkinMonth; // 20171
+
+                console.log(checkinYearMonth);
+                console.log(reqYearMonth);
+
+                if (checkinYearMonth === reqYearMonth) {
+                    checkinData.push(checkinByCompany[i]);
+                }
+            }
+            req.checkinByEmpId = checkinData;
+            next();
+        }
+    });
+
+};
+
+exports.getByEmployeeId = function (req, res) {
+    res.jsonp(req.checkinByEmpId);
 };

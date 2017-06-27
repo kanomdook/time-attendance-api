@@ -24,7 +24,7 @@
   function EmployeeService($http, $q) {
     this.getChenckinByMonth = function (yearMonth, userid) {
       var deferred = $q.defer();
-      $http.get('/api/checkins/yearmonth&userid/' + yearMonth + '/' + userid).success(function (checkins) {
+      $http.get('/api/checkins/employeeid/' + yearMonth + '/' + userid).success(function (checkins) {
         deferred.resolve(checkins);
       }).error(function (error) {
         deferred.reject(error);
