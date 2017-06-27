@@ -134,8 +134,8 @@
                                                        {{leave.leaveDetail}}
                                                     </td>
                                                     <td class="no-borders">
-                                                        <button class="btn btn-xs btn-danger" ng-if="leave.leaveStatus === 'Request'" ng-click="vm.updateLeace('Reject')">Reject </button>&nbsp;
-                                                        <button class="btn btn-xs btn-primary" ng-if="leave.leaveStatus === 'Request'" ng-click="vm.updateLeace('Approve')">Approve</button>
+                                                        <button class="btn btn-xs btn-danger" ng-click="vm.updateLeace(leave,'Reject')" ng-if="leave.leaveStatus === 'Request'">Reject </button>&nbsp;
+                                                        <button class="btn btn-xs btn-primary" ng-click="vm.updateLeace(leave,'Approve')" ng-if="leave.leaveStatus === 'Request'">Approve</button>
                                                         <i class="fa fa-check text-navy" ng-if="leave.leaveStatus === 'Approve'"></i>
                                                         <i class="fa fa-times text-danger" ng-if="leave.leaveStatus === 'Reject'"></i>
                                                     </td>

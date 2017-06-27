@@ -19,7 +19,7 @@
         vm.save = save;
         vm.init = init;
         vm.initView = initView;
-
+        vm.updateLeace = updateLeace;
         $scope.postcode = null;
         $scope.language = null;
 
@@ -190,6 +190,15 @@
             EmployeeService.getleaveByUser(vm.employeeprofile._id).then(function (leaves) {
                 vm.leaves = leaves;
                 console.log(vm.leaves);
+            }, function (error) {
+                console.error(error);
+            });
+        }
+
+        function updateLeace(item, status) {
+            item.leaveStatus = status;
+            EmployeeService.updateLeaveStatus(item).then(function (leave) {
+                item = leave;
             }, function (error) {
                 console.error(error);
             });

@@ -41,5 +41,15 @@
       });
       return deferred.promise;
     };
+
+    this.updateLeaveStatus = function (item) {
+      var deferred = $q.defer();
+      $http.put('/api/leaves/' + item._id, item).success(function (leaves) {
+        deferred.resolve(leaves);
+      }).error(function (error) {
+        deferred.reject(error);
+      });
+      return deferred.promise;
+    };
   }
 }());
