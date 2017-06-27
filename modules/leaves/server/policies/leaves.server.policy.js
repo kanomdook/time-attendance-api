@@ -27,7 +27,7 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/leave/company/:leaveId',
       permissions: '*'
     }, {
-      resources: '/api/leaves/employeeid/:empid',
+      resources: '/api/leave/employeeid/:empid',
       permissions: '*'
     }]
   }, {
@@ -45,7 +45,7 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/leave/company/:leaveId',
       permissions: ['get']
     }, {
-      resources: '/api/leaves/employeeid/:empid',
+      resources: '/api/leave/employeeid/:empid',
       permissions: ['get']
     }]
   }, {
