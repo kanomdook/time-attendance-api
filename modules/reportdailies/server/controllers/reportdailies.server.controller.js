@@ -171,7 +171,7 @@ exports.reportdailyByDate = function (req, res, next, reportdate) {
                         var distance = getDistanceFromLatLonInKm(i.locationIn.lat, i.locationIn.lng, company.address.location.latitude, company.address.location.longitude);
                         var workhours = null;
                         if (i.dateTimeIn && i.dateTimeOut) {
-                            workhours = workingHoursBetweenDates(i.user.employeeprofile.shiftin, i.user.employeeprofile.shiftout, i.dateTimeIn, i.dateTimeOut);
+                            workhours = workingHoursBetweenDates(i.dateTimeIn, i.dateTimeOut);
                         }
                         reportDailyData.push({
                             employeeid: i.user.employeeprofile.employeeid,
@@ -413,9 +413,9 @@ function deg2rad(deg) {
     return deg * (Math.PI / 180);
 }
 // get hours
-function workingHoursBetweenDates(shiftin, shiftout, startDate, endDate) {
-    var start = new Date(startDate).getMinutes() + ":" + new Date(startDate).getSeconds();
-    var end = new Date(endDate).getMinutes() + ":" + new Date(endDate).getSeconds();    
+function workingHoursBetweenDates(startDate, endDate) {
+    var start = new Date(startDate).getHours() + ":" + new Date(startDate).getMinutes();
+    var end = new Date(endDate).getHours() + ":" + new Date(endDate).getMinutes();
     start = start.split(":");
     end = end.split(":");
     var startDate = new Date(0, 0, 0, start[0], start[1], 0);
