@@ -1,4 +1,40 @@
 <section>
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="widget-head-color-box navy-bg p-lg text-center">
+          <div class="m-b-md">
+            <h2 class="font-bold no-margins">
+              Apple Lapisara
+            </h2>
+            <small>{{vm.leave.email}}</small>
+          </div>
+          <img src="https://pbs.twimg.com/media/DDJjn3IVwAEw0ID.jpg" class="img-circle circle-border m-b-md" alt="profile" width="164px" height="164px">
+          <div>
+            <span>{{vm.leave.leaveStartDateTime | date:'fullDate'}}</span> -
+            <span>{{vm.leave.leaveEndDateTime | date:'fullDate'}}</span> 
+          </div>
+        </div>
+        <div class="widget-text-box">
+          <h4 class="media-heading">{{vm.leave.leaveType}}</h4>
+          <p>{{vm.leave.leaveDetail}}</p>
+          <div class="text-right">
+            <a class="btn btn-xs btn-primary"><i class="fa fa-heart"></i> Approve</a>            
+            <a class="btn btn-xs btn-danger"><i class="fa fa-thumbs-up"></i> Reject </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+<!--<section>
   <div class="page-header">
     <h1>{{vm.leave._id ? 'Edit Leave' : 'New Leave'}}</h1>
   </div>
@@ -57,4 +93,4 @@
       </fieldset>
     </form>
   </div>
-</section>
+</section>-->
