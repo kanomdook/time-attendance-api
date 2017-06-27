@@ -62,7 +62,7 @@
           <td>{{leave.leaveStartDateTime | date:'dMMMy'}}</td>
           <td>{{leave.leaveEndDateTime | date:'dMMMy'}}</td>
           <td><span ng-if="!leave.leaveHalf">{{leave.leaveDay}} วัน</span><span ng-if="leave.leaveHalf">{{leave.leaveTime}} ชม.</span></td>
-          <td class="text-text-navy" ng-if="leave.leaveStatus == 'Approve'">{{leave.leaveStatus}}</td>
+          <td class="text-navy" ng-if="leave.leaveStatus == 'Approve'">{{leave.leaveStatus}}</td>
           <td class="text-danger" ng-if="leave.leaveStatus == 'Reject'">{{leave.leaveStatus}}</td>
           <td ng-if="leave.leaveStatus == 'Request'">{{leave.leaveStatus}}</td>
 
