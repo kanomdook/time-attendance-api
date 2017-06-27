@@ -21,6 +21,9 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/leaves/:leaveId',
       permissions: '*'
     }, {
+      resources: '/api/leaves/userid/:userid',
+      permissions: '*'
+    }, {
       resources: '/api/leave/company',
       permissions: '*'
     }, {
@@ -37,6 +40,9 @@ exports.invokeRolesPolicies = function () {
       permissions: '*'
     }, {
       resources: '/api/leaves/:leaveId',
+      permissions: '*'
+    }, {
+      resources: '/api/leaves/userid/:userid',
       permissions: '*'
     }, {
       resources: '/api/leave/company',

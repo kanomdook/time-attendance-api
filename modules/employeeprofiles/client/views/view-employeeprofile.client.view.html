@@ -120,7 +120,7 @@
                                     <h2>ข้อมูลการลาภายในเดือน</h2>
                                         <table class="table table-striped">
                                             <tbody>
-                                                <tr ng-repeat="leave in vm.leaves | filter:{ leaveStatus: '!Draft'} | orderBy:'leaveEndDateTime'">
+                                                <tr ng-repeat="leave in vm.leaves | filter:{ leaveStatus: '!Draft || !Reject'} | orderBy:'leaveEndDateTime'">
                                                     <td>
                                                         <i class="fa fa-play-circle text-navy"></i> {{leave.leaveStartDateTime | date:'dd MMMM yyyy'}}
                                                     </td>
@@ -134,8 +134,8 @@
                                                        {{leave.leaveDetail}}
                                                     </td>
                                                     <td class="no-borders">
-                                                        <button class="btn btn-xs btn-danger" ng-if="leave.leaveStatus === 'Request'">Reject </button>
-                                                        <button class="btn btn-xs btn-primary" ng-if="leave.leaveStatus === 'Request'">Approve</button>
+                                                        <button class="btn btn-xs btn-danger" ng-if="leave.leaveStatus === 'Request'" ng-click="vm.updateLeace('Reject')">Reject </button>&nbsp;
+                                                        <button class="btn btn-xs btn-primary" ng-if="leave.leaveStatus === 'Request'" ng-click="vm.updateLeace('Approve')">Approve</button>
                                                         <i class="fa fa-check text-navy" ng-if="leave.leaveStatus === 'Approve'"></i>
                                                         <i class="fa fa-times text-danger" ng-if="leave.leaveStatus === 'Reject'"></i>
                                                     </td>
