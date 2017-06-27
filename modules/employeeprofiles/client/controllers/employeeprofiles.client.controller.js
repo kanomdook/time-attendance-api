@@ -178,16 +178,16 @@
         };
 
         function initView() {
-            var newDate = new Date().getFullYear + '' + (new Date().getMonth + 1);
+            var newDate = new Date().getFullYear() + '' + (new Date().getMonth() + 1);
             console.warn(newDate);
-            EmployeeService.getChenckinByMonth(newDate, vm.authentication._id).then(function (checkins) {
+            EmployeeService.getChenckinByMonth(newDate, vm.authentication.user._id).then(function (checkins) {
                 vm.checkins = checkins;
                 console.error(vm.checkins);
             }, function (error) {
                 console.error(error);
             });
 
-            EmployeeService.getleaveByUser(vm.authentication._id).then(function (leaves) {
+            EmployeeService.getleaveByUser(vm.authentication.user._id).then(function (leaves) {
                 vm.leaves = leaves;
                 console.error(vm.leaves);
             }, function (error) {
