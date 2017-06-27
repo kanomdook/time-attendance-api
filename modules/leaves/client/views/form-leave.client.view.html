@@ -1,6 +1,7 @@
 <section>
   <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
+      <div class="col-lg-4"></div>
       <div class="col-lg-4">
         <div class="widget-head-color-box navy-bg p-lg text-center">
           <div class="m-b-md">
@@ -9,7 +10,7 @@
             </h2>
             <small>{{vm.leave.email}}</small>
           </div>
-          <img src="https://pbs.twimg.com/media/DDJjn3IVwAEw0ID.jpg" class="img-circle circle-border m-b-md" alt="profile" width="164px" height="164px">
+          <img src="{{vm.leave.user.profileImageURL}}" class="img-circle circle-border m-b-md" alt="profile" width="164px" height="164px">
           <div>
             <span>{{vm.leave.leaveStartDateTime | date:'fullDate'}}</span> -
             <span>{{vm.leave.leaveEndDateTime | date:'fullDate'}}</span> 
@@ -19,11 +20,12 @@
           <h4 class="media-heading">{{vm.leave.leaveType}}</h4>
           <p>{{vm.leave.leaveDetail}}</p>
           <div class="text-right">
-            <a class="btn btn-xs btn-primary" ng-click="approve(vm.leave._id)"><i class="fa fa-heart"></i> Approve</a>            
-            <a class="btn btn-xs btn-danger" ng-click="reject(vm.leave._id)"><i class="fa fa-thumbs-up"></i> Reject </a>
+            <button class="btn btn-xs btn-primary" ng-click="vm.approve(vm.leave._id)"><i class="fa fa-heart"></i> Approve</button>            
+            <button class="btn btn-xs btn-danger" ng-click="vm.reject(vm.leave._id)"><i class="fa fa-thumbs-up"></i> Reject </button>
           </div>
         </div>
       </div>
+      <div class="col-lg-4"></div>      
     </div>
   </div>
 </section>

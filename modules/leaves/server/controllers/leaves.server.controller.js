@@ -103,7 +103,7 @@ exports.leaveByID = function(req, res, next, id) {
         });
     }
 
-    Leave.findById(id).populate('user', 'displayName').exec(function(err, leave) {
+    Leave.findById(id).populate('user').exec(function(err, leave) {
         if (err) {
             return next(err);
         } else if (!leave) {
