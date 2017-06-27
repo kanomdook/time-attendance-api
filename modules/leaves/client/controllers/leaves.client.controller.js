@@ -25,6 +25,14 @@
       }
     }
 
+    function approve(leaveID){
+      console.log(leaveID);
+    }
+
+    function reject(leaveID){
+      console.log(leaveID);
+    }
+
     // Save Leave
     function save(isValid) {
       if (!isValid) {
