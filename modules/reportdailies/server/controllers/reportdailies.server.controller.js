@@ -279,7 +279,7 @@ exports.exportByDate = function (req, res, next) {
             width: 120 // <- width in pixels 
         },
         enddate: { // <- the key should match the actual data key 
-            displayName: 'เวลาอก', // <- Here you specify the column header 
+            displayName: 'เวลาออก', // <- Here you specify the column header 
             headerStyle: styles.default, // <- Header style 
             width: 120 // <- width in pixels 
         },
@@ -289,7 +289,7 @@ exports.exportByDate = function (req, res, next) {
             width: 120 // <- width in pixels 
         },
         longitudein: { // <- the key should match the actual data key 
-            displayName: 'ลองติจูดออก', // <- Here you specify the column header 
+            displayName: 'ลองติจูดเข้า', // <- Here you specify the column header 
             headerStyle: styles.default, // <- Header style 
             width: 120 // <- width in pixels 
         },
@@ -345,8 +345,8 @@ exports.exportByDate = function (req, res, next) {
     req._reportdaily.data.forEach(function (i, index) {
         var startdate = new Date(i.timein);
         var enddate = new Date(i.timeout);
-        var startdateText = startdate.getHours + ':' + startdate.getMinutes + ':' + startdate.getSeconds;
-        var enddateText = enddate.getHours + ':' + enddate.getMinutes + ':' + enddate.getSeconds;
+        var startdateText = startdate.getHours() + ':' + startdate.getMinutes() + ':' + startdate.getSeconds();
+        var enddateText = enddate.getHours() + ':' + enddate.getMinutes() + ':' + enddate.getSeconds();
         dataset.push({
             number: (index + 1),
             employeeid: i.employeeid,
