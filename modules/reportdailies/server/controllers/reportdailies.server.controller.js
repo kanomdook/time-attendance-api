@@ -170,9 +170,9 @@ exports.reportdailyByDate = function (req, res, next, reportdate) {
                     checkinByCompany.forEach(function (i, index) {
                         var distance = getDistanceFromLatLonInKm(i.locationIn.lat, i.locationIn.lng, company.address.location.latitude, company.address.location.longitude);
                         var workhours = null;
-                        if (i.dateTimeIn && i.dateTimeOut) {
-                            workhours = workingHoursBetweenDates(i.dateTimeIn, i.dateTimeOut);
-                        }
+                        // if (i.dateTimeIn && i.dateTimeOut) {
+                        //     workhours = workingHoursBetweenDates(i.dateTimeIn, i.dateTimeOut);
+                        // }
                         reportDailyData.push({
                             employeeid: i.user.employeeprofile.employeeid,
                             firstname: i.user.employeeprofile.firstname,
