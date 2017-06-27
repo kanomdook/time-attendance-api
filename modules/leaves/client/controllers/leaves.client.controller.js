@@ -31,7 +31,7 @@
       vm.leave.leaveStatus = 'Approve';
       console.log(vm.leave.leaveStatus);
       $http.put('/api/leaves/'+vm.leave._id, vm.leave).success(function (res) {
-        console.log(res);
+        $window.location.href = '/leaves';
       }).error(function (err) {
         console.error(err);
       });
@@ -41,7 +41,7 @@
       vm.leave.leaveStatus = 'Reject';
       console.log(vm.leave.leaveStatus);
       $http.put('/api/leaves/'+vm.leave._id, vm.leave).success(function (res) {
-        console.log(res);
+        $window.location.href = '/leaves';        
       }).error(function (err) {
         console.error(err);
       });
