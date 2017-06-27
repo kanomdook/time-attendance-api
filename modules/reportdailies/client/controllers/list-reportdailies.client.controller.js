@@ -17,6 +17,7 @@
         vm.startCall = false;
 
         function searchReport(reportDate) {
+            vm.reportData = null;
             var date = new Date(reportDate).getDate();
             var month = new Date(reportDate).getMonth() + 1;
             var year = new Date(reportDate).getFullYear();
