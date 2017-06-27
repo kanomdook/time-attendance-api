@@ -27,7 +27,7 @@
       }
     }
 
-    function approve(leaveID) {
+    function approve() {
       vm.leave.leaveStatus = 'Approve';
       console.log(vm.leave.leaveStatus);
       $http.put('/api/leaves/'+vm.leave._id, vm.leave).success(function (res) {
@@ -37,7 +37,7 @@
       });
     }
 
-    function reject(leaveID) {
+    function reject() {
       vm.leave.leaveStatus = 'Reject';
       console.log(vm.leave.leaveStatus);
       $http.put('/api/leaves/'+vm.leave._id, vm.leave).success(function (res) {
