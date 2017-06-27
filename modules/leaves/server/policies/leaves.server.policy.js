@@ -31,10 +31,10 @@ exports.invokeRolesPolicies = function () {
     roles: ['user'],
     allows: [{
       resources: '/api/leaves',
-      permissions: ['get', 'post']
+      permissions: '*'
     }, {
       resources: '/api/leaves/:leaveId',
-      permissions: ['get']
+      permissions: '*'
     }, {
       resources: '/api/leave/company',
       permissions: ['get', 'post']
