@@ -126,7 +126,10 @@
                                                 <tr ng-repeat="leave in vm.leaves">
                                                     <td>
                                                         <i class="fa fa-play-circle text-navy"></i> {{leave.leaveStartDateTime | date:'dd MMMM yyyy'}} &nbsp; 
-                                                        <i class="fa fa-stop-circle text-danger"></i> {{leave.leaveEndDateTime | date:'dd MMMM yyyy'}} &nbsp; <i class="fa fa-clock-o"></i> <span ng-if="!leave.leaveHalf">{{leave.leaveDay}} วัน</span><span ng-if="leave.leaveHalf">{{leave.leaveTime}} ชม.</span>
+                                                        <i class="fa fa-stop-circle text-danger"></i> {{leave.leaveEndDateTime | date:'dd MMMM yyyy'}} &nbsp;
+                                                    </td>
+                                                    <td>
+                                                       <i class="fa fa-clock-o"></i> <span ng-if="!leave.leaveHalf">{{leave.leaveDay}} วัน</span><span ng-if="leave.leaveHalf">{{leave.leaveTime}} ชม.</span>
                                                     </td>
                                                     <td>
                                                        {{leave.leaveDetail}}
