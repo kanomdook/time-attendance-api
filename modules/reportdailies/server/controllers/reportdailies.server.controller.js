@@ -226,7 +226,8 @@ exports.exportByDate = function (req, res, next) {
                 },
                 sz: 12,
                 bold: false,
-                underline: false
+                underline: false,
+                center: true
             }
         },
         default: {
@@ -264,8 +265,8 @@ exports.exportByDate = function (req, res, next) {
         },
         firstname: { // <- the key should match the actual data key 
             displayName: 'ชื่อ', // <- Here you specify the column header 
-            headerStyle: styles.default // <- Header style 
-            // width: 120 // <- width in pixels 
+            headerStyle: styles.default, // <- Header style 
+            width: 120 // <- width in pixels 
         },
         lastname: { // <- the key should match the actual data key 
             displayName: 'นามสกุล', // <- Here you specify the column header 
@@ -282,22 +283,22 @@ exports.exportByDate = function (req, res, next) {
             headerStyle: styles.default, // <- Header style 
             width: 120 // <- width in pixels 
         },
-        latitudeinlat: { // <- the key should match the actual data key 
+        latitudein: { // <- the key should match the actual data key 
             displayName: 'ละติจูดเข้า', // <- Here you specify the column header 
             headerStyle: styles.default, // <- Header style 
             width: 120 // <- width in pixels 
         },
-        latitudeinlng: { // <- the key should match the actual data key 
+        longitudein: { // <- the key should match the actual data key 
             displayName: 'ลองติจูดออก', // <- Here you specify the column header 
             headerStyle: styles.default, // <- Header style 
             width: 120 // <- width in pixels 
         },
-        latitudeoutlat: { // <- the key should match the actual data key 
+        latitudeout: { // <- the key should match the actual data key 
             displayName: 'ละติจูดออก', // <- Here you specify the column header 
             headerStyle: styles.default, // <- Header style 
             width: 120 // <- width in pixels 
         },
-        latitudeoutlng: { // <- the key should match the actual data key 
+        longitudeout: { // <- the key should match the actual data key 
             displayName: 'ลองติจูดออก', // <- Here you specify the column header 
             headerStyle: styles.default, // <- Header style 
             width: 120 // <- width in pixels 
@@ -344,17 +345,19 @@ exports.exportByDate = function (req, res, next) {
     req._reportdaily.data.forEach(function (i, index) {
         var startdate = new Date(i.timein);
         var enddate = new Date(i.timeout);
+        var startdateText = startdate.getHours + ':' + startdate.getMinutes + ':' + startdate.getSeconds;
+        var enddateText = enddate.getHours + ':' + enddate.getMinutes + ':' + enddate.getSeconds;
         dataset.push({
             number: (index + 1),
             employeeid: i.employeeid,
             firstname: i.firstname,
             lastname: i.lastname,
-            startdate: startdate.toString('HH:mm:ss'),
-            enddate: enddate.toString('HH:mm:ss'),
-            latitudeinlat: i.locationIn.lat,
-            longitudeinlng: i.locationIn.lng,
-            latitudeoutlat: i.locationOut.lat,
-            longitudeoutlng: i.locationOut.lng,
+            startdate: startdateText,
+            enddate: enddateText,
+            latitudein: i.locationIn.lat,
+            longitudein: i.locationIn.lng,
+            latitudeout: i.locationOut.lat,
+            longitudeout: i.locationOut.lng,
             device: i.device,
             distance: i.distance,
             timelate: i.timelate,
