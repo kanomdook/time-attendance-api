@@ -255,20 +255,85 @@ exports.exportByDate = function (req, res, next) {
         number: { // <- the key should match the actual data key 
             displayName: 'ลำดับ', // <- Here you specify the column header 
             headerStyle: styles.default, // <- Header style 
-            width: 120 // <- width in pixels 
+            width: 40 // <- width in pixels 
         },
         employeeid: { // <- the key should match the actual data key 
             displayName: 'รหัสพนักงาน', // <- Here you specify the column header 
             headerStyle: styles.default, // <- Header style 
-            width: 120 // <- width in pixels 
+            width: 80 // <- width in pixels 
         },
         firstname: { // <- the key should match the actual data key 
             displayName: 'ชื่อ', // <- Here you specify the column header 
-            headerStyle: styles.default, // <- Header style 
-            width: 120 // <- width in pixels 
+            headerStyle: styles.default // <- Header style 
+            // width: 120 // <- width in pixels 
         },
         lastname: { // <- the key should match the actual data key 
             displayName: 'นามสกุล', // <- Here you specify the column header 
+            headerStyle: styles.default, // <- Header style 
+            width: 120 // <- width in pixels 
+        },
+        startdate: { // <- the key should match the actual data key 
+            displayName: 'เวลาเข้า', // <- Here you specify the column header 
+            headerStyle: styles.default, // <- Header style 
+            width: 120 // <- width in pixels 
+        },
+        enddate: { // <- the key should match the actual data key 
+            displayName: 'เวลาอก', // <- Here you specify the column header 
+            headerStyle: styles.default, // <- Header style 
+            width: 120 // <- width in pixels 
+        },
+        latitudeinlat: { // <- the key should match the actual data key 
+            displayName: 'ละติจูดเข้า', // <- Here you specify the column header 
+            headerStyle: styles.default, // <- Header style 
+            width: 120 // <- width in pixels 
+        },
+        latitudeinlng: { // <- the key should match the actual data key 
+            displayName: 'ลองติจูดออก', // <- Here you specify the column header 
+            headerStyle: styles.default, // <- Header style 
+            width: 120 // <- width in pixels 
+        },
+        latitudeoutlat: { // <- the key should match the actual data key 
+            displayName: 'ละติจูดออก', // <- Here you specify the column header 
+            headerStyle: styles.default, // <- Header style 
+            width: 120 // <- width in pixels 
+        },
+        latitudeoutlng: { // <- the key should match the actual data key 
+            displayName: 'ลองติจูดออก', // <- Here you specify the column header 
+            headerStyle: styles.default, // <- Header style 
+            width: 120 // <- width in pixels 
+        },
+        device: { // <- the key should match the actual data key 
+            displayName: 'เครื่อง', // <- Here you specify the column header 
+            headerStyle: styles.default, // <- Header style 
+            width: 120 // <- width in pixels 
+        },
+        distance: { // <- the key should match the actual data key 
+            displayName: 'ระยะห่างจากสนง. (กม.)', // <- Here you specify the column header 
+            headerStyle: styles.default, // <- Header style 
+            width: 120 // <- width in pixels 
+        },
+        timelate: { // <- the key should match the actual data key 
+            displayName: 'สาย(ชม.นาที)', // <- Here you specify the column header 
+            headerStyle: styles.default, // <- Header style 
+            width: 120 // <- width in pixels 
+        },
+        workinghours: { // <- the key should match the actual data key 
+            displayName: 'ชั่วโมงทำงาน', // <- Here you specify the column header 
+            headerStyle: styles.default, // <- Header style 
+            width: 120 // <- width in pixels 
+        },
+        overtime: { // <- the key should match the actual data key 
+            displayName: 'OT', // <- Here you specify the column header 
+            headerStyle: styles.default, // <- Header style 
+            width: 120 // <- width in pixels 
+        },
+        remarkin: { // <- the key should match the actual data key 
+            displayName: 'หมายเหตุ(เข้างาน)', // <- Here you specify the column header 
+            headerStyle: styles.default, // <- Header style 
+            width: 120 // <- width in pixels 
+        },
+        remarkout: { // <- the key should match the actual data key 
+            displayName: 'หมายเหตุ(ออกงาน)', // <- Here you specify the column header 
             headerStyle: styles.default, // <- Header style 
             width: 120 // <- width in pixels 
         },
@@ -277,12 +342,27 @@ exports.exportByDate = function (req, res, next) {
     var dataset = [];
 
     req._reportdaily.data.forEach(function (i, index) {
+        var startdate = new Date(i.timein);
+        var enddate = new Date(i.timeout);
         dataset.push({
             number: (index + 1),
             employeeid: i.employeeid,
             firstname: i.firstname,
-            lastname: i.lastname
-        })
+            lastname: i.lastname,
+            startdate: startdate.toString('HH:mm:ss'),
+            enddate: enddate.toString('HH:mm:ss'),
+            latitudeinlat: i.locationIn.lat,
+            longitudeinlng: i.locationIn.lng,
+            latitudeoutlat: i.locationOut.lat,
+            longitudeoutlng: i.locationOut.lng,
+            device: i.device,
+            distance: i.distance,
+            timelate: i.timelate,
+            workinghours: i.workinghours,
+            overtime: i.overtime,
+            remarkin: i.remark.timein,
+            remarkout: i.remark.timeout
+        });
     });
 
     var merges = [
