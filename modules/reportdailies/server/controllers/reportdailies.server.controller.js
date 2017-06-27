@@ -418,5 +418,5 @@ function workingHoursBetweenDates(shiftin, shiftout, startDate, endDate) {
     console.log(baseDiff);
     var diff = Math.abs(new Date(startDate).getTime() - new Date(endDate).getTime()) / 3600000;
     console.log(diff);
-    return 0;
+    return diff;
 }
