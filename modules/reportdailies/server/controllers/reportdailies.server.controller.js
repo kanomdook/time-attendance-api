@@ -413,25 +413,9 @@ function deg2rad(deg) {
     return deg * (Math.PI / 180);
 }
 // get hours
-// function workingHoursBetweenDates(shiftin, shiftout, startDate, endDate) {
-//     var baseDiff = Math.abs(new Date(shiftin).getTime() - new Date(shiftout).getTime()) / 3600000;
-//     var diff = Math.abs(new Date(startDate).getTime() - new Date(endDate).getTime()) / 3600000;
-//     if (diff > baseDiff) {
-//         var shiftoutMin = new Date(shiftout).getMinutes();
-//         var shiftoutMin = new Date(endDate).getMinutes();
-//     } else {
-//         var shiftinMin = new Date(shiftin).getMinutes();
-//         var shiftinMin = new Date(endDate).getMinutes();
-//     }
-
-//     console.log(baseDiff);
-//     console.log(diff);
-//     return diff;
-// }
-
 function workingHoursBetweenDates(shiftin, shiftout, startDate, endDate) {
-    var start = new Date(startDate).getMinutes() + ":" + new Date(startDate).getMinutes();
-    var end = new Date(endDate).getMinutes() + ":" + new Date(endDate).getMinutes();    
+    var start = new Date(startDate).getMinutes() + ":" + new Date(startDate).getSeconds();
+    var end = new Date(endDate).getMinutes() + ":" + new Date(endDate).getSeconds();    
     start = start.split(":");
     end = end.split(":");
     var startDate = new Date(0, 0, 0, start[0], start[1], 0);
