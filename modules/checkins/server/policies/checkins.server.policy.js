@@ -26,24 +26,30 @@ exports.invokeRolesPolicies = function () {
         }, {
             resources: '/api/checkin/company/:checkinId',
             permissions: '*'
+        }, {
+            resources: '/api/checkins/employeeid/:empid',
+            permissions: '*'
         }]
     }, {
         roles: ['user'],
         allows: [
             {
-            resources: '/api/checkins',
-            permissions: ['get', 'post']
-        }, 
-        {
-            resources: '/api/checkins/:checkinId',
-            permissions: ['get', 'post']
-        }, {
-            resources: '/api/checkin/company',
-            permissions: ['get', 'post']
-        }, {
-            resources: '/api/checkin/company/:checkinId',
-            permissions: ['get', 'post']
-        }]
+                resources: '/api/checkins',
+                permissions: ['get', 'post']
+            },
+            {
+                resources: '/api/checkins/:checkinId',
+                permissions: ['get', 'post']
+            }, {
+                resources: '/api/checkin/company',
+                permissions: ['get', 'post']
+            }, {
+                resources: '/api/checkin/company/:checkinId',
+                permissions: ['get', 'post']
+            }, {
+                resources: '/api/checkins/employeeid/:empid',
+                permissions: ['get']
+            }]
     }, {
         roles: ['guest'],
         allows: [{

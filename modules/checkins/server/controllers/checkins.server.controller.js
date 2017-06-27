@@ -175,10 +175,7 @@ exports.getByUserID = function (req, res, next, id) {
 
     var reqYearMonth = req.yearMonth;
     var checkinData = [];
-    console.log(reqYearMonth);
-    console.log(id);
-    Checkin.find({ user: { _id: id } }).populate({ path: 'user', select: 'displayName profileImageURL' }).exec(function (err, checkin) {
-        console.log(checkin.length);
+    Checkin.find({ user: id }).populate({ path: 'user', select: 'displayName profileImageURL' }).exec(function (err, checkin) {
         if (reqYearMonth && reqYearMonth !== "All") {
             for (var i = 0; i < checkin.length; i++) {
                 var checkinDate = new Date(checkin[i].created);
@@ -186,7 +183,8 @@ exports.getByUserID = function (req, res, next, id) {
                 var checkinMonth = checkinDate.getUTCMonth() + 1;
                 var checkinYearMonth = checkinYear + "" + checkinMonth; // 20171
 
-                console.log(checkinYearMonth);
+                // console.log(checkinYearMonth);
+                // console.log(reqYearMonth);
 
                 if (checkinYearMonth === reqYearMonth) {
                     checkinData.push(checkin[i]);
@@ -233,4 +231,43 @@ exports.listByCompany = function (req, res) {
             res.jsonp(checkinByCompany);
         }
     });
+};
+
+exports.getByEmpID = function (req, res, next, empid) {
+
+    var reqYearMonth = req.yearMonth;
+    var checkinData = [];
+    Checkin.find().sort('-created').populate({
+        path: 'user',
+        model: 'User',
+        populate: {
+            path: 'employeeprofile',
+            model: 'Employeeprofile',
+            populate: {
+                path: 'company',
+                model: 'Company'
+            }
+        }
+    }).exec(function (err, checkin) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            var checkinByCompany = [];
+            if (checkin.length > 0) {
+                checkinByCompany = checkin.filter(function (obj) {
+                    return obj.user.employeeprofile._id.toString() === empid;
+
+                });
+            }
+            req.checkinByEmpId = checkinByCompany;
+            next();
+        }
+    });
+
+};
+
+exports.getByEmployeeId = function (req, res) {
+    res.jsonp(req.checkinByEmpId);
 };
