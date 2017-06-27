@@ -93,21 +93,21 @@
                                 <!-- <div class="ibox-content"> -->
                                 <table class="table table-striped">
                                     <tbody>
-                                        <tr ng-repeat="item in vm.checkins">
+                                        <tr ng-repeat="check in vm.checkins">
                                             <td class="no-borders">
-                                                {{item.dateTimeIn | date:'dd MMMM yyyy'}}
+                                                {{check.dateTimeIn | date:'dd MMMM yyyy'}}
                                             </td>
                                             <td class="no-borders">
-                                                <i class="fa fa-circle text-navy"></i> {{item.dateTimeIn | date:'HH:mm'}}
+                                                <i class="fa fa-circle text-navy"></i> {{check.dateTimeIn | date:'HH:mm'}}
                                             </td>
                                             <td class="no-borders">
                                             </td>
                                             <td class="no-borders">
-                                                <i class="fa fa-circle text-danger" ng-if="item.dateTimeOut"></i> {{item.dateTimeOut | date:'HH:mm'}}
+                                                <i class="fa fa-circle text-danger" ng-if="check.dateTimeOut"></i> {{check.dateTimeOut | date:'HH:mm'}}
                                             </td>
                                             <td class="no-borders">
-                                                <i class="fa fa-check text-navy" ng-if="item.dateTimeOut"></i>
-                                                <i class="fa fa-times text-danger" ng-if="!item.dateTimeOut"></i>
+                                                <i class="fa fa-check text-navy" ng-if="check.dateTimeOut"></i>
+                                                <i class="fa fa-times text-danger" ng-if="!check.dateTimeOut"></i>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -123,13 +123,15 @@
                                     <div class="ibox-content">
                                         <table class="table table-striped">
                                             <tbody>
-                                                <tr>
+                                                <tr ng-repeat="leave in vm.leaves">
                                                     <td>
-                                                        <i class="fa fa-play-circle text-navy"></i> 15/01/2560 &nbsp;
-                                                        <i class="fa fa-stop-circle text-danger"></i> 15/01/2560 &nbsp; &nbsp; หมอนัดทำฟัน
+                                                        <i class="fa fa-play-circle text-navy"></i> {{leave.leaveStartDateTime | date:'dd MMMM yyyy'}} &nbsp; 
+                                                        <i class="fa fa-stop-circle text-danger"></i> {{leave.leaveEndDateTime | date:'dd MMMM yyyy'}} &nbsp; <i class="fa fa-clock-o"></i> <span>{{leave.leaveDay}} วัน</span> &nbsp; {{leave.leaveDetail}}
                                                     </td>
                                                     <td class="no-borders">
-                                                        <i class="fa fa-exclamation-triangle text-warning"></i>
+                                                        <i class="fa fa-exclamation-triangle text-warning" ng-if="leave.approveStatus === Waiting"></i>
+                                                        <i class="fa fa-check text-navy" ng-if="leave.approveStatus === Approve"></i>
+                                                        <i class="fa fa-times text-danger" ng-if="leave.approveStatus === Reject"></i>
                                                     </td>
                                                 </tr>
                                             </tbody>
