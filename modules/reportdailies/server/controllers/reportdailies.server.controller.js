@@ -254,7 +254,7 @@ exports.exportByDate = function (req, res, next) {
 
     var heading = [
         [{ value: 'รายงานการมาทำงานของพนักงาน (รายวัน)', style: styles.headerDark }], // <-- It can be only values 
-        ['วันที่', date]
+        ['วันที่ ' + date + '']
     ];
 
     var specification = {
@@ -319,12 +319,12 @@ exports.exportByDate = function (req, res, next) {
             width: 100 // <- width in pixels 
         },
         distance: { // <- the key should match the actual data key 
-            displayName: 'ระยะห่างจากสนง. (กม.)', // <- Here you specify the column header 
+            displayName: 'ระยะห่าง (กม.)', // <- Here you specify the column header 
             headerStyle: styles.default, // <- Header style 
             width: 100 // <- width in pixels 
         },
         timelate: { // <- the key should match the actual data key 
-            displayName: 'สาย(ชม.นาที)', // <- Here you specify the column header 
+            displayName: 'สาย (ชม.นาที)', // <- Here you specify the column header 
             headerStyle: styles.default, // <- Header style 
             width: 100 // <- width in pixels 
         },
@@ -374,7 +374,9 @@ exports.exportByDate = function (req, res, next) {
     });
 
     var merges = [
-        { start: { row: 1, column: 1 }, end: { row: 1, column: 17 } }
+        { start: { row: 1, column: 1 }, end: { row: 1, column: 17 } },
+        { start: { row: 2, column: 1 }, end: { row: 2, column: 17 } }
+
     ];
 
     var report = excel.buildExport(
