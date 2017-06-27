@@ -170,9 +170,9 @@ exports.reportdailyByDate = function (req, res, next, reportdate) {
                     checkinByCompany.forEach(function (i, index) {
                         var distance = getDistanceFromLatLonInKm(i.locationIn.lat, i.locationIn.lng, company.address.location.latitude, company.address.location.longitude);
                         var workhours = null;
-                        // if (i.dateTimeIn && i.dateTimeOut) {
-                        //     workhours = workingHoursBetweenDates(i.dateTimeIn, i.dateTimeOut);
-                        // }
+                        if (i.dateTimeIn && i.dateTimeOut) {
+                            workhours = workingHoursBetweenDates(i.dateTimeIn, i.dateTimeOut);
+                        }
                         reportDailyData.push({
                             employeeid: i.user.employeeprofile.employeeid,
                             firstname: i.user.employeeprofile.firstname,
@@ -427,18 +427,6 @@ function workingHoursBetweenDates(startDate, endDate) {
     var workHoursStart = 9;
     var workHoursEnd = 18;
     var includeWeekends = false;
-
-    // Loop while currentDate is less than end Date (by minutes)
-    while (current <= endDate) {
-        // Is the current time within a work day (and if it occurs on a weekend or not)
-        if (current.getHours() >= workHoursStart && current.getHours() <= workHoursEnd && (includeWeekends ? current.getDay() !== 0 && current.getDay() !== 6 : true)) {
-            minutesWorked++;
-        }
-
-        // Increment current time
-        current.setTime(current.getTime() + 1000 * 60);
-    }
-    // console.log(minutesWorked / 60);
-    // Return the number of hours
-    return minutesWorked / 60;
+    
+    return 0;
 }
