@@ -25,11 +25,10 @@
             ReportdailiesDayService.getReportDailies(inputDate).then(function (report) {
                 console.log(report);
                 vm.reportData = report;
-                vm.startCall = false;
                 if (vm.reportData.data.length) {
-                    vm.startCall = true;
-                } else {
                     vm.startCall = false;
+                } else {
+                    vm.startCall = true;
                 }
             }, function (error) {
                 console.error(error);
