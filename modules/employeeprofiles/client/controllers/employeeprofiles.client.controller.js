@@ -196,7 +196,7 @@
         }
 
         function updateLeace(item, status) {
-            if ($window.confirm('คุณต้องการ' + status + '?')) {
+            if ($window.confirm('คุณต้องการ ' + status + '?')) {
                 item.leaveStatus = status;
                 EmployeeService.updateLeaveStatus(item).then(function (leave) {
                     item = leave;
