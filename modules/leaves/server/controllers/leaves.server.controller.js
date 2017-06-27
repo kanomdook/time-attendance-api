@@ -159,7 +159,6 @@ exports.listByCompany = function (req, res) {
 };
 
 exports.leaveByEmpID = function (req, res, next, empid) {
-
     Leave.find().sort('-created').populate({
         path: 'user',
         model: 'User',
