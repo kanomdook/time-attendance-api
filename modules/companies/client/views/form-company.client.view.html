@@ -1,4 +1,17 @@
 <section ng-init="vm.init()">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-9" ng-if="!vm.employeeprofile._id">
+            <br>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/companies/{{vm.company._id}}">ข้อมูลบริษัท {{vm.companyname}}</a>
+                </li>
+                <li>
+                    <strong>แก้ไขข้อมูล {{vm.companyname}}</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
     <div class="wrapper wrapper-content animated fadeInRight ecommerce">
         <form class="form-horizontal" name="vm.form.companyForm" ng-submit="vm.save(vm.form.companyForm.$valid)" novalidate>
             <div class="row">

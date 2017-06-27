@@ -13,6 +13,7 @@
 
     vm.authentication = Authentication;
     vm.company = company;
+    vm.companyname = JSON.parse(JSON.stringify(vm.company)).name;
     vm.error = null;
     vm.form = {};
     vm.remove = remove;

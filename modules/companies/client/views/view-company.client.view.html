@@ -1,4 +1,14 @@
 <section>
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-9">
+            <br>
+            <ol class="breadcrumb">
+                <li>
+                    <strong>ข้อมูลบริษัท {{vm.company.name}}</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
             <div class="col-md-4">
@@ -8,7 +18,7 @@
                     </div>
                     <div>
                         <div class="ibox-content no-padding border-left-right text-center">
-                            <img alt="รูปภาพ" ng-src="{{vm.company.images[0].url}}">
+                            <img ng-src="{{vm.company.images[0].url}}" alt="รูปภาพ">
                         </div>
                         <div class="ibox-content profile-content">
                             <h4><strong>{{vm.company.name}}</strong></h4>
@@ -45,7 +55,7 @@
                             <div class="user-button">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <button type="button" class="btn btn-primary btn-sm btn-block" ui-sref="companies.edit({ companyId: vm.company._id })">
+                                        <button class="btn btn-primary btn-sm btn-block" type="button" ui-sref="companies.edit({ companyId: vm.company._id })">
                                             <i class="glyphicon glyphicon-edit"></i> แก้ไขข้อมูล
                                         </button>
                                     </div>
@@ -67,7 +77,7 @@
                         <h2>10/15</h2>
                         <div class="text-center">
                             <div class="progress">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:80%">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" style="width:80%">
                                     80% (ที่ใช้งาน)
                                 </div>
                             </div>
@@ -80,7 +90,7 @@
                         <h2>570/3000</h2>
                         <div class="text-center">
                             <div class="progress">
-                                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:40%">
+                                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" style="width:40%">
                                     40% (ที่ใช้งาน)
                                 </div>
                             </div>
@@ -93,7 +103,7 @@
                         <h2>50/500</h2>
                         <div class="text-center">
                             <div class="progress">
-                                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:25%">
+                                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" style="width:25%">
                                     25% (ที่ใช้งาน)
                                 </div>
                             </div>
