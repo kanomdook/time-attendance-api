@@ -126,12 +126,12 @@
                                                 <tr ng-repeat="leave in vm.leaves">
                                                     <td>
                                                         <i class="fa fa-play-circle text-navy"></i> {{leave.leaveStartDateTime | date:'dd MMMM yyyy'}} &nbsp; 
-                                                        <i class="fa fa-stop-circle text-danger"></i> {{leave.leaveEndDateTime | date:'dd MMMM yyyy'}} &nbsp; <i class="fa fa-clock-o"></i> <span>{{leave.leaveDay}} วัน</span> &nbsp; {{leave.leaveDetail}}
+                                                        <i class="fa fa-stop-circle text-danger"></i> {{leave.leaveEndDateTime | date:'dd MMMM yyyy'}} &nbsp; <i class="fa fa-clock-o"></i> <span ng-if="!leave.leaveHalf">{{leave.leaveDay}} วัน</span><span ng-if="leave.leaveHalf">{{leave.leaveTime}} ชั่วโมง</span> &nbsp; {{leave.leaveDetail}}
                                                     </td>
                                                     <td class="no-borders">
-                                                        <i class="fa fa-exclamation-triangle text-warning" ng-if="leave.approveStatus === Waiting"></i>
-                                                        <i class="fa fa-check text-navy" ng-if="leave.approveStatus === Approve"></i>
-                                                        <i class="fa fa-times text-danger" ng-if="leave.approveStatus === Reject"></i>
+                                                        <i class="fa fa-exclamation-triangle text-warning" ng-if="leave.approveStatus === 'Waiting'"></i>
+                                                        <i class="fa fa-check text-navy" ng-if="leave.approveStatus === 'Approve'"></i>
+                                                        <i class="fa fa-times text-danger" ng-if="leave.approveStatus === 'Reject'"></i>
                                                     </td>
                                                 </tr>
                                             </tbody>
