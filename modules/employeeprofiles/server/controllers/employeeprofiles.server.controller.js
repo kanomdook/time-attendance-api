@@ -165,7 +165,8 @@ exports.listByCompany = function(req, res) {
         employeeprofiles.forEach(function(i, index) {
             display = i.firstname + ' ' + i.lastname;
             i.display = display;
-            console.log(i.displayName);
+            i.jobTitle = '555';
+            console.log(i.display);
         });
         console.log('jsonp');
         res.jsonp(employeeprofiles);
