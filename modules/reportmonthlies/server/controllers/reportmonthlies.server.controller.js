@@ -152,6 +152,7 @@ exports.reportmonthlyByDateAndEmployeeId = function (req, res, next, employeeid)
       return obj.user.employeeprofile._id.toString() === employeeid.toString();
     });
   }
+  req.employeeid = employeeid;
   req.reportbyemployee = reportbyemployee;
   next();
 };
@@ -167,12 +168,22 @@ exports.reportmonthly = function (req, res, next) {
         message: 'No Company with that identifier has been found'
       });
     } else {
-      returnReportMonthly.company = company;
-      // returnReportMonthly.employeeprofile = reportbyemployee[0].user.employeeprofile;
-      returnReportMonthly.firstDay = req.firstDay;
-      returnReportMonthly.lastDay = req.lastDay;
-      returnReportMonthly.reportbyemployee = reportbyemployee;
-      res.jsonp(returnReportMonthly);
+
+      Employeeprofile.findById(req.employeeid).populate('user', 'displayName').populate('company').exec(function (err, employeeprofile) {
+        if (err) {
+          return next(err);
+        } else if (!employeeprofile) {
+          return res.status(404).send({
+            message: 'No Employeeprofile with that identifier has been found'
+          });
+        }
+        returnReportMonthly.company = company;
+        returnReportMonthly.employeeprofile = employeeprofile;
+        returnReportMonthly.firstDay = req.firstDay;
+        returnReportMonthly.lastDay = req.lastDay;
+        returnReportMonthly.reportbyemployee = reportbyemployee;
+        res.jsonp(returnReportMonthly);
+      });
     }
   });
 };
