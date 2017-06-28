@@ -32,13 +32,10 @@
     </div>
     <div class ng-if="vm.reportData.data.length > 0">
         <div class="contact-box table-responsive">
-            <h3>
-                รหัสพนักงาน <b>{{vm.reportData.employeeprofile.employeeid}}</b>
-            </h3>
-            <h3>
-                ชื่อ
+            <p>
+                รหัสพนักงาน <b>{{vm.reportData.employeeprofile.employeeid}}</b> ชื่อ
                 <b>{{vm.reportData.employeeprofile.firstname}} {{vm.reportData.employeeprofile.lastname}}</b>
-            </h3>
+            </p>
             <table class="table table-striped table-bordered table-hover dataTables-example ng-isolate-scope dataTable" id="DataTables_Table_2" role="grid" aria-describedby="DataTables_Table_2_info" datatable dt-options="dtOptions">
                 <thead>
                     <tr role="row">
