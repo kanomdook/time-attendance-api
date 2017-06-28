@@ -21,7 +21,7 @@ module.exports = function(app) {
     app.route('/api/reportmonthly/:date/:employeeid').all(reportmonthliesPolicy.isAllowed)
         .get(reportmonthlies.reportmonthly);
 
-    app.route('/api/reportmonthly/export/excel/:date/:employeeid').all(reportdailiesPolicy.isAllowed)
+    app.route('/api/reportmonthly/export/excel/:date/:employeeid').all(reportmonthliesPolicy.isAllowed)
         .get(reportmonthlies.exportByMonth, reportmonthlies.exportExcel);
 
     // Finish by binding the Reportmonthly middleware
