@@ -12,7 +12,8 @@
         // vm.reportmonthlies = ReportmonthliesService.query();
         vm.employeeprofiles = EmployeeprofilesService.query();
         vm.employeeprofiles.push({
-          displayname : 'เลือกพนักงาน'
+            _id: null,
+            displayname: 'เลือกพนักงาน'
         });
         vm.selectemployee = {};
         vm.reportDate = new Date();
