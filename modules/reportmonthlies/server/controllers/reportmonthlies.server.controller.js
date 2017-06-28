@@ -420,7 +420,7 @@ exports.exportByMonth = function (req, res, next) {
             device: i.device,
             distance: i.distance,
             timelate: i.timelate,
-            workinghours: workhours,
+            workinghours: i.workhours,
             remarkin: i.remark.timein,
             remarkout: i.remark.timeout
         });
