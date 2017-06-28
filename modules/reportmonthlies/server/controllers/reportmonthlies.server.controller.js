@@ -264,7 +264,7 @@ exports.reportmonthly = function (req, res, next) {
     });
 };
 
-exports.reportmonthly = function (req, res, next) {
+exports.sendreportmonthly = function (req, res, next) {
     res.jsonp(req.returnReportMonthly);
 };
 
@@ -396,9 +396,9 @@ exports.exportByMonth = function (req, res, next) {
 
     var dataset = [];
     var days = ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'];
-    console.log(req.reportbyemployee.length);
+    // console.log(req.reportbyemployee.length);
     req.reportbyemployee.forEach(function (i, index) {
-        console.log("------------", i);
+        // console.log("------------", i);
         var startdate = new Date(i.dateTimeIn);
         var enddate = new Date(i.dateTimeOut);
         var date = new Date(i.created);
