@@ -80,7 +80,7 @@
                     <div class="col col-md-4"></div>
                     <div class="col col-md-4">
                         <!--  ng-click="vm.exportReport(vm.reportDate)" -->
-                        <a class="btn btn-default btn-block" href="https://time-attendance.herokuapp.com/api/reportdaily/export/excel/:{{vm.reportData.date}}" target="_self">Export</a>
+                        <a class="btn btn-default btn-block" href="https://time-attendance.herokuapp.com/api/reportmonthly/export/excel/{{vm.reportData.firstdate}}/{{vm.reportData.employeeprofile._id}}" target="_self">Export</a>
                     </div>
                 </div>
             </div>
