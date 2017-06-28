@@ -173,9 +173,8 @@ exports.reportdailyByDate = function (req, res, next, reportdate) {
                         var timelate = null;
                         if (i.dateTimeIn && i.dateTimeOut) {
                             workhours = workingHoursBetweenDates(i.dateTimeIn, i.dateTimeOut);
-                        } else if (i.dateTimeIn){
-                            timelate = workingHoursBetweenDates(i.user.employeeprofile.shiftin, i.dateTimeIn);
-                        }
+                        } 
+                        timelate = workingHoursBetweenDates(i.user.employeeprofile.shiftin, i.dateTimeIn);
                         reportDailyData.push({
                             employeeid: i.user.employeeprofile.employeeid,
                             firstname: i.user.employeeprofile.firstname,
