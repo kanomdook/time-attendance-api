@@ -120,7 +120,7 @@ exports.reportmonthlyByDate = function (req, res, next, date) {
   var paramDate = new Date(date);
   var firstDay = new Date(paramDate.getFullYear(), paramDate.getMonth(), 1);
   var lastDay = new Date(new Date(paramDate.getFullYear(), paramDate.getMonth() + 1, 0).setHours(23, 59, 59, 999));
-  Reportmonthly.find({ created: { $gte: firstDay, $lte: lastDay } }).populate({
+  Checkin.find({ created: { $gte: firstDay, $lte: lastDay } }).populate({
     path: 'user',
     model: 'User',
     populate: {
