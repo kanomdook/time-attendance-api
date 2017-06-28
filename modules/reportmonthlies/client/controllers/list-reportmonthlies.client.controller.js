@@ -27,18 +27,20 @@
             var year = new Date(reportDate).getFullYear();
             var inputDate = year + "-" + ((month) < 10 ? "0" + month : month) + "-" + (date < 10 ? "0" + date : date);
             console.warn(inputDate);
-            ReportmonthlyService.getReportMonthlies(inputDate, vm._id).then(function(report) {
-                console.log(report);
-                vm.reportData = report;
-                if (vm.reportData.data.length) {
-                    vm.startCall = false;
-                } else {
+            if (vm._id) {
+                ReportmonthlyService.getReportMonthlies(inputDate, vm._id).then(function(report) {
+                    console.log(report);
+                    vm.reportData = report;
+                    if (vm.reportData.data.length) {
+                        vm.startCall = false;
+                    } else {
+                        vm.startCall = true;
+                    }
+                }, function(error) {
+                    console.error(error);
                     vm.startCall = true;
-                }
-            }, function(error) {
-                console.error(error);
-                vm.startCall = true;
-            });
+                });
+            }
         }
 
         function getDay(day) {
