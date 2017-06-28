@@ -168,7 +168,7 @@ exports.reportmonthly = function (req, res, next) {
       });
     } else {
       returnReportMonthly.company = company;
-      returnReportMonthly.employeeprofile = reportbyemployee[0].user.employeeprofile;
+      // returnReportMonthly.employeeprofile = reportbyemployee[0].user.employeeprofile;
       returnReportMonthly.firstDay = req.firstDay;
       returnReportMonthly.lastDay = req.lastDay;
       returnReportMonthly.reportbyemployee = reportbyemployee;
