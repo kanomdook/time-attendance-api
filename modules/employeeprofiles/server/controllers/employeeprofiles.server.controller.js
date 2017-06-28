@@ -160,11 +160,11 @@ exports.listByCompany = function(req, res) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
             });
-        } else {
-            employeeprofiles.forEach(function(i, index) {
-                i.displayName = i.firstname + ' ' + i.lastname;
-            });
         }
+        employeeprofiles.forEach(function(i, index) {
+            i.displayName = i.firstname + ' ' + i.lastname;
+            console.log(i.displayName);
+        });
         res.jsonp(employeeprofiles);
     });
 };
