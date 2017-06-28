@@ -164,11 +164,9 @@ exports.listByCompany = function(req, res) {
         var display = '';
         employeeprofiles.forEach(function(i, index) {
             display = i.firstname + ' ' + i.lastname;
+            i.display = '';
             i.display = display;
-            i.jobTitle = '555';
-            console.log(i.display);
         });
-        console.log('jsonp');
         res.jsonp(employeeprofiles);
     });
 };
