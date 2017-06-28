@@ -26,7 +26,7 @@
             var year = new Date(reportDate).getFullYear();
             var inputDate = year + "-" + ((month) < 10 ? "0" + month : month) + "-" + (date < 10 ? "0" + date : date);
             console.warn(inputDate);
-            ReportmonthlyService.getReportMonthlies(inputDate, '5951ef170cd34d10005badaf').then(function(report) {
+            ReportmonthlyService.getReportMonthlies(inputDate, vm.selectemployee._id).then(function(report) {
                 console.log(report);
                 vm.reportData = report;
                 if (vm.reportData.data.length) {
