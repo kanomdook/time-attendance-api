@@ -46,7 +46,9 @@
         }
 
         function selected(item) {
-            vm._id = item._id;
+            if (item) {
+                vm._id = item._id;
+            }
         }
     }
 }());

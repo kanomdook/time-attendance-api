@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-sm-4 col-md-4">
                 <div class="form-group">
-                    <select class="form-control m-b" id="employee" name="employee" ng-model="vm.selectemployee" ng-options="item as item.displayname for item in vm.employeeprofiles track by item._id" ng-change="vm.selected(vm.selectemployee)" required></select>
+                    <select class="form-control m-b" id="employee" name="employee" ng-model="vm.selectemployee" ng-options="item as item.displayname for item in vm.employeeprofiles track by item._id" ng-change="vm.selected(vm.selectemployee)" placeholder="เลือกพนักงาน" required></select>
                 </div>
             </div>
             <div class="col-sm-4 col-md-4">
