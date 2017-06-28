@@ -20,6 +20,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/reportmonthlies/:reportmonthlyId',
       permissions: '*'
+    }, {
+      resources: '/api/reportmonthly/:date/:employeeid',
+      permissions: '*'
     }]
   }, {
     roles: ['user'],
@@ -29,6 +32,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/reportmonthlies/:reportmonthlyId',
       permissions: ['get']
+    }, {
+      resources: '/api/reportmonthly/:date/:employeeid',
+      permissions: ['get']
     }]
   }, {
     roles: ['guest'],
@@ -37,6 +43,9 @@ exports.invokeRolesPolicies = function () {
       permissions: ['get']
     }, {
       resources: '/api/reportmonthlies/:reportmonthlyId',
+      permissions: ['get']
+    }, {
+      resources: '/api/reportmonthly/:date/:employeeid',
       permissions: ['get']
     }]
   }]);
