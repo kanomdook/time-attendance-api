@@ -6,6 +6,8 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Reportmonthly = mongoose.model('Reportmonthly'),
+  Checkin = mongoose.model('Checkin'),
+  Company = mongoose.model('Company'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
