@@ -13,7 +13,7 @@
     <br>
     <div class="animated fadeInRight">
         <div class="row">
-            <div class="col-sm-4 col-md-3">
+            <div class="col-sm-4 col-md-4">
                 <div class="form-group">
                     <select class="form-control m-b" id="employee" name="employee" ng-model="vm.selectemployee" ng-options="item as (item.firstname item.lastname) for item in vm.employeeprofiles track by item.cca2" required></select>
                 </div>
@@ -23,7 +23,7 @@
                     <input class="form-control" id="date" name="date" ng-model="vm.reportDate" type="month" placeholder="ค้นหา">
                 </div>
             </div>
-            <div class="col-sm-4 col-md-3">
+            <div class="col-sm-4 col-md-4">
                 <div class="form-group">
                     <a class="btn btn-primary btn-block" ng-click="vm.searchReport(vm.reportDate)">ค้นหา</a>
                 </div>
