@@ -308,7 +308,7 @@ exports.exportByMonth = function (req, res, next) {
 
     var heading = [
         [{ value: 'รายงานการมาทำงานของพนักงาน (รายเดือน)', style: styles.headerDark }], // <-- It can be only values 
-        ['รหัสพนักงาน ' + req.reportbyemployee[0].user.employeeprofile.employeeid + '', '' + req.reportbyemployee[0].user.employeeprofile.firstname + ' ' + req.reportbyemployee[0].user.employeeprofile.lastname + '', ' วันที่ ' + firstDay + '-', lastDay]
+        ['รหัสพนักงาน ' + req.returnReportMonthly.employeeprofile.employeeid + '', '' + req.returnReportMonthly.employeeprofile.firstname + ' ' + req.returnReportMonthly.employeeprofile.lastname + '', ' วันที่ ' + firstDay + '-', lastDay]
     ];
 
     var specification = {
@@ -396,8 +396,8 @@ exports.exportByMonth = function (req, res, next) {
 
     var dataset = [];
     var days = ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'];
-    // console.log(req.reportbyemployee.length);
-    req.reportbyemployee.forEach(function (i, index) {
+    // console.log(req.returnReportMonthly.length);
+    req.returnReportMonthly.forEach(function (i, index) {
         // console.log("------------", i);
         var startdate = new Date(i.dateTimeIn);
         var enddate = new Date(i.dateTimeOut);
