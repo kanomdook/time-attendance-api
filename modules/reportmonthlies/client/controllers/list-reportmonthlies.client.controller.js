@@ -16,6 +16,7 @@
         vm.reportData = null;
         vm.startCall = false;
         vm.searchReport = searchReport;
+        vm.selected = selected;
         vm.getDay = getDay;
         vm.days = ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'];
 
@@ -26,7 +27,7 @@
             var year = new Date(reportDate).getFullYear();
             var inputDate = year + "-" + ((month) < 10 ? "0" + month : month) + "-" + (date < 10 ? "0" + date : date);
             console.warn(inputDate);
-            ReportmonthlyService.getReportMonthlies(inputDate, vm.selectemployee._id).then(function(report) {
+            ReportmonthlyService.getReportMonthlies(inputDate, vm._id).then(function(report) {
                 console.log(report);
                 vm.reportData = report;
                 if (vm.reportData.data.length) {
@@ -42,6 +43,10 @@
 
         function getDay(day) {
             return vm.days[day];
+        }
+
+        function selected(employee) {
+            vm._id = employee;
         }
     }
 }());
