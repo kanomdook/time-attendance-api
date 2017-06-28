@@ -187,8 +187,8 @@ exports.reportmonthly = function (req, res, next) {
             workhours = workingHoursBetweenDates(i.dateTimeIn, i.dateTimeOut);
           } else if (i.dateTimeIn) {
             timelate = workingHoursBetweenDates(employeeprofile.shiftin, i.dateTimeIn);
-            console.log(timelate + ":" + employeeprofile.shiftin + " " +i.dateTimeIn);
           }
+          console.log(timelate + ":" + employeeprofile.shiftin + " " + i.dateTimeIn);
           reportMonthlyData.push({
             date: i.created,
             day: new Date(i.created).getDay(),
