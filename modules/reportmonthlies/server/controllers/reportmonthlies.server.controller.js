@@ -401,7 +401,13 @@ exports.exportByMonth = function (req, res, next) {
         var enddateText = (enddate.getUTCHours() + 7) + ':' + enddate.getUTCMinutes() + ':' + enddate.getUTCSeconds();
         var dateText = date.getDate() + '/' + (date.getMonth() + 1 > 9 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1)) + '/' + date.getFullYear();
         var day = date.getDay();
-
+        var distance = getDistanceFromLatLonInKm(i.locationIn.lat, i.locationIn.lng, company.address.location.latitude, company.address.location.longitude);
+        var workhours = null;
+        var timelate = null;
+        if (i.dateTimeIn && i.dateTimeOut) {
+            workhours = workingHoursBetweenDates(i.dateTimeIn, i.dateTimeOut);
+        }
+        timelate = workingHoursBetweenDates(employeeprofile.shiftin, i.dateTimeIn);
         dataset.push({
             number: (index + 1),
             date: dateText,
@@ -413,10 +419,10 @@ exports.exportByMonth = function (req, res, next) {
             latitudeout: i.locationOut.lat,
             longitudeout: i.locationOut.lng,
             type: i.type,
-            device: i.device,
-            distance: i.distance,
-            timelate: i.timelate,
-            workinghours: i.workinghours,
+            device: i.deviceID,
+            distance: distance,
+            timelate: timelate,
+            workinghours: workhours,
             remarkin: i.remark.timein,
             remarkout: i.remark.timeout
         });
