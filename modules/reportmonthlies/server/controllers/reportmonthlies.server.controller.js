@@ -393,18 +393,19 @@ exports.exportByMonth = function (req, res, next) {
     var days = ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'];
     console.log(req.reportbyemployee.length);
     req.reportbyemployee.forEach(function (i, index) {
-        console.log("------------" , i);
-        var startdate = new Date(i.datetimein);    
-        var enddate = new Date(i.datetimeout);
+        console.log("------------", i);
+        var startdate = new Date(i.dateTimeIn);
+        var enddate = new Date(i.dateTimeOut);
         var date = new Date(i.created);
         var startdateText = (startdate.getUTCHours() + 7) + ':' + startdate.getUTCMinutes() + ':' + startdate.getUTCSeconds();
         var enddateText = (enddate.getUTCHours() + 7) + ':' + enddate.getUTCMinutes() + ':' + enddate.getUTCSeconds();
         var dateText = date.getDate() + '/' + (date.getMonth() + 1 > 9 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1)) + '/' + date.getFullYear();
+        var day = date.getDay();
 
         dataset.push({
             number: (index + 1),
             date: dateText,
-            day: days[i.day],
+            day: days[day],
             startdate: startdateText,
             enddate: enddateText,
             latitudein: i.locationIn.lat,
