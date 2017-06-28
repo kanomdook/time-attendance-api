@@ -45,8 +45,8 @@
             return vm.days[day];
         }
 
-        function selected(employee) {
-            vm._id = employee._id;
+        function selected(item) {
+            vm._id = item._id;
         }
     }
 }());
