@@ -262,7 +262,7 @@ exports.exportByMonth = function (req, res, next) {
     var firstDay = req.firstDay.getDate() + '/' + (req.firstDay.getMonth() > 9 ? req.firstDay.getMonth() : '0' + req.firstDay.getMonth()) + '/' + req.firstDay.getFullYear();
     var lastDay = req.lastDay.getDate() + '/' + (req.firstDay.getMonth() > 9 ? req.firstDay.getMonth() : '0' + req.firstDay.getMonth()) + '/' + req.lastDay.getFullYear();
     console.log(firstDay + ' : ' + lastDay);
-    console.log(req.reportbyemployee);
+    // console.log(req.reportbyemployee);
     var styles = {
         headerDark: {
             fill: {
