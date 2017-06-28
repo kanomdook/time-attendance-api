@@ -259,8 +259,8 @@ function workingHoursBetweenDates(startDateTime, endDateTime) {
 }
 
 exports.exportByMonth = function (req, res, next) {
-    var firstDay = req.firstDay.getDate() + '/' + req.firstDay.getMonth() + '/' + req.firstDay.getFullYear();
-    var lastDay = req.lastDay.getDate() + '/' + req.lastDay.getMonth() + '/' + req.lastDay.getFullYear();
+    var firstDay = req.firstDay.getDate() + '/' + (req.firstDay.getMonth() > 9 ? req.firstDay.getMonth() : '0' + req.firstDay.getMonth()) + '/' + req.firstDay.getFullYear();
+    var lastDay = req.lastDay.getDate() + '/' + (req.firstDay.getMonth() > 9 ? req.firstDay.getMonth() : '0' + req.firstDay.getMonth()) + '/' + req.lastDay.getFullYear();
     console.log(firstDay + ' : ' + lastDay);
     console.log(req.reportbyemployee);
     var styles = {
@@ -297,8 +297,8 @@ exports.exportByMonth = function (req, res, next) {
     };
 
     var heading = [
-        [{ value: 'รายงานการมาทำงานของพนักงาน (รายวัน)', style: styles.headerDark }], // <-- It can be only values 
-        ['วันที่ ' + date + '']
+        [{ value: 'รายงานการมาทำงานของพนักงาน (รายเดือน)', style: styles.headerDark }], // <-- It can be only values 
+        ['รหัสพนักงาน ' + req.reportbyemployee[0].user.employeeprofile.employeeid + '', req.reportbyemployee[0].user.employeeprofile.displayname, ' วันที่ ' + firstDay + '-', lastDay]
     ];
 
     var specification = {
@@ -307,18 +307,13 @@ exports.exportByMonth = function (req, res, next) {
             headerStyle: styles.default, // <- Header style 
             width: 40 // <- width in pixels 
         },
-        employeeid: { // <- the key should match the actual data key 
-            displayName: 'รหัสพนักงาน', // <- Here you specify the column header 
+        date: { // <- the key should match the actual data key 
+            displayName: 'วัน/เดือน/ปี', // <- Here you specify the column header 
             headerStyle: styles.default, // <- Header style 
             width: 80 // <- width in pixels 
         },
-        firstname: { // <- the key should match the actual data key 
-            displayName: 'ชื่อ', // <- Here you specify the column header 
-            headerStyle: styles.default, // <- Header style 
-            width: 120 // <- width in pixels 
-        },
-        lastname: { // <- the key should match the actual data key 
-            displayName: 'นามสกุล', // <- Here you specify the column header 
+        day: { // <- the key should match the actual data key 
+            displayName: 'วัน', // <- Here you specify the column header 
             headerStyle: styles.default, // <- Header style 
             width: 120 // <- width in pixels 
         },
@@ -390,17 +385,19 @@ exports.exportByMonth = function (req, res, next) {
     };
 
     var dataset = [];
-
-    req._reportdaily.data.forEach(function (i, index) {
+    var days = ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'];
+    req.reportbyemployee.forEach(function (i, index) {
         var startdate = new Date(i.datetimein);
         var enddate = new Date(i.datetimeout);
+        var date = new Date(i.create);
         var startdateText = (startdate.getUTCHours() + 7) + ':' + startdate.getUTCMinutes() + ':' + startdate.getUTCSeconds();
         var enddateText = (enddate.getUTCHours() + 7) + ':' + enddate.getUTCMinutes() + ':' + enddate.getUTCSeconds();
+        var dateText = date.getDate() + '/' + (date.getMonth() > 9 ? date.getMonth() : '0' + date.getMonth()) + '/' + date.getFullYear();
+
         dataset.push({
             number: (index + 1),
-            employeeid: i.employeeid,
-            firstname: i.firstname,
-            lastname: i.lastname,
+            date: dateText,
+            day: days[i.day],
             startdate: startdateText,
             enddate: enddateText,
             latitudein: i.locationIn.lat,
@@ -418,14 +415,12 @@ exports.exportByMonth = function (req, res, next) {
     });
 
     var merges = [
-        { start: { row: 1, column: 1 }, end: { row: 1, column: 17 } },
-        { start: { row: 2, column: 1 }, end: { row: 2, column: 17 } }
-
+        { start: { row: 1, column: 1 }, end: { row: 1, column: 17 } }
     ];
 
     var report = excel.buildExport(
         [{
-            name: 'Report', // <- Specify sheet name (optional) 
+            name: 'รายเดือน', // <- Specify sheet name (optional) 
             heading: heading, // <- Raw heading array (optional) 
             merges: merges, // <- Merge cell ranges 
             specification: specification, // <- Report specification 
@@ -438,6 +433,6 @@ exports.exportByMonth = function (req, res, next) {
 };
 
 exports.exportExcel = function (req, res, next) {
-    res.attachment('reportdaily' + req._reportdaily.date + '.xlsx'); // This is sails.js specific (in general you need to set headers) 
+    res.attachment('reportdaily' + (req.firstDay.getMonth() > 9 ? req.firstDay.getMonth() : '0' + req.firstDay.getMonth()) + '-' + req.firstDay.getFullYear() + '.xlsx'); // This is sails.js specific (in general you need to set headers) 
     return res.send(req.export);
 };
