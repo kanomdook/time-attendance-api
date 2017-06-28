@@ -399,12 +399,11 @@ exports.exportByMonth = function (req, res, next) {
     // console.log(req.returnReportMonthly.length);
     req.returnReportMonthly.data.forEach(function (i, index) {
         // console.log("------------", i);
-        var startdate = new Date(i.dateTimeIn);
-        var enddate = new Date(i.dateTimeOut);
-        var date = new Date(i.created);
+        var startdate = new Date(i.datetimein);
+        var enddate = new Date(i.datetimeout);
         var startdateText = (startdate.getUTCHours() + 7) + ':' + startdate.getUTCMinutes() + ':' + startdate.getUTCSeconds();
         var enddateText = (enddate.getUTCHours() + 7) + ':' + enddate.getUTCMinutes() + ':' + enddate.getUTCSeconds();
-        var dateText = date.getDate() + '/' + (date.getMonth() + 1 > 9 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1)) + '/' + date.getFullYear();
+        var dateText = startdate.getDate() + '/' + (startdate.getMonth() + 1 > 9 ? startdate.getMonth() + 1 : '0' + (startdate.getMonth() + 1)) + '/' + startdate.getFullYear();
 
         dataset.push({
             number: (index + 1),
@@ -420,7 +419,7 @@ exports.exportByMonth = function (req, res, next) {
             device: i.device,
             distance: i.distance,
             timelate: i.timelate,
-            workinghours: i.workhours,
+            workinghours: i.workinghours,
             remarkin: i.remark.timein,
             remarkout: i.remark.timeout
         });
