@@ -308,7 +308,7 @@ exports.exportByMonth = function (req, res, next) {
 
     var heading = [
         [{ value: 'รายงานการมาทำงานของพนักงาน (รายเดือน)', style: styles.headerDark }], // <-- It can be only values 
-        ['รหัสพนักงาน ' + req.returnReportMonthly.employeeprofile.employeeid + '', '' + req.returnReportMonthly.employeeprofile.firstname + ' ' + req.returnReportMonthly.employeeprofile.lastname + '', ' วันที่ ' + firstDay + '-', lastDay]
+        ['รหัสพนักงาน ' + req.returnReportMonthly.employeeprofile.employeeid + '  ' + req.returnReportMonthly.employeeprofile.firstname + ' ' + req.returnReportMonthly.employeeprofile.lastname + ' วันที่ ' + firstDay + '-' + lastDay]
     ];
 
     var specification = {
@@ -426,7 +426,8 @@ exports.exportByMonth = function (req, res, next) {
     });
 
     var merges = [
-        { start: { row: 1, column: 1 }, end: { row: 1, column: 17 } }
+        { start: { row: 1, column: 1 }, end: { row: 1, column: 17 } },
+        { start: { row: 2, column: 1 }, end: { row: 2, column: 17 } }        
     ];
 
     var report = excel.buildExport(
@@ -444,6 +445,6 @@ exports.exportByMonth = function (req, res, next) {
 };
 
 exports.exportExcel = function (req, res, next) {
-    res.attachment('reportmonthly' + (req.firstDay.getMonth() + 1 > 9 ? req.firstDay.getMonth() + 1 : '0' + (req.firstDay.getMonth() + 1)) + '-' + req.firstDay.getFullYear() + '.xlsx'); // This is sails.js specific (in general you need to set headers) 
+    res.attachment('reportmonthly' + req.returnReportMonthly.employeeprofile.firstname + '' + req.returnReportMonthly.employeeprofile.lastname + (req.firstDay.getMonth() + 1 > 9 ? req.firstDay.getMonth() + 1 : '0' + (req.firstDay.getMonth() + 1)) + '-' + req.firstDay.getFullYear() + '.xlsx'); // This is sails.js specific (in general you need to set headers) 
     return res.send(req.export);
 };
