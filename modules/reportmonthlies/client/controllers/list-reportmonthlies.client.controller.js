@@ -46,7 +46,7 @@
         }
 
         function selected(employee) {
-            vm._id = employee;
+            vm._id = employee._id;
         }
     }
 }());
