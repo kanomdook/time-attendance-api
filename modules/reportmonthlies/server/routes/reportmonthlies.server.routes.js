@@ -22,7 +22,7 @@ module.exports = function (app) {
         .get(reportmonthlies.reportmonthly, reportmonthlies.sendreportmonthly);
 
     app.route('/api/reportmonthly/export/excel/:date/:employeeid').all(reportmonthliesPolicy.isAllowed)
-        .get(reportmonthlies.reportmonthly, reportmonthlies.sendreportmonthly, reportmonthlies.exportByMonth, reportmonthlies.exportExcel);
+        .get(reportmonthlies.reportmonthly, reportmonthlies.exportByMonth, reportmonthlies.exportExcel);
 
     // Finish by binding the Reportmonthly middleware
     app.param('date', reportmonthlies.reportmonthlyByDate);
