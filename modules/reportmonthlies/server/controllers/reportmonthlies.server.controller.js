@@ -257,10 +257,15 @@ exports.reportmonthly = function (req, res, next) {
                 returnReportMonthly.firstDay = req.firstDay;
                 returnReportMonthly.lastDay = req.lastDay;
                 returnReportMonthly.data = reportMonthlyData;
-                res.jsonp(returnReportMonthly);
+                req.returnReportMonthly = returnReportMonthly;
+                next();
             });
         }
     });
+};
+
+exports.reportmonthly = function (req, res, next) {
+    res.jsonp(req.returnReportMonthly);
 };
 
 exports.exportByMonth = function (req, res, next) {
@@ -400,18 +405,11 @@ exports.exportByMonth = function (req, res, next) {
         var startdateText = (startdate.getUTCHours() + 7) + ':' + startdate.getUTCMinutes() + ':' + startdate.getUTCSeconds();
         var enddateText = (enddate.getUTCHours() + 7) + ':' + enddate.getUTCMinutes() + ':' + enddate.getUTCSeconds();
         var dateText = date.getDate() + '/' + (date.getMonth() + 1 > 9 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1)) + '/' + date.getFullYear();
-        var day = date.getDay();
-        var distance = getDistanceFromLatLonInKm(i.locationIn.lat, i.locationIn.lng, company.address.location.latitude, company.address.location.longitude);
-        var workhours = null;
-        var timelate = null;
-        if (i.dateTimeIn && i.dateTimeOut) {
-            workhours = workingHoursBetweenDates(i.dateTimeIn, i.dateTimeOut);
-        }
-        timelate = workingHoursBetweenDates(employeeprofile.shiftin, i.dateTimeIn);
+
         dataset.push({
             number: (index + 1),
             date: dateText,
-            day: days[day],
+            day: days[i.day],
             startdate: startdateText,
             enddate: enddateText,
             latitudein: i.locationIn.lat,
@@ -419,9 +417,9 @@ exports.exportByMonth = function (req, res, next) {
             latitudeout: i.locationOut.lat,
             longitudeout: i.locationOut.lng,
             type: i.type,
-            device: i.deviceID,
-            distance: distance,
-            timelate: timelate,
+            device: i.device,
+            distance: i.distance,
+            timelate: i.timelate,
             workinghours: workhours,
             remarkin: i.remark.timein,
             remarkout: i.remark.timeout
