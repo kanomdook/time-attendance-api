@@ -44,9 +44,6 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/reportmonthlies/:reportmonthlyId',
       permissions: ['get']
-    }, {
-      resources: '/api/reportmonthly/:date/:employeeid',
-      permissions: ['get']
     }]
   }]);
 };

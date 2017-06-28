@@ -5,14 +5,13 @@
         .module('reportdailies')
         .controller('ReportdailiesListController', ReportdailiesListController);
 
-    ReportdailiesListController.$inject = ['ReportdailiesService', 'ReportdailiesDayService'];
+    ReportdailiesListController.$inject = ['ReportdailiesDayService'];
 
-    function ReportdailiesListController(ReportdailiesService, ReportdailiesDayService) {
+    function ReportdailiesListController(ReportdailiesDayService) {
         var vm = this;
         vm.reportDate = new Date();
         vm.searchReport = searchReport;
-        // vm.exportReport = exportReport;
-        vm.reportdailies = ReportdailiesService.query();
+        // vm.reportdailies = ReportdailiesService.query();
         vm.reportData = null;
         vm.startCall = false;
 
@@ -36,9 +35,5 @@
                 vm.startCall = true;
             });
         }
-
-        // function exportReport(report) {
-        // ReportdailiesDayService.exportReportDailies(report);
-        // }
     }
 }());
