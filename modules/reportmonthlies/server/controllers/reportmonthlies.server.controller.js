@@ -391,9 +391,11 @@ exports.exportByMonth = function (req, res, next) {
 
     var dataset = [];
     var days = ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'];
+    console.log(req.reportbyemployee.length);
     req.reportbyemployee.forEach(function (i, index) {
-        console.log(i);
-        var startdate = new Date(i.datetimein);
+        console.log(startdate);
+        console.log(datetimeout);    
+        var startdate = new Date(i.datetimein);    
         var enddate = new Date(i.datetimeout);
         var date = new Date(i.created);
         var startdateText = (startdate.getUTCHours() + 7) + ':' + startdate.getUTCMinutes() + ':' + startdate.getUTCSeconds();
@@ -426,7 +428,7 @@ exports.exportByMonth = function (req, res, next) {
 
     var report = excel.buildExport(
         [{
-            name: 'รายเดือน', // <- Specify sheet name (optional) 
+            name: 'Report', // <- Specify sheet name (optional) 
             heading: heading, // <- Raw heading array (optional) 
             merges: merges, // <- Merge cell ranges 
             specification: specification, // <- Report specification 
@@ -439,6 +441,6 @@ exports.exportByMonth = function (req, res, next) {
 };
 
 exports.exportExcel = function (req, res, next) {
-    res.attachment('reportdaily' + (req.firstDay.getMonth() + 1 > 9 ? req.firstDay.getMonth() + 1 : '0' + (req.firstDay.getMonth() + 1)) + '-' + req.firstDay.getFullYear() + '.xlsx'); // This is sails.js specific (in general you need to set headers) 
+    res.attachment('reportmonthly' + (req.firstDay.getMonth() + 1 > 9 ? req.firstDay.getMonth() + 1 : '0' + (req.firstDay.getMonth() + 1)) + '-' + req.firstDay.getFullYear() + '.xlsx'); // This is sails.js specific (in general you need to set headers) 
     return res.send(req.export);
 };
