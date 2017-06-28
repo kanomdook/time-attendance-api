@@ -11,6 +11,7 @@
         var vm = this;
         // vm.reportmonthlies = ReportmonthliesService.query();
         vm.employeeprofiles = EmployeeprofilesService.query();
+        vm.selectemployee = {};
         vm.reportDate = new Date();
         vm.reportData = null;
         vm.startCall = false;
