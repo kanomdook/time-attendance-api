@@ -161,6 +161,9 @@ exports.listByCompany = function(req, res) {
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
+            employeeprofiles.forEach(function(i, index) {
+                i.displayName = i.firstname + ' ' + i.lastname;
+            });
             res.jsonp(employeeprofiles);
         }
     });
