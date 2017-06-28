@@ -162,7 +162,8 @@ exports.listByCompany = function(req, res) {
             });
         }
         employeeprofiles.forEach(function(i, index) {
-            i.displayName = i.firstname + ' ' + i.lastname;
+            var displayName = i.firstname + ' ' + i.lastname;
+            i.displayName = displayName;
             console.log(i.displayName);
         });
         res.jsonp(employeeprofiles);
