@@ -11,9 +11,11 @@
         var vm = this;
         // vm.reportmonthlies = ReportmonthliesService.query();
         vm.reportDate = new Date();
-        vm.searchReport = searchReport;
         vm.reportData = null;
         vm.startCall = false;
+        vm.searchReport = searchReport;
+        vm.getDay = getDay;
+        vm.days = ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'];
 
         function searchReport(reportDate) {
             vm.reportData = null;
@@ -34,6 +36,10 @@
                 console.error(error);
                 vm.startCall = true;
             });
+        }
+
+        function getDay(day) {
+            return vm.days[day];
         }
     }
 }());

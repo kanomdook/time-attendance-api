@@ -54,8 +54,8 @@
                 <tbody>
                     <tr class="gradeA" ng-repeat="item in vm.reportData.data" role="row">
                         <td class="text-right">{{$index + 1}}</td>
-                        <td>{{item.date}}</td>
-                        <td>{{item.day}}</td>
+                        <td>{{item.date | date :'dd/MM/yyyy'}}</td>
+                        <td>{{vm.getDay(item.day)}}</td>
                         <td class="text-center">{{item.datetimein | date :'HH:mm:ss'}}</td>
                         <td class="text-center">{{item.datetimeout| date :'HH:mm:ss'}}</td>
                         <td class="text-center">{{item.type}}</td>
