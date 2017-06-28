@@ -16,6 +16,46 @@ var path = require('path'),
 /**
  * Create a Reportmonthly
  */
+
+
+
+function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+    var R = 6371; // Radius of the earth in km
+    var dLat = deg2rad(lat2 - lat1); // deg2rad below
+    var dLon = deg2rad(lon2 - lon1);
+    var a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c; // Distance in km
+    return d;
+}
+
+function deg2rad(deg) {
+    return deg * (Math.PI / 180);
+}
+// get hours
+function workingHoursBetweenDates(startDateTime, endDateTime) {
+    var start = new Date(startDateTime).getHours() + ":" + new Date(startDateTime).getMinutes();
+    var end = new Date(endDateTime).getHours() + ":" + new Date(endDateTime).getMinutes();
+    start = start.split(":");
+    end = end.split(":");
+    var startDate = new Date(0, 0, 0, start[0], start[1], 0);
+    var endDate = new Date(0, 0, 0, end[0], end[1], 0);
+    var diff = endDate.getTime() - startDate.getTime();
+    var hours = Math.floor(diff / 1000 / 60 / 60);
+    diff -= hours * 1000 * 60 * 60;
+    var minutes = Math.floor(diff / 1000 / 60);
+
+    // If using time pickers with 24 hours format, add the below line get exact hours
+    if (hours < 0)
+        hours = hours + 24;
+
+    return (hours <= 9 ? "0" : "") + hours + ":" + (minutes <= 9 ? "0" : "") + minutes;
+}
+
+
 exports.create = function (req, res) {
     var reportmonthly = new Reportmonthly(req.body);
     reportmonthly.user = req.user;
@@ -223,46 +263,10 @@ exports.reportmonthly = function (req, res, next) {
     });
 };
 
-function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
-    var R = 6371; // Radius of the earth in km
-    var dLat = deg2rad(lat2 - lat1); // deg2rad below
-    var dLon = deg2rad(lon2 - lon1);
-    var a =
-        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-        Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    var d = R * c; // Distance in km
-    return d;
-}
-
-function deg2rad(deg) {
-    return deg * (Math.PI / 180);
-}
-// get hours
-function workingHoursBetweenDates(startDateTime, endDateTime) {
-    var start = new Date(startDateTime).getHours() + ":" + new Date(startDateTime).getMinutes();
-    var end = new Date(endDateTime).getHours() + ":" + new Date(endDateTime).getMinutes();
-    start = start.split(":");
-    end = end.split(":");
-    var startDate = new Date(0, 0, 0, start[0], start[1], 0);
-    var endDate = new Date(0, 0, 0, end[0], end[1], 0);
-    var diff = endDate.getTime() - startDate.getTime();
-    var hours = Math.floor(diff / 1000 / 60 / 60);
-    diff -= hours * 1000 * 60 * 60;
-    var minutes = Math.floor(diff / 1000 / 60);
-
-    // If using time pickers with 24 hours format, add the below line get exact hours
-    if (hours < 0)
-        hours = hours + 24;
-
-    return (hours <= 9 ? "0" : "") + hours + ":" + (minutes <= 9 ? "0" : "") + minutes;
-}
-
 exports.exportByMonth = function (req, res, next) {
     var firstDay = req.firstDay.getDate() + '/' + (req.firstDay.getMonth() + 1 > 9 ? req.firstDay.getMonth() + 1 : '0' + (req.firstDay.getMonth() + 1)) + '/' + req.firstDay.getFullYear();
     var lastDay = req.lastDay.getDate() + '/' + (req.lastDay.getMonth() + 1 > 9 ? req.lastDay.getMonth() + 1 : '0' + (req.lastDay.getMonth() + 1)) + '/' + req.lastDay.getFullYear();
-    console.log(firstDay + ' : ' + lastDay);
+    // console.log(firstDay + ' : ' + lastDay);
     // console.log(req.reportbyemployee);
     var styles = {
         headerDark: {
@@ -299,7 +303,7 @@ exports.exportByMonth = function (req, res, next) {
 
     var heading = [
         [{ value: 'รายงานการมาทำงานของพนักงาน (รายเดือน)', style: styles.headerDark }], // <-- It can be only values 
-        ['รหัสพนักงาน ' + req.reportbyemployee[0].user.employeeprofile.employeeid + '', req.reportbyemployee[0].user.employeeprofile.displayname, ' วันที่ ' + firstDay + '-', lastDay]
+        ['รหัสพนักงาน ' + req.reportbyemployee[0].user.employeeprofile.employeeid + '', '' + req.reportbyemployee[0].user.employeeprofile.firstname + ' ' + req.reportbyemployee[0].user.employeeprofile.lastname + '', ' วันที่ ' + firstDay + '-', lastDay]
     ];
 
     var specification = {
@@ -388,6 +392,7 @@ exports.exportByMonth = function (req, res, next) {
     var dataset = [];
     var days = ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'];
     req.reportbyemployee.forEach(function (i, index) {
+        console.log(i);
         var startdate = new Date(i.datetimein);
         var enddate = new Date(i.datetimeout);
         var date = new Date(i.create);
