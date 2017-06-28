@@ -167,6 +167,7 @@ exports.listByCompany = function(req, res) {
             i.display = display;
             console.log(i.displayName);
         });
+        console.log('jsonp');
         res.jsonp(employeeprofiles);
     });
 };
