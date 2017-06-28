@@ -397,7 +397,7 @@ exports.exportByMonth = function (req, res, next) {
     var dataset = [];
     var days = ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'];
     // console.log(req.returnReportMonthly.length);
-    req.returnReportMonthly.forEach(function (i, index) {
+    req.returnReportMonthly.data.forEach(function (i, index) {
         // console.log("------------", i);
         var startdate = new Date(i.dateTimeIn);
         var enddate = new Date(i.dateTimeOut);
