@@ -24,6 +24,9 @@ var EmployeeprofileSchema = new Schema({
     lastname: {
         type: String,
     },
+    displayname: {
+        type: String,
+    },
     company: {
         type: Schema.ObjectId,
         ref: 'Company'
