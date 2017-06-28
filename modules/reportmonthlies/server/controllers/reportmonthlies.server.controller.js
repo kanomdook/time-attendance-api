@@ -187,6 +187,7 @@ exports.reportmonthly = function (req, res, next) {
             workhours = workingHoursBetweenDates(i.dateTimeIn, i.dateTimeOut);
           } else if (i.dateTimeIn) {
             timelate = workingHoursBetweenDates(employeeprofile.shiftin, i.dateTimeIn);
+            console.log(timelate + ":" + employeeprofile.shiftin + " " +i.dateTimeIn);
           }
           reportMonthlyData.push({
             date: i.created,
@@ -243,7 +244,6 @@ function deg2rad(deg) {
 function workingHoursBetweenDates(startDateTime, endDateTime) {
   var start = new Date(startDateTime).getHours() + ":" + new Date(startDateTime).getMinutes();
   var end = new Date(endDateTime).getHours() + ":" + new Date(endDateTime).getMinutes();
-  console.log(start + "/" + end);
   start = start.split(":");
   end = end.split(":");
   var startDate = new Date(0, 0, 0, start[0], start[1], 0);
