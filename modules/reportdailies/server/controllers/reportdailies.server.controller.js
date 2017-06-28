@@ -173,7 +173,7 @@ exports.reportdailyByDate = function (req, res, next, reportdate) {
                         var timelate = null;
                         if (i.dateTimeIn && i.dateTimeOut) {
                             workhours = workingHoursBetweenDates(i.dateTimeIn, i.dateTimeOut);
-                        } 
+                        }
                         timelate = workingHoursBetweenDates(i.user.employeeprofile.shiftin, i.dateTimeIn);
                         reportDailyData.push({
                             employeeid: i.user.employeeprofile.employeeid,
@@ -351,7 +351,10 @@ exports.exportByDate = function (req, res, next) {
         var startdate = new Date(i.datetimein);
         var enddate = new Date(i.datetimeout);
         var startdateText = (startdate.getUTCHours() + 7) + ':' + startdate.getUTCMinutes() + ':' + startdate.getUTCSeconds();
-        var enddateText = (enddate.getUTCHours() + 7) + ':' + enddate.getUTCMinutes() + ':' + enddate.getUTCSeconds();
+        var enddateText = '';
+        if (i.datetimeout) {
+            enddateText = (enddate.getUTCHours() + 7) + ':' + enddate.getUTCMinutes() + ':' + enddate.getUTCSeconds();
+        }
         dataset.push({
             number: (index + 1),
             employeeid: i.employeeid,

@@ -402,7 +402,10 @@ exports.exportByMonth = function (req, res, next) {
         var startdate = new Date(i.datetimein);
         var enddate = new Date(i.datetimeout);
         var startdateText = (startdate.getUTCHours() + 7) + ':' + startdate.getUTCMinutes() + ':' + startdate.getUTCSeconds();
-        var enddateText = (enddate.getUTCHours() + 7) + ':' + enddate.getUTCMinutes() + ':' + enddate.getUTCSeconds();
+        var enddateText = '';
+        if (i.datetimeout) {
+            enddateText = (enddate.getUTCHours() + 7) + ':' + enddate.getUTCMinutes() + ':' + enddate.getUTCSeconds();
+        }
         var dateText = startdate.getDate() + '/' + (startdate.getMonth() + 1 > 9 ? startdate.getMonth() + 1 : '0' + (startdate.getMonth() + 1)) + '/' + startdate.getFullYear();
 
         dataset.push({
@@ -427,7 +430,7 @@ exports.exportByMonth = function (req, res, next) {
 
     var merges = [
         { start: { row: 1, column: 1 }, end: { row: 1, column: 17 } },
-        { start: { row: 2, column: 1 }, end: { row: 2, column: 17 } }        
+        { start: { row: 2, column: 1 }, end: { row: 2, column: 17 } }
     ];
 
     var report = excel.buildExport(
