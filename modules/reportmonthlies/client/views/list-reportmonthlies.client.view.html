@@ -16,10 +16,10 @@
             <div class="col-sm-4 col-md-4">
                 <div class="form-group">
                     <select class="form-control m-b" id="employee" name="employee" ng-model="vm.selectemployee" ng-change="vm.selected(vm.selectemployee)" required>
-                        <option value="" selected>
+                        <option ng-value="" selected>
                             เลือกพนักงาน
                         </option>
-                        <option value="item" ng-repeat="item in vm.employeeprofiles">
+                        <option ng-value="item" ng-repeat="item in vm.employeeprofiles">
                             {{item.displayname}}
                         </option>
                     </select>
