@@ -178,13 +178,83 @@ exports.reportmonthly = function (req, res, next) {
             message: 'No Employeeprofile with that identifier has been found'
           });
         }
+        var reportMonthlyData = [];
+        reportbyemployee.forEach(function (i, index) {
+          var distance = getDistanceFromLatLonInKm(i.locationIn.lat, i.locationIn.lng, company.address.location.latitude, company.address.location.longitude);
+          var workhours = null;
+          var timelate = null;
+          if (i.dateTimeIn && i.dateTimeOut) {
+            workhours = workingHoursBetweenDates(i.dateTimeIn, i.dateTimeOut);
+          } else if (i.dateTimeIn) {
+            timelate = workingHoursBetweenDates(i.user.employeeprofile.shiftin, i.dateTimeIn);
+          }
+          reportMonthlyData.push({
+            date: i.created,
+            day: new Date(i.created).getDay(),
+            timein: i.dateTimeIn,
+            timeout: i.dateTimeOut,
+            timelate: timelate,
+            workinghours: workhours,
+            locationIn: {
+              lat: i.locationIn.lat,
+              lng: i.locationIn.lng
+            },
+            locationOut: {
+              lat: i.locationOut.lat,
+              lng: i.locationOut.lng
+            },
+            type: i.type,
+            device: i.user.deviceID,
+            distance: distance.toFixed(2),
+            remark: {
+              timein: i.remark.in,
+              timeout: i.remark.out
+            }
+          });
+        });
         returnReportMonthly.company = company;
         returnReportMonthly.employeeprofile = employeeprofile;
         returnReportMonthly.firstDay = req.firstDay;
         returnReportMonthly.lastDay = req.lastDay;
-        returnReportMonthly.reportbyemployee = reportbyemployee;
+        returnReportMonthly.data = reportbyemployee;
         res.jsonp(returnReportMonthly);
       });
     }
   });
 };
+
+function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2 - lat1); // deg2rad below
+  var dLon = deg2rad(lon2 - lon1);
+  var a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  var d = R * c; // Distance in km
+  return d;
+}
+
+function deg2rad(deg) {
+  return deg * (Math.PI / 180);
+}
+// get hours
+function workingHoursBetweenDates(startDateTime, endDateTime) {
+  var start = new Date(startDateTime).getHours() + ":" + new Date(startDateTime).getMinutes();
+  var end = new Date(endDateTime).getHours() + ":" + new Date(endDateTime).getMinutes();
+  start = start.split(":");
+  end = end.split(":");
+  var startDate = new Date(0, 0, 0, start[0], start[1], 0);
+  var endDate = new Date(0, 0, 0, end[0], end[1], 0);
+  var diff = endDate.getTime() - startDate.getTime();
+  var hours = Math.floor(diff / 1000 / 60 / 60);
+  diff -= hours * 1000 * 60 * 60;
+  var minutes = Math.floor(diff / 1000 / 60);
+
+  // If using time pickers with 24 hours format, add the below line get exact hours
+  if (hours < 0)
+    hours = hours + 24;
+
+  return (hours <= 9 ? "0" : "") + hours + ":" + (minutes <= 9 ? "0" : "") + minutes;
+}
