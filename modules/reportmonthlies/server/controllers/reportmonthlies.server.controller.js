@@ -216,7 +216,7 @@ exports.reportmonthly = function (req, res, next) {
         returnReportMonthly.employeeprofile = employeeprofile;
         returnReportMonthly.firstDay = req.firstDay;
         returnReportMonthly.lastDay = req.lastDay;
-        returnReportMonthly.data = reportbyemployee;
+        returnReportMonthly.data = reportMonthlyData;
         res.jsonp(returnReportMonthly);
       });
     }
