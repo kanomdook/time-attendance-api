@@ -10,7 +10,8 @@ var path = require('path'),
     Company = mongoose.model('Company'),
     Employeeprofile = mongoose.model('Employeeprofile'),
     errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
-    _ = require('lodash');
+    _ = require('lodash'),
+    excel = require('node-excel-export');
 
 /**
  * Create a Reportmonthly
