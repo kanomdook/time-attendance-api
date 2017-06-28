@@ -173,6 +173,7 @@ exports.reportdailyByDate = function (req, res, next, reportdate) {
                         var timelate = null;
                         if (i.dateTimeIn && i.dateTimeOut) {
                             workhours = workingHoursBetweenDates(i.dateTimeIn, i.dateTimeOut);
+                        } else if (i.dateTimeIn){
                             timelate = workingHoursBetweenDates(i.user.employeeprofile.shiftin, i.dateTimeIn);
                         }
                         reportDailyData.push({
@@ -417,9 +418,9 @@ function deg2rad(deg) {
     return deg * (Math.PI / 180);
 }
 // get hours
-function workingHoursBetweenDates(startDate, endDate) {
-    var start = new Date(startDate).getHours() + ":" + new Date(startDate).getMinutes();
-    var end = new Date(endDate).getHours() + ":" + new Date(endDate).getMinutes();
+function workingHoursBetweenDates(startDateTime, endDateTime) {
+    var start = new Date(startDateTime).getHours() + ":" + new Date(startDateTime).getMinutes();
+    var end = new Date(endDateTime).getHours() + ":" + new Date(endDateTime).getMinutes();
     start = start.split(":");
     end = end.split(":");
     var startDate = new Date(0, 0, 0, start[0], start[1], 0);
