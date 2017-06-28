@@ -259,9 +259,9 @@ function workingHoursBetweenDates(startDateTime, endDateTime) {
 }
 
 exports.exportByMonth = function(req, res, next) {
-    // console.dir(req._reportdaily);
-    req.reportbyemployee.date = req.reportbyemployee.date.split(':')[1];
-    var date = req._reportdaily.date.split('-')[2] + '/' + req._reportdaily.date.split('-')[1] + '/' + req._reportdaily.date.split('-')[0];
+    var firstDay = req.firstDay.getDate() + '/' + req.firstDay.getMonth() + '/' + req.firstDay.getFullYear();
+    var lastDay = req.lastDay.getDate() + '/' + req.lastDay.getMonth() + '/' + req.lastDay.getFullYear();
+    console.log(firstDay + ' : ' + lastDay);
     var styles = {
         headerDark: {
             fill: {
