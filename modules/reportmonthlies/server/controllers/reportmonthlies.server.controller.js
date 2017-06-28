@@ -190,8 +190,8 @@ exports.reportmonthly = function (req, res, next) {
           reportMonthlyData.push({
             date: i.created,
             day: new Date(i.created).getDay(),
-            timein: i.dateTimeIn,
-            timeout: i.dateTimeOut,
+            datetimein: i.dateTimeIn,
+            datetimeout: i.dateTimeOut,
             timelate: timelate,
             workinghours: workhours,
             locationIn: {

@@ -17,7 +17,7 @@
             </div>
             <div class="col-sm-4 col-md-4">
                 <div class="form-group">
-                    <input class="form-control" id="search" name="search" ng-model="vm.reportDate" type="date" placeholder="ค้นหา" format="MM/yyyy">
+                    <input class="form-control" id="date" name="date" ng-model="vm.reportDate" type="date" placeholder="ค้นหา">
                 </div>
             </div>
             <div class="col-sm-4 col-md-3">
@@ -31,13 +31,11 @@
         <p>ไม่มีข้อมูลรายงาน</p>
     </div>
     <div class ng-if="vm.reportData.data.length > 0">
-        <div class="ibox-title">
-            <h5>
-                รหัสพนักงาน {{vm.reportData.employeeprofile.employeeid}}
-                ชื่อ {{vm.reportData.employeeprofile.firstname}} {{vm.reportData.employeeprofile.lastname}}
-            </h5>
-        </div>
         <div class="contact-box table-responsive">
+            <h5>
+                <b>รหัสพนักงาน </b> {{vm.reportData.employeeprofile.employeeid}}
+                <b>ชื่อ</b> {{vm.reportData.employeeprofile.firstname}} {{vm.reportData.employeeprofile.lastname}}
+            </h5>
             <table class="table table-striped table-bordered table-hover dataTables-example ng-isolate-scope dataTable" id="DataTables_Table_2" role="grid" aria-describedby="DataTables_Table_2_info" datatable dt-options="dtOptions">
                 <thead>
                     <tr role="row">
