@@ -15,12 +15,6 @@
         vm.reportData = null;
         vm.startCall = false;
 
-        $("#date").datepicker({
-            format: " yyyy", // Notice the Extra space at the beginning
-            viewMode: "years",
-            minViewMode: "years"
-        });
-
         function searchReport(reportDate) {
             vm.reportData = null;
             var date = new Date(reportDate).getDate();
