@@ -170,7 +170,7 @@ exports.reportmonthly = function (req, res, next) {
       });
     } else {
 
-      Employeeprofile.findById(req.employeeid).populate('user', 'displayName').populate('company').exec(function (err, employeeprofile) {
+      Employeeprofile.findById(req.employeeid).populate('user', 'displayName').exec(function (err, employeeprofile) {
         if (err) {
           return next(err);
         } else if (!employeeprofile) {
