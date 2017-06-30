@@ -28,8 +28,8 @@
     }
 
     function approve() {
-      vm.leave.leaveStatus = 'Approve';
-      console.log(vm.leave.leaveStatus);
+      vm.leave.approveStatus = 'Approve';
+      console.log(vm.leave.approveStatus);
       $http.put('/api/leaves/'+vm.leave._id, vm.leave).success(function (res) {
         // $window.location.href = '/leaves';
         $state.go('leaves.list');
@@ -39,8 +39,8 @@
     }
 
     function reject() {
-      vm.leave.leaveStatus = 'Reject';
-      console.log(vm.leave.leaveStatus);
+      vm.leave.approveStatus = 'Reject';
+      console.log(vm.leave.approveStatus);
       $http.put('/api/leaves/'+vm.leave._id, vm.leave).success(function (res) {
         // $window.location.href = '/leaves';
         $state.go('leaves.list');        
