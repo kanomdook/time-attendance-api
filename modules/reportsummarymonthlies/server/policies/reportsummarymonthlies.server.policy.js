@@ -20,6 +20,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/reportsummarymonthlies/:reportsummarymonthlyId',
       permissions: '*'
+    },{
+      resources: '/api/reportsummarymonthly/:startdate/:enddate',
+      permissions: '*'
     }]
   }, {
     roles: ['user'],
@@ -29,6 +32,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/reportsummarymonthlies/:reportsummarymonthlyId',
       permissions: ['get']
+    },{
+      resources: '/api/reportsummarymonthly/:startdate/:enddate',
+      permissions: '*'
     }]
   }, {
     roles: ['guest'],
@@ -38,6 +44,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/reportsummarymonthlies/:reportsummarymonthlyId',
       permissions: ['get']
+    },{
+      resources: '/api/reportsummarymonthly/:startdate/:enddate',
+      permissions: '*'
     }]
   }]);
 };

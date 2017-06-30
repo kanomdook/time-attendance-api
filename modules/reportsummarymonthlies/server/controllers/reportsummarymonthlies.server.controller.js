@@ -115,3 +115,24 @@ exports.reportsummarymonthlyByID = function(req, res, next, id) {
     next();
   });
 };
+
+exports.reportStarDate = function (req, res, next,startdate) {
+  req.startdate = startdate;
+  next();
+};
+
+exports.reportEndDate = function (req, res, next,enddate) {
+  req.enddate = enddate;
+  next();
+};
+
+exports.reportsummarymonthlyByDate = function (req, res, next) {
+  
+  next();
+};
+
+exports.sendReport = function (req, res, next) {
+  
+  res.json(req.enddate);
+};
+

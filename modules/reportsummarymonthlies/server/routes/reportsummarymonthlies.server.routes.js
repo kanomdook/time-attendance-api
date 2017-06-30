@@ -6,7 +6,7 @@
 var reportsummarymonthliesPolicy = require('../policies/reportsummarymonthlies.server.policy'),
   reportsummarymonthlies = require('../controllers/reportsummarymonthlies.server.controller');
 
-module.exports = function(app) {
+module.exports = function (app) {
   // Reportsummarymonthlies Routes
   app.route('/api/reportsummarymonthlies').all(reportsummarymonthliesPolicy.isAllowed)
     .get(reportsummarymonthlies.list)
@@ -17,6 +17,13 @@ module.exports = function(app) {
     .put(reportsummarymonthlies.update)
     .delete(reportsummarymonthlies.delete);
 
+  // 
+  app.route('/api/reportsummarymonthly/:startdate/:enddate').all(reportsummarymonthliesPolicy.isAllowed)
+    .get(reportsummarymonthlies.reportsummarymonthlyByDate,reportsummarymonthlies.sendReport);
+
   // Finish by binding the Reportsummarymonthly middleware
+  app.param('startdate', reportsummarymonthlies.reportStarDate);
+  app.param('enddate', reportsummarymonthlies.reportEndDate);
+
   app.param('reportsummarymonthlyId', reportsummarymonthlies.reportsummarymonthlyByID);
 };

@@ -4,7 +4,8 @@
 
   angular
     .module('reportsummarymonthlies')
-    .factory('ReportsummarymonthliesService', ReportsummarymonthliesService);
+    .factory('ReportsummarymonthliesService', ReportsummarymonthliesService)
+    .service('ReportSummaryMonthlyService', ReportSummaryMonthlyService);
 
   ReportsummarymonthliesService.$inject = ['$resource'];
 
@@ -17,4 +18,20 @@
       }
     });
   }
+
+  ReportSummaryMonthlyService.$inject = ['$http', '$q'];
+
+  function ReportSummaryMonthlyService($http, $q) {
+    this.getReportSummaryMonthlies = function (inputDateStrat, inputDateEnd) {
+      var deferred = $q.defer();
+
+      $http.get('/api/reportsummarymonthly/' + inputDateStrat + '/' + inputDateEnd).success(function (report) {
+        deferred.resolve(report);
+      }).error(function (error) {
+        deferred.reject(error);
+      });
+      return deferred.promise;
+    };
+  }
+
 }());
