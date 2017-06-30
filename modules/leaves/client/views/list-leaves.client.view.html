@@ -64,7 +64,7 @@
           <td style="text-align: center"><span ng-if="!leave.leaveHalf">{{leave.leaveDay}} วัน</span><span ng-if="leave.leaveHalf">{{leave.leaveTime}} ชม.</span></td>
           <td class="text-navy" ng-if="leave.approveStatus == 'Approve'" style="text-align: center">{{leave.approveStatus}}</td>
           <td class="text-danger" ng-if="leave.approveStatus == 'Reject'" style="text-align: center">{{leave.approveStatus}}</td>
-          <td ng-if="leave.leaveStatus == 'Request'" style="color:#f7ac59;text-align: center;">{{leave.leaveStatus}}</td>
+          <td ng-if="leave.approveStatus == 'Waiting'" style="color:#f7ac59;text-align: center;">{{leave.approveStatus}}</td>
 
           <!--<td ng-if="vm.checkins.length < 0">ไม่มีข้อมูล</td>          -->
         </tr>
