@@ -47,18 +47,18 @@
                     <tbody>
                         <tr>
                             <td>
-                                จำนวนวันทำงานทั้งหมด <strong>142</strong>
+                                จำนวนวันทำงานทั้งหมด <strong>{{vm.checkins.length}}</strong>
                             </td>
                             <td>
-                                จำนวนวันทำงานภายในเดือน <strong>15</strong>
+                                จำนวนวันทำงานภายในเดือน <strong>{{vm.checkins.length}}</strong>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                จำนวนวันที่ลาทั้งหมด <strong>30</strong>
+                                จำนวนวันที่ลาทั้งหมด <strong>{{vm.leaves.length}}</strong>
                             </td>
                             <td>
-                                จำนวนวันที่ลาภายในเดือน <strong>2</strong>
+                                จำนวนวันที่ลาภายในเดือน <strong>{{vm.leaves.length}}</strong>
                             </td>
                         </tr>
                     </tbody>
@@ -133,13 +133,13 @@
                                                     <td>
                                                        {{leave.leaveDetail}}
                                                     </td>
-                                                    <td class="no-borders" ng-if="leave.leaveStatus !== 'Request'">
-                                                        <i class="fa fa-check text-navy" ng-if="leave.leaveStatus === 'Approve'"></i>
-                                                        <i class="fa fa-times text-danger" ng-if="leave.leaveStatus === 'Reject'"></i>
+                                                    <td class="no-borders" ng-if="leave.approveStatus != 'Waiting'">
+                                                        <i class="fa fa-check text-navy" ng-if="leave.approveStatus == 'Approve'"> Approve</i>
+                                                        <i class="fa fa-close text-danger" ng-if="leave.approveStatus == 'Reject'"> Reject</i>
                                                     </td>
-                                                    <td ng-if="leave.leaveStatus === 'Request'">
-                                                        <button class="btn btn-xs btn-primary" ng-click="vm.updateLeace(leave,'Approve')" ng-if="leave.leaveStatus === 'Request'">Approve</button>
-                                                        <button class="btn btn-xs btn-danger" ng-click="vm.updateLeace(leave,'Reject')" ng-if="leave.leaveStatus === 'Request'">Reject </button>
+                                                    <td ng-if="leave.approveStatus == 'Waiting'">
+                                                        <button class="btn btn-xs btn-primary" ng-click="vm.updateLeace(leave,'Approve')">Approve</button>
+                                                        <button class="btn btn-xs btn-danger" ng-click="vm.updateLeace(leave,'Reject')">Reject</button>
                                                     </td>
                                                 </tr>
                                             </tbody>

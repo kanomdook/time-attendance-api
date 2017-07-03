@@ -179,25 +179,20 @@
 
         function initView() {
             var newDate = new Date().getFullYear() + '' + (new Date().getMonth() + 1);
-            console.warn(newDate);
             EmployeeService.getChenckinByMonth(newDate, vm.employeeprofile._id).then(function (checkins) {
                 vm.checkins = checkins;
-                console.log(vm.checkins);
             }, function (error) {
-                console.error(error);
             });
 
             EmployeeService.getleaveByUser(vm.employeeprofile._id).then(function (leaves) {
                 vm.leaves = leaves;
-                console.log(vm.leaves);
             }, function (error) {
-                console.error(error);
             });
         }
 
         function updateLeace(item, status) {
             if ($window.confirm('คุณต้องการ ' + status + '?')) {
-                item.leaveStatus = status;
+                item.approveStatus = status;
                 EmployeeService.updateLeaveStatus(item).then(function (leave) {
                     item = leave;
                 }, function (error) {
