@@ -13,12 +13,20 @@
 
     vm.authentication = Authentication;
     vm.leave = leave;
+    console.log(vm.leave);
     vm.error = null;
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
     vm.approve = approve;
     vm.reject = reject;
+
+    $scope.initViewCard = function(){
+      $http.get('/api/employeeprofiles/'+vm.leave.user.employeeprofile).success(function (employeeprofile) {
+        vm.employeeprofile = employeeprofile;
+      }).error(function (error) {
+      });
+    };
 
     // Remove existing Leave
     function remove() {
