@@ -37,6 +37,30 @@
         }
       };
     }
+
+    $scope.initView = function(){
+      $http.get('/api/employee/company',{company:vm.company._id}).success(function (employee) {
+        vm.employee = employee;
+        vm.emppersen = (vm.employee.length / 15) * 100;
+        vm.emppersenStyle = `width:${vm.emppersen}%`;
+      }).error(function (error) {
+      });
+
+      $http.get('/api/checkin/company').success(function (checkin) {
+        vm.checkin = checkin;
+        vm.checkinPersen = (vm.checkin.length / 3000) * 100;
+        vm.checkinPersenStyle = `width:${vm.checkinPersen}%`;
+      }).error(function (error) {
+      });
+
+      $http.get('/api/leave/company').success(function (leave) {
+        vm.leave = leave;
+        vm.leavePersen = (vm.leave.length / 3000) * 100;
+        vm.leavePersenStyle = `width:${vm.leavePersen}%`;
+      }).error(function (error) {
+      });
+    };
+    
     function init() {
       $http.get('json/postcode.json').success(function (response) {
         $scope.postcode = response.postcodeData;

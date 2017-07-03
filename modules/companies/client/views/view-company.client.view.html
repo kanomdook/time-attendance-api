@@ -1,4 +1,4 @@
-<section>
+<section ng-init="initView()">
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-9">
             <br>
@@ -36,17 +36,17 @@
                             <hr>
                             <div class="row m-t-lg">
                                 <div class="col-md-12">
-                                    <i class="fa fa-users"></i> &nbsp; พนักงานทั้งหมด <strong> 10</strong>
+                                    <i class="fa fa-users"></i> &nbsp; พนักงานทั้งหมด <strong> {{vm.employee.length}} คน</strong>
                                     <br>
                                     <br>
                                 </div>
                                 <div class="col-md-12">
-                                    <i class="fa fa-clock-o"></i> &nbsp; การลงชื่อเข้างาน <strong>570</strong>
+                                    <i class="fa fa-clock-o"></i> &nbsp; การลงชื่อเข้างาน <strong>{{vm.checkin.length}} ครั้ง</strong>
                                     <br>
                                     <br>
                                 </div>
                                 <div class="col-md-12">
-                                    <i class="fa fa-file-text-o"></i> &nbsp; การลาทั้งหมด <strong>50</strong>
+                                    <i class="fa fa-file-text-o"></i> &nbsp; การลาทั้งหมด <strong>{{vm.leave.length}} ครั้ง</strong>
                                     <br>
                                     <br>
                                 </div>
@@ -74,11 +74,11 @@
                 <div class="ibox">
                     <div class="ibox-content">
                         <h5>พนักงานทั้งหมด</h5>
-                        <h2>10/15</h2>
+                        <h2>{{vm.employee.length}}/15</h2>
                         <div class="text-center">
                             <div class="progress">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" style="width:80%">
-                                    80% (ที่ใช้งาน)
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{vm.emppersen}}" style="{{vm.emppersenStyle}}">
+                                    {{vm.emppersen | number : 2}}%
                                 </div>
                             </div>
                         </div>
@@ -87,11 +87,11 @@
                 <div class="ibox">
                     <div class="ibox-content">
                         <h5>การลงชื่อเข้างาน</h5>
-                        <h2>570/3000</h2>
+                        <h2>{{vm.checkin.length}}/3000</h2>
                         <div class="text-center">
                             <div class="progress">
-                                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" style="width:40%">
-                                    40% (ที่ใช้งาน)
+                                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{vm.checkinPersen}}" style="{{vm.checkinPersenStyle}}">
+                                    {{vm.checkinPersen | number : 2}}%
                                 </div>
                             </div>
                         </div>
@@ -100,11 +100,11 @@
                 <div class="ibox">
                     <div class="ibox-content">
                         <h5>การลาทั้งหมด</h5>
-                        <h2>50/500</h2>
+                        <h2>{{vm.leave.length}}/500</h2>
                         <div class="text-center">
                             <div class="progress">
-                                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" style="width:25%">
-                                    25% (ที่ใช้งาน)
+                                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{vm.leavePersen}}" style="{{vm.leavePersenStyle}}">
+                                    {{vm.leavePersen | number : 2}}%
                                 </div>
                             </div>
                         </div>
