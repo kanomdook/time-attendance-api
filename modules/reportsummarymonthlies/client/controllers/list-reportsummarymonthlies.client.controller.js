@@ -35,8 +35,12 @@
       var year_end = new Date(endDate).getFullYear();
       var inputDateEnd = year_end + "-" + ((month_end) < 10 ? "0" + month_end : month_end) + "-" + (date_end < 10 ? "0" + date_end : date_end);
 
+      vm.inputDateStart = inputDateStart;
+      vm.inputDateEnd = inputDateEnd;
+
       ReportSummaryMonthlyService.getReportSummaryMonthlies(inputDateStart,inputDateEnd).then(function (report) {
-        console.log(report);
+        vm.report = report;
+        console.log(vm.report);
         vm.startCall = false;
       }, function (error) {
         console.error(error);

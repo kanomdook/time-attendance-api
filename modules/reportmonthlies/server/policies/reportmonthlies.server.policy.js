@@ -34,13 +34,13 @@ exports.invokeRolesPolicies = function() {
             permissions: ['get', 'post']
         }, {
             resources: '/api/reportmonthlies/:reportmonthlyId',
-            permissions: ['get']
+            permissions: ['*']
         }, {
             resources: '/api/reportmonthly/:date/:employeeid',
-            permissions: ['get']
+            permissions: ['*']
         }, {
             resources: '/api/reportmonthly/export/excel/:date/:employeeid',
-            permissions: ['get']
+            permissions: ['*']
         }]
     }, {
         roles: ['guest'],

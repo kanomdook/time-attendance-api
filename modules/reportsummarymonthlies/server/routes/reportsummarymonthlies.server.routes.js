@@ -19,7 +19,22 @@ module.exports = function (app) {
 
   // 
   app.route('/api/reportsummarymonthly/:startdate/:enddate').all(reportsummarymonthliesPolicy.isAllowed)
-    .get(reportsummarymonthlies.reportsummarymonthlyByDate,reportsummarymonthlies.sendReport);
+    .get(
+    reportsummarymonthlies.getUser,
+    reportsummarymonthlies.getCheckin,
+    reportsummarymonthlies.getLeave,
+    reportsummarymonthlies.calculatDay,
+    reportsummarymonthlies.sendReport
+    );
+
+    app.route('/api/reportsummarymonthly/export/excel/:startdate/:enddate').all(reportsummarymonthliesPolicy.isAllowed)
+    .get(
+    reportsummarymonthlies.getUser,
+    reportsummarymonthlies.getCheckin,
+    reportsummarymonthlies.getLeave,
+    reportsummarymonthlies.calculatDay,
+    reportsummarymonthlies.exportExcel
+    );
 
   // Finish by binding the Reportsummarymonthly middleware
   app.param('startdate', reportsummarymonthlies.reportStarDate);

@@ -23,6 +23,9 @@ exports.invokeRolesPolicies = function () {
     },{
       resources: '/api/reportsummarymonthly/:startdate/:enddate',
       permissions: '*'
+    },{
+      resources: '/api/reportsummarymonthly/export/excel/:startdate/:enddate',
+      permissions: '*'
     }]
   }, {
     roles: ['user'],
@@ -34,6 +37,9 @@ exports.invokeRolesPolicies = function () {
       permissions: ['get']
     },{
       resources: '/api/reportsummarymonthly/:startdate/:enddate',
+      permissions: '*'
+    },{
+      resources: '/api/reportsummarymonthly/export/excel/:startdate/:enddate',
       permissions: '*'
     }]
   }, {

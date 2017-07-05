@@ -40,7 +40,7 @@ exports.invokeRolesPolicies = function() {
             permissions: ['get']
         }, {
             resources: '/api/reportdaily/export/excel/:exportdate',
-            permissions: ['get']
+            permissions: ['*']
         }]
     }, {
         roles: ['guest'],

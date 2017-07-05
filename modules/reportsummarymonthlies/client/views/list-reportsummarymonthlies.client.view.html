@@ -43,7 +43,7 @@
     <div class="text-center" ng-if="vm.startCall">
         <p>ไม่มีข้อมูลรายงาน</p>
     </div>
-    <div class ng-if="vm.reportData.data.length > 0">
+    <div class ng-if="vm.report.length > 0">
         <div class="contact-box table-responsive">
             <table class="table table-striped table-bordered table-hover dataTables-example ng-isolate-scope dataTable" id="DataTables_Table_2" role="grid" aria-describedby="DataTables_Table_2_info" datatable dt-options="dtOptions">
                 <thead>
@@ -52,26 +52,22 @@
                         <th class="sorting" rowspan="1" colspan="1" style="text-align: center">รหัสพนักงาน</th>
                         <th class="sorting" rowspan="1" colspan="1" style="text-align: center">ชื่อ - นามสกุล</th>
                         <th class="sorting" rowspan="1" colspan="1" style="text-align: center">วันทำงาน (วัน)</th>
-                        <th class="sorting" rowspan="1" colspan="1" style="text-align: center">โอที (ชม.)</th>
-                        <th class="sorting" rowspan="1" colspan="1" style="text-align: center">มาสาย (ชม:นาที)</th>
-                        <th class="sorting" rowspan="1" colspan="1" style="text-align: center">ออกก่อน (ชม:นาที)</th>
+                        <th class="sorting" rowspan="1" colspan="1" style="text-align: center">มาสาย (ชม.)</th>
                         <th class="sorting" rowspan="1" colspan="1" style="text-align: center">ลาป่วย (วัน)</th>
                         <th class="sorting" rowspan="1" colspan="1" style="text-align: center">ลาพักร้อน (วัน)</th>
                         <th class="sorting" rowspan="1" colspan="1" style="text-align: center">ลากิจ (วัน)</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="gradeA" ng-repeat="item in vm.reportData.data" role="row">
-                        <td class="text-right">{{$index + 1}}</td>
-                        <td>{{vm.reportData.employeeprofile.employeeid}}</td>
-                        <td>{{vm.reportData.employeeprofile.firstname}} {{vm.reportData.employeeprofile.lastname}}</td>
-                        <td class="text-center">19</td>
-                        <td class="text-center">4</td>
-                        <td class="text-center">1:19</td>
-                        <td class="text-center">1:19</td>
-                        <td class="text-center">1</td>
-                        <td class="text-center">7</td>
-                        <td class="text-center">2</td>
+                    <tr class="gradeA" ng-repeat="item in vm.report" role="row">
+                        <td class="text-center">{{$index + 1}}</td>
+                        <td>{{item.empID}}</td>
+                        <td>{{item.firstName}} {{item.lastName}}</td>
+                        <td class="text-center">{{item.taskDay || 0}}</td>
+                        <td class="text-center">{{item.late.hours}}</td>
+                        <td class="text-center">{{item.leaveSick || 0}}</td>
+                        <td class="text-center">{{item.vacation || 0}}</td>
+                        <td class="text-center">{{item.personalLeave || 0}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -80,7 +76,7 @@
                     <div class="col col-md-4"></div>
                     <div class="col col-md-4"></div>
                     <div class="col col-md-4">
-                        <a class="btn btn-default btn-block" href="https://time-attendance.herokuapp.com/api/reportmonthly/export/excel/{{vm.reportData.firstDay}}/{{vm.reportData.employeeprofile._id}}" target="_self">Export</a>
+                        <a class="btn btn-default btn-block" href="https://time-attendance.herokuapp.com/api/reportsummarymonthly/export/excel/{{vm.inputDateStart}}/{{vm.inputDateEnd}}" target="_self">Export</a>
                     </div>
                 </div>
             </div>
