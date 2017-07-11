@@ -266,6 +266,13 @@ exports.exportExcel = function (req, res, next) {
 
   var s_date = new Date(req.startdate);
   var e_date = new Date(req.enddate);
+  
+  console.log('===============================DOOKAPP=================');
+  console.log(req.startdate);
+  console.log(req.enddate);
+  console.log(s_date);
+  console.log(s_date);
+  console.log('===============================DOOKAPP=================');
   var txtDateStart = `${s_date.getDate()}/${s_date.getMonth()}/${s_date.getFullYear()}`;
   var txtDateEnd = `${e_date.getDate()}/${e_date.getMonth()}/${e_date.getFullYear()}`;
 
