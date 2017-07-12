@@ -32,6 +32,10 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/leave/employeeid/:empid',
       permissions: '*'
+    },
+    {
+      resources: '/api/getLeaveByLeaveTypeAndDate',
+      permissions: ['*']
     }]
   }, {
     roles: ['user'],
@@ -53,6 +57,10 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/leave/employeeid/:empid',
       permissions: ['get']
+    },
+    {
+      resources: '/api/getLeaveByLeaveTypeAndDate',
+      permissions: ['*']
     }]
   }, {
     roles: ['guest'],

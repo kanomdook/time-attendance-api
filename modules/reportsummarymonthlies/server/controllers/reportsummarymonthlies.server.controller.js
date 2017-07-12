@@ -137,6 +137,9 @@ exports.getUser = function (req, res, next) {
     .populate('user')
     .populate('company')
     .exec(function (err, users) {
+      console.log('========================User===================');
+      console.log(users);
+      console.log('===============================================');
       req.users = users;
       next();
     });
@@ -146,6 +149,9 @@ exports.getCheckin = function (req, res, next) {
   Checkin.find({ created: { $gte: new Date(req.startdate), $lt: new Date(req.enddate) } })
     .populate('user')
     .exec(function (err, checkin) {
+      console.log('========================checkin===================');
+      console.log(checkin);
+      console.log('===============================================');
       req.checkin = checkin;
       next();
     });
@@ -155,6 +161,9 @@ exports.getLeave = function (req, res, next) {
   Leave.find()
     .populate('user')
     .exec(function (err, leave) {
+      console.log('========================leave===================');
+      console.log(leave);
+      console.log('===============================================');
       req.leave = leave;
       next();
     });

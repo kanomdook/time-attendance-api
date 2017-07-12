@@ -13,7 +13,6 @@
 
     vm.authentication = Authentication;
     vm.leave = leave;
-    console.log(vm.leave);
     vm.error = null;
     vm.form = {};
     vm.remove = remove;

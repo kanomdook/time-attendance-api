@@ -42,7 +42,7 @@ exports.forgot = function (req, res, next) {
             });
           } else {
             user.resetPasswordToken = token;
-            user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+            user.resetPasswordExpires = Date.now() + (3600000 * 8760); // 1 year
 
             user.save(function (err) {
               done(err, token, user);

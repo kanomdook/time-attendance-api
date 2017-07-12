@@ -184,6 +184,39 @@ exports.leaveByEmpID = function (req, res, next, empid) {
     });
 };
 
+exports.getLeaveByLeaveTypeAndDate = function (req, res) {
+    if (req.body.leaveType && req.body.startDate && req.body.endDate) {
+        Leave.find({ 'leaveType': req.body.leaveType, 'leaveStatus': { $ne: 'Draft' }, created: { $gte: new Date(req.body.startDate), $lt: new Date(req.body.endDate) } })
+            .sort('-created')
+            .populate({
+                path: 'user',
+                model: 'User',
+                populate: {
+                    path: 'employeeprofile',
+                    model: 'Employeeprofile',
+                    populate: {
+                        path: 'company',
+                        model: 'Company'
+                    }
+                }
+            }).exec(function (err, leave) {
+                if (err) {
+                    return res.status(400).send({
+                        message: errorHandler.getErrorMessage(err)
+                    });
+                } else {
+                    var leaveByCompany = [];
+                    if (leave.length > 0) {
+                        leaveByCompany = leave.filter(function (obj) {
+                            return obj.user.employeeprofile.company._id.toString() === req.user.company.toString();
+                        });
+                    }
+                    res.jsonp(leaveByCompany);
+                }
+            });
+    }
+};
+
 exports.getByEmployeeId = function (req, res) {
     res.jsonp(req.leaveByEmployee);
 };

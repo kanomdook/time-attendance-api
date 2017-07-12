@@ -32,7 +32,43 @@
             </ol>
         </div>
     </div>
+    <br>
+    <div class="animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-2 col-md-2" style="font-weight: bold;font-size: 1.5em;">
+                <div class="form-group">
+                    <select class="form-control m-b" id="leaveType" name="leaveType" ng-model="leaveType">
+                    <option value="" disabled selected>เลือกประเภทการลา</option>
+                    <option value="All">ทั้งหมด</option>
+                    <option value="Sick Leave">ลาป่วย</option>
+                    <option value="Personal Leave">ลากิจ</option>
+                    <option value="Vacation">ลาพักร้อน</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-3 col-md-3">
+                <div class="form-group">
+                    <input class="form-control" id="startDate" name="startDate" ng-model="startDate" type="date">
+                </div>
+            </div>
+            <div class="col-sm-1 col-md-1" style="font-weight: bold;font-size: 1.5em;text-align: center">
+                ถึง
+            </div>
+            <div class="col-sm-3 col-md-3">
+                <div class="form-group">
+                    <input class="form-control" id="endDate" name="endDate" ng-model="endDate" type="date">
+                </div>
+            </div>
+            <div class="col-sm-3 col-md-3">
+                <div class="form-group">
+                    <a class="btn btn-primary btn-block" ng-click="vm.searchLeave(startDate,endDate,leaveType)">ค้นหา</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
   <div class="ibox float-e-margins">
+    
     <div class="ibox-content" style="margin-top: 48px">
 
       <div id="DataTables_Table_2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">

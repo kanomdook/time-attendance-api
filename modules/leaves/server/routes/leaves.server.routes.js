@@ -12,6 +12,9 @@ module.exports = function (app) {
     .get(leaves.list)
     .post(leaves.create);
 
+    app.route('/api/getLeaveByLeaveTypeAndDate').all(leavesPolicy.isAllowed)
+    .post(leaves.getLeaveByLeaveTypeAndDate);
+
   app.route('/api/leaves/userid/:userid').all(leavesPolicy.isAllowed)
     .get(leaves.getById);
 
