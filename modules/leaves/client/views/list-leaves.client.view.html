@@ -37,7 +37,7 @@
         <div class="row">
             <div class="col-sm-2 col-md-2" style="font-weight: bold;font-size: 1.5em;">
                 <div class="form-group">
-                    <select class="form-control m-b" id="leaveType" name="leaveType" ng-model="leaveType">
+                    <select class="form-control m-b" id="leaveType" name="leaveType" ng-model="leaveType" ng-change="vm.disableDate(leaveType)">
                     <option value="" disabled selected>เลือกประเภทการลา</option>
                     <option value="All">ทั้งหมด</option>
                     <option value="Sick Leave">ลาป่วย</option>
@@ -48,7 +48,7 @@
             </div>
             <div class="col-sm-3 col-md-3">
                 <div class="form-group">
-                    <input class="form-control" id="startDate" name="startDate" ng-model="startDate" type="date">
+                    <input class="form-control" id="startDate" name="startDate" ng-model="startDate" type="date" ng-disabled="disDate">
                 </div>
             </div>
             <div class="col-sm-1 col-md-1" style="font-weight: bold;font-size: 1.5em;text-align: center">
@@ -56,7 +56,7 @@
             </div>
             <div class="col-sm-3 col-md-3">
                 <div class="form-group">
-                    <input class="form-control" id="endDate" name="endDate" ng-model="endDate" type="date">
+                    <input class="form-control" id="endDate" name="endDate" ng-model="endDate" type="date" ng-disabled="disDate">
                 </div>
             </div>
             <div class="col-sm-3 col-md-3">

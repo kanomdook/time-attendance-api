@@ -130,7 +130,7 @@ exports.getById = function (req, res) {
 };
 //  get list by company
 exports.listByCompany = function (req, res) {
-    Leave.find().sort('-created').populate({
+    Leave.find({'leaveStatus': { $ne: 'Draft' }}).sort('-created').populate({
         path: 'user',
         model: 'User',
         populate: {
