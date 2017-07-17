@@ -41,7 +41,7 @@
     $scope.initView = function(){
       $http.get('/api/employee/company',{company:vm.company._id}).success(function (employee) {
         vm.employee = employee;
-        vm.emppersen = (vm.employee.length / 15) * 100;
+        vm.emppersen = (vm.employee.length / 25) * 100;
         vm.emppersenStyle = `width:${vm.emppersen}%`;
       }).error(function (error) {
       });
