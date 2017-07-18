@@ -169,7 +169,10 @@ exports.reportdailyByDate = function (req, res, next, reportdate) {
                     }
                     checkinByCompany.forEach(function (i, index) {
                         var distance = getDistanceFromLatLonInKm(i.locationIn.lat, i.locationIn.lng, company.address.location.latitude, company.address.location.longitude);
-                        var distanceout = getDistanceFromLatLonInKm(i.locationOut.lat, i.locationOut.lng, company.address.location.latitude, company.address.location.longitude);                        
+                        var distanceout = "";
+                        if (i.dateTimeOut || i.dateTimeOut !== "") {
+                            distanceout = getDistanceFromLatLonInKm(i.locationOut.lat, i.locationOut.lng, company.address.location.latitude, company.address.location.longitude);
+                        }
                         var workhours = null;
                         var timelate = null;
                         if (i.dateTimeIn && i.dateTimeOut) {
