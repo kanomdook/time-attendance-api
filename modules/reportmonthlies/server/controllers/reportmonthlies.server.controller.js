@@ -55,6 +55,30 @@ function workingHoursBetweenDates(startDateTime, endDateTime) {
     return (hours <= 9 ? "0" : "") + hours + ":" + (minutes <= 9 ? "0" : "") + minutes;
 }
 
+function workingHoursBetweenDatesLate(startDateTime, endDateTime) {
+    var start = new Date(startDateTime).getHours() + ":" + new Date(startDateTime).getMinutes();
+    var end = new Date(endDateTime).getHours() + ":" + new Date(endDateTime).getMinutes();
+    start = start.split(":");
+    end = end.split(":");
+    var startDate = new Date(0, 0, 0, start[0], start[1], 0);
+    var endDate = new Date(0, 0, 0, end[0], end[1], 0);
+    var diff = endDate.getTime() - startDate.getTime();
+    var hours = Math.floor(diff / 1000 / 60 / 60);
+    diff -= hours * 1000 * 60 * 60;
+    var minutes = Math.floor(diff / 1000 / 60);
+    console.log(parseInt(start[0]) + " : " + parseInt(end[0]));
+    if (parseInt(start[0]) <= parseInt(end[0])) {
+        // If using time pickers with 24 hours format, add the below line get exact hours
+        if (hours < 0) {
+            hours = hours + 24;
+        }
+
+        return (hours <= 9 ? "0" : "") + hours + ":" + (minutes <= 9 ? "0" : "") + minutes;
+    } else {
+        return "00:00";
+    }
+}
+
 
 exports.create = function (req, res) {
     var reportmonthly = new Reportmonthly(req.body);
@@ -227,7 +251,7 @@ exports.reportmonthly = function (req, res, next) {
                     if (i.dateTimeIn && i.dateTimeOut) {
                         workhours = workingHoursBetweenDates(i.dateTimeIn, i.dateTimeOut);
                     }
-                    timelate = workingHoursBetweenDates(employeeprofile.shiftin, i.dateTimeIn);
+                    timelate = workingHoursBetweenDatesLate(employeeprofile.shiftin, i.dateTimeIn);
                     reportMonthlyData.push({
                         date: i.created,
                         day: new Date(i.created).getDay(),
