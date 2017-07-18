@@ -459,6 +459,6 @@ function workingHoursBetweenDatesLate(startDateTime, endDateTime) {
 
         return (hours <= 9 ? "0" : "") + hours + ":" + (minutes <= 9 ? "0" : "") + minutes;
     } else {
-        return "0";
+        return "00:00";
     }
 }
