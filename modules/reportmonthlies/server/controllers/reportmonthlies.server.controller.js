@@ -246,6 +246,7 @@ exports.reportmonthly = function (req, res, next) {
                 var reportMonthlyData = [];
                 reportbyemployee.forEach(function (i, index) {
                     var distance = getDistanceFromLatLonInKm(i.locationIn.lat, i.locationIn.lng, company.address.location.latitude, company.address.location.longitude);
+                    var distanceout = getDistanceFromLatLonInKm(i.locationOut.lat, i.locationOut.lng, company.address.location.latitude, company.address.location.longitude);
                     var workhours = null;
                     var timelate = null;
                     if (i.dateTimeIn && i.dateTimeOut) {
@@ -270,6 +271,7 @@ exports.reportmonthly = function (req, res, next) {
                         type: i.type,
                         device: i.user.deviceID,
                         distance: distance.toFixed(2),
+                        distanceout: distanceout.toFixed(2),
                         remark: {
                             timein: i.remark.in,
                             timeout: i.remark.out
