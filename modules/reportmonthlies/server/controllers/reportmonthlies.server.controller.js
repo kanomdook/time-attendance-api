@@ -249,6 +249,7 @@ exports.reportmonthly = function (req, res, next) {
                     var distanceout = "";
                     if (i.locationOut.lat !== "" || i.locationOut.lng !== "") {
                         distanceout = getDistanceFromLatLonInKm(i.locationOut.lat, i.locationOut.lng, company.address.location.latitude, company.address.location.longitude);
+                        distanceout = distanceout.toFixed(2);
                     }
                     var workhours = null;
                     var timelate = null;
@@ -274,7 +275,7 @@ exports.reportmonthly = function (req, res, next) {
                         type: i.type,
                         device: i.user.deviceID,
                         distance: distance.toFixed(2),
-                        distanceout: distanceout.toFixed(2),
+                        distanceout: distanceout,
                         remark: {
                             timein: i.remark.in,
                             timeout: i.remark.out
