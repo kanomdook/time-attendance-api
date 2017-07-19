@@ -204,7 +204,14 @@ exports.getById = function (req, res) {
 };
 //  get list by company
 exports.listByCompany = function (req, res) {
-    Checkin.find().sort('-created').populate({
+    var d = new Date(),
+        hour = d.getHours(),
+        min = d.getMinutes(),
+        month = d.getMonth(),
+        year = d.getFullYear(),
+        sec = d.getSeconds(),
+        day = d.getDate();
+    Checkin.find({ 'created': { $gt: new Date(year,month,day), $lt: new Date(year,month,day + 1) } }).sort('-created').populate({
         path: 'user',
         model: 'User',
         populate: {

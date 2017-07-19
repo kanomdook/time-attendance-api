@@ -13,6 +13,7 @@
 
     vm.authentication = Authentication;
     vm.company = company;
+    localStorage.setItem('companyId', vm.company._id);
     vm.companyname = JSON.parse(JSON.stringify(vm.company)).name;
     vm.error = null;
     vm.form = {};
@@ -54,7 +55,8 @@
       });
 
       $http.get('/api/leave/company').success(function (leave) {
-        vm.leave = leave;
+        vm.leave = leave.reverse();
+        console.log(leave);
         vm.leavePersen = (vm.leave.length / 3000) * 100;
         vm.leavePersenStyle = `width:${vm.leavePersen}%`;
       }).error(function (error) {

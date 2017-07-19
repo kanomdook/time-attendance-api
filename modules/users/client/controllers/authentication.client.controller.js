@@ -1,13 +1,14 @@
 'use strict';
 
 angular.module('users').controller('AuthenticationController', ['$scope', '$state', '$http', '$location', '$window', 'Authentication', 'PasswordValidator', 'NgMap', '$uibModal', '$geolocation',
-    function($scope, $state, $http, $location, $window, Authentication, PasswordValidator, NgMap, $uibModal, $geolocation) {
+    function ($scope, $state, $http, $location, $window, Authentication, PasswordValidator, NgMap, $uibModal, $geolocation) {
         var map;
         var center;
+        $scope.branchs = [];
         $geolocation.getCurrentPosition({
             timeout: 60000,
             enableHighAccuracy: true
-        }).then(function(position) {
+        }).then(function (position) {
             // center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         });
 
@@ -22,11 +23,11 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
             $location.path('/companies/' + $scope.authentication.user.company);
         }
 
-        $scope.callback = function(postcode) {
+        $scope.callback = function (postcode) {
             $scope.checkAutocomplete(postcode);
         };
 
-        $scope.checkAutocomplete = function(postcode) {
+        $scope.checkAutocomplete = function (postcode) {
             if (postcode) {
                 $scope.company.address.postcode = postcode.postcode;
                 $scope.company.address.district = postcode.district;
@@ -39,20 +40,20 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
             }
         };
 
-        $scope.showGoogleMap = function() {
+        $scope.showGoogleMap = function () {
             var modal = $uibModal.open({
                 animation: true,
                 templateUrl: 'myModalContent.html',
                 size: 'lg',
-                controller: function($scope) {
-                    NgMap.getMap().then(function(map) {
+                controller: function ($scope) {
+                    NgMap.getMap().then(function (map) {
                         map = map;
                         map.setCenter(center);
                     });
-                    $scope.cancel = function() {
+                    $scope.cancel = function () {
                         modal.dismiss('cancel');
                     };
-                    $scope.ok = function() {
+                    $scope.ok = function () {
 
                     };
                 }
@@ -62,13 +63,13 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
         $scope.hideRegisterForm = false;
         $scope.hideCompanyForm = true;
 
-        $scope.init = function() {
-            $http.get('json/postcode.json').success(function(response) {
+        $scope.init = function () {
+            $http.get('json/postcode.json').success(function (response) {
                 $scope.postcode = response.postcodeData;
-            }).error(function(error) {
+            }).error(function (error) {
 
             });
-            $http.get('json/country-language.json').success(function(response) {
+            $http.get('json/country-language.json').success(function (response) {
                 $scope.country = response.countryData;
                 $scope.company = {
                     address: {
@@ -84,34 +85,35 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
                         }
                     }
                 };
-            }).error(function(error) {
+            }).error(function (error) {
 
             });
         };
 
-        $scope.nextStep = function() {
+        $scope.nextStep = function () {
             $scope.hideRegisterForm = true;
             $scope.hideCompanyForm = false;
         };
 
-        $scope.backStep = function() {
+        $scope.backStep = function () {
             $scope.hideCompanyForm = true;
             $scope.hideRegisterForm = false;
         };
 
-        $scope.createData = function(credentials, company) {
-            $http.post('/api/auth/signup', credentials).success(function(user) {
+        $scope.createData = function (credentials, company) {
+            $http.post('/api/auth/signup', credentials).success(function (user) {
                 createCompany(company, user, credentials);
-            }).error(function(err) {
+            }).error(function (err) {
                 console.error(err);
             });
         };
 
         function createCompany(company, user, credentials) {
             company.user = user._id;
-            $http.post('/api/companies', company).success(function(comp) {
+            company.branchs = $scope.branchs;
+            $http.post('/api/companies', company).success(function (comp) {
                 updateUser(user, comp._id, credentials);
-            }).error(function(err) {
+            }).error(function (err) {
                 console.error(err);
             });
         }
@@ -119,15 +121,15 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
         function updateUser(user, comp_id, credentials) {
             user.company = comp_id;
             user.password = credentials.password;
-            $http.put('/api/users', user).success(function(res) {
+            $http.put('/api/users', user).success(function (res) {
                 // $location.path('/companies/' + res.company);
                 $window.location.href = '/companies/' + res.company;
-            }).error(function(err) {
+            }).error(function (err) {
                 console.error(err);
             });
         }
 
-        $scope.signup = function(isValid) {
+        $scope.signup = function (isValid) {
             $scope.error = null;
             $scope.startCall = true;
             if (!isValid) {
@@ -137,20 +139,20 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
                 return false;
             }
 
-            $http.post('/api/auth/signup', $scope.credentials).success(function(response) {
+            $http.post('/api/auth/signup', $scope.credentials).success(function (response) {
                 // If successful we assign the response to the global user model
                 $scope.authentication.user = response;
                 $scope.startCall = false;
                 // And redirect to the previous or home page
                 $state.go($state.previous.state.name || 'home', $state.previous.params);
-            }).error(function(response) {
+            }).error(function (response) {
                 $scope.startCall = false;
 
                 $scope.error = response.message;
             });
         };
 
-        $scope.signin = function(isValid) {
+        $scope.signin = function (isValid) {
             $scope.error = null;
             $scope.startCall = true;
             if (!isValid) {
@@ -159,27 +161,53 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
                 return false;
             }
 
-            $http.post('/api/auth/signin', $scope.credentials).success(function(response) {
+            $http.post('/api/auth/signin', $scope.credentials).success(function (response) {
                 // If successful we assign the response to the global user model
                 $scope.authentication.user = response;
                 $scope.startCall = false;
                 // And redirect to the previous or home page
                 // $state.go($state.previous.state.name || 'home', $state.previous.params);
                 $window.location.href = '/companies/' + response.company._id;
-            }).error(function(response) {
+            }).error(function (response) {
                 $scope.startCall = false;
                 $scope.error = response.message;
             });
         };
 
         // OAuth provider request
-        $scope.callOauthProvider = function(url) {
+        $scope.callOauthProvider = function (url) {
             if ($state.previous && $state.previous.href) {
                 url += '?redirect_to=' + encodeURIComponent($state.previous.href);
             }
 
             // Effectively call OAuth authentication route:
             $window.location.href = url;
+        };
+
+        $scope.addBranch = function (brunch, address, subdistrict, district, province, postcode, country, latitude, longitude) {
+            if (brunch && address) {
+                $scope.branchs.push({
+                    branch: brunch,
+                    address: address,
+                    subdistrict: subdistrict,
+                    district: district,
+                    province: province,
+                    postcode: postcode,
+                    country: country,
+                    latitude: latitude,
+                    longitude: longitude
+                });
+            }
+            console.log($scope.branchs);
+        };
+
+        $scope.deleteBrunch = function (brunch) {
+            for (var i = 0; i < $scope.branchs.length; i++) {
+                if ($scope.branchs[i].branch === brunch) {
+                    $scope.branchs.splice(i, 1);
+                    break;
+                }
+            }
         };
     }
 ]);

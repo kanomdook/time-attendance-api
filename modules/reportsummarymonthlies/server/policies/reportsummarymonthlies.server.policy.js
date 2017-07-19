@@ -36,10 +36,10 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/reportsummarymonthlies/:reportsummarymonthlyId',
       permissions: ['get']
     },{
-      resources: '/api/reportsummarymonthly/:startdate/:enddate',
+      resources: '/api/reportsummarymonthly/:companyId/:startdate/:enddate',
       permissions: '*'
     },{
-      resources: '/api/reportsummarymonthly/export/excel/:startdate/:enddate',
+      resources: '/api/reportsummarymonthly/export/excel/:companyId/:startdate/:enddate',
       permissions: '*'
     }]
   }, {

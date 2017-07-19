@@ -14,11 +14,11 @@
     <div class="animated fadeInRight">
         <div class="row">
             <div class="col-sm-2 col-md-2" style="font-weight: bold;font-size: 1.5em;">
-                <!-- <div class="form-group">
+                 <div class="form-group">
                     <select class="form-control m-b" id="department" name="department">
-                    <option value="" disabled selected>----- เลือกแผนก -----</option>
+                    <option value="" disabled selected>----- เลือกสาขา -----</option>
                     </select>
-                </div> -->
+                </div> 
             </div>
             <div class="col-sm-3 col-md-3">
                 <div class="form-group">
@@ -76,7 +76,7 @@
                     <div class="col col-md-4"></div>
                     <div class="col col-md-4"></div>
                     <div class="col col-md-4">
-                        <a class="btn btn-default btn-block" href="https://time-attendance.herokuapp.com/api/reportsummarymonthly/export/excel/{{vm.inputDateStart}}/{{vm.inputDateEnd}}" target="_self">Export</a>
+                        <a class="btn btn-default btn-block" href="https://time-attendance.herokuapp.com/api/reportsummarymonthly/export/excel/{{vm.companyId}}/{{vm.inputDateStart}}/{{vm.inputDateEnd}}" target="_self">Export</a>
                     </div>
                 </div>
             </div>

@@ -18,7 +18,7 @@ module.exports = function (app) {
     .delete(reportsummarymonthlies.delete);
 
   // 
-  app.route('/api/reportsummarymonthly/:startdate/:enddate').all(reportsummarymonthliesPolicy.isAllowed)
+  app.route('/api/reportsummarymonthly/:companyId/:startdate/:enddate').all(reportsummarymonthliesPolicy.isAllowed)
     .get(
     reportsummarymonthlies.getUser,
     reportsummarymonthlies.getCheckin,
@@ -27,7 +27,7 @@ module.exports = function (app) {
     reportsummarymonthlies.sendReport
     );
 
-    app.route('/api/reportsummarymonthly/export/excel/:startdate/:enddate').all(reportsummarymonthliesPolicy.isAllowed)
+    app.route('/api/reportsummarymonthly/export/excel/:companyId/:startdate/:enddate').all(reportsummarymonthliesPolicy.isAllowed)
     .get(
     reportsummarymonthlies.getUser,
     reportsummarymonthlies.getCheckin,
@@ -37,6 +37,7 @@ module.exports = function (app) {
     );
 
   // Finish by binding the Reportsummarymonthly middleware
+  app.param('companyId', reportsummarymonthlies.getCompanyID);
   app.param('startdate', reportsummarymonthlies.reportStarDate);
   app.param('enddate', reportsummarymonthlies.reportEndDate);
 

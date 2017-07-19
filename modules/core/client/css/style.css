@@ -10303,3 +10303,44 @@ body.md-skin {
     max-width: 100%;
     height: auto;
 }
+.img-avatar{
+  width:100% !important;
+  box-shadow: 3px 3px 3px #ffffff;
+  margin-bottom: 10px;
+  /*margin-top: 32px;*/
+}
+.img-avatarscrollHori{
+  width:50px !important;
+  box-shadow: 3px 3px 3px #ffffff;
+  margin-bottom: 10px;
+  /*margin-top: 32px;*/
+}
+.fix-scroll{
+    width: auto;
+    height: 450px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+.marginitem{
+    margin-left: -5px;
+    margin-right: -5px;
+}
+/* div.scrollhori {
+    background-color: #333;
+    overflow: auto;
+    white-space: nowrap;
+} */
+.rowitems {
+    white-space: nowrap; /* important */
+    overflow: auto;
+    background-color: #fff;
+}
+.initems {
+    display: inline-block;
+}
+.itemcontentNormal{
+    white-space: normal;
+}
+.font-Bold{
+    font-weight: bold;
+}

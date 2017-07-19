@@ -35,41 +35,47 @@
                     <h5>พนักงานทั้งหมด</h5>
         </div>
 
-        <div class="ibox-content">
+        <div class="ibox-content" ng-repeat="employeeprofile in vm.employeeprofiles | filter : vm.search">
             <div class="table-responsive">
-                <table datatable="" dt-options="dtOptions" class="table table-striped table-bordered table-hover dataTables-example ng-isolate-scope dataTable"
-                    id="DataTables_Table_2" aria-describedby="DataTables_Table_2_info" role="grid">
-                    <thead>
-                        <tr role="row">
-                            <th class="sorting" rowspan="1" colspan="1" style="text-align: center">ลำดับ</th>
-                            <th class="sorting" rowspan="1" colspan="1" style="text-align: center">รหัสพนักงาน</th>
-                            <th class="sorting" rowspan="1" colspan="1" style="text-align: center">ชื่อ - นามสกุล</th>
-                            <th class="sorting" rowspan="1" colspan="1" style="text-align: center">ตำแหน่ง</th>
-                            <th class="sorting" rowspan="1" colspan="1" style="text-align: center">อีเมล์</th>
-                            <th class="sorting" rowspan="1" colspan="1" style="text-align: center">เบอร์โทร</th>
-                            <th class="sorting" rowspan="1" colspan="1" style="text-align: center">สาขา</th>
-                            <th class="sorting" rowspan="1" colspan="1" style="text-align: center">แก้ไขข้อมูล</th>
-                        </tr>
-                    </thead>
+                <table class="table shoping-cart-table">
+
                     <tbody>
-                        <tr class="gradeA odd" role="row" ng-repeat="employeeprofile in vm.employeeprofiles | filter : vm.search">
-                            <td style="text-align: center">{{$index + 1}}</td>
-                            <td style="text-align: center">{{employeeprofile.employeeid}}</td>
-                            <td>
+                        <tr>
+                            <td width="120">
+
+                                <img ng-src="{{employeeprofile.image}}" alt="profile image" width="82px" height="82px">
+
+                            </td>
+                            <td class="desc">
                                 <h3 ui-sref="employeeprofiles.view({ employeeprofileId: employeeprofile._id })">
                                     <a href="#" class="text-navy">
                                                     {{employeeprofile.firstname}} {{employeeprofile.lastname}}
                                                 </a>
                                 </h3>
+                                <p>
+                                    {{employeeprofile.jobTitle}}
+                                </p>
+                                <p>{{employeeprofile.address.address}} {{employeeprofile.address.district}} {{employeeprofile.address.subdistrict}}
+                                    {{employeeprofile.address.province}} {{employeeprofile.address.postcode}}</p>
+                                <dl>
+                                    <dt>{{employeeprofile.email}}</dt>
+                                    <dd>{{employeeprofile.mobile}}</dd>
+                                </dl>
                             </td>
-                            <td style="text-align: center">{{employeeprofile.jobTitle}}</td>
-                            <td>{{employeeprofile.email}}</td>
-                            <td style="text-align: center">{{employeeprofile.mobile}}</td>
-                            <td style="text-align: center">สาขา</td>
-                            <td style="text-align: center"><a class="btn btn-primary" ui-sref="employeeprofiles.edit({ employeeprofileId: employeeprofile._id })">
+
+                            <td>
+                                <!-- $50,00
+                                            <s class="small text-muted">$63,00</s> -->
+                            </td>
+                            <td width="65">
+                                <!-- <input type="text" class="form-control" placeholder="2"> -->
+                            </td>
+                            <td>
+                                <a class="btn btn-primary" ui-sref="employeeprofiles.edit({ employeeprofileId: employeeprofile._id })">
                 <i class="glyphicon glyphicon-edit"></i>
-            </a></td>
-                            <!--<td ng-if="vm.checkins.length < 0">ไม่มีข้อมูล</td>          -->
+            </a>
+                            </td>
+
                         </tr>
                     </tbody>
                 </table>

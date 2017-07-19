@@ -10,8 +10,8 @@
   function ReportsummarymonthliesListController(ReportSummaryMonthlyService, EmployeeprofilesService) {
     var vm = this;
     vm.employeeprofiles = EmployeeprofilesService.query();
-
-      // vm.reportsummarymonthlies = ReportSummaryMonthlyService.query();
+    vm.companyId = localStorage.getItem('companyId');
+    // vm.reportsummarymonthlies = ReportSummaryMonthlyService.query();
     vm.selectemployee = {};
     vm.startDate = new Date();
     vm.endDate = new Date();
@@ -38,12 +38,10 @@
       vm.inputDateStart = inputDateStart;
       vm.inputDateEnd = inputDateEnd;
 
-      ReportSummaryMonthlyService.getReportSummaryMonthlies(inputDateStart,inputDateEnd).then(function (report) {
+      ReportSummaryMonthlyService.getReportSummaryMonthlies(vm.companyId,inputDateStart,inputDateEnd).then(function (report) {
         vm.report = report;
-        console.log(vm.report);
         vm.startCall = false;
       }, function (error) {
-        console.error(error);
         vm.startCall = true;
       });
     }

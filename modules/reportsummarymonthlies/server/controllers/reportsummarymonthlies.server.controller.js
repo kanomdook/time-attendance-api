@@ -121,6 +121,10 @@ exports.reportsummarymonthlyByID = function (req, res, next, id) {
   });
 };
 //////////////////////////////export report\\\\\\\\\\\\\\\\\\\\\\\\\\
+exports.getCompanyID = function (req, res, next, companyID) {
+  req.companyID = companyID;
+  next();
+};
 
 exports.reportStarDate = function (req, res, next, startdate) {
   req.startdate = startdate;
@@ -133,7 +137,7 @@ exports.reportEndDate = function (req, res, next, enddate) {
 };
 
 exports.getUser = function (req, res, next) {
-  Employeeprofile.find()
+  Employeeprofile.find({'company': req.companyID})
     .populate('user')
     .populate('company')
     .exec(function (err, users) {

@@ -22,10 +22,10 @@
   ReportSummaryMonthlyService.$inject = ['$http', '$q'];
 
   function ReportSummaryMonthlyService($http, $q) {
-    this.getReportSummaryMonthlies = function (inputDateStrat, inputDateEnd) {
+    this.getReportSummaryMonthlies = function (companyId,inputDateStrat, inputDateEnd) {
       var deferred = $q.defer();
 
-      $http.get('/api/reportsummarymonthly/' + inputDateStrat + '/' + inputDateEnd).success(function (report) {
+      $http.get('/api/reportsummarymonthly/' + companyId +'/'+ inputDateStrat + '/' + inputDateEnd).success(function (report) {
         deferred.resolve(report);
       }).error(function (error) {
         deferred.reject(error);
