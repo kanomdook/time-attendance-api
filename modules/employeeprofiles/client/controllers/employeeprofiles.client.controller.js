@@ -20,8 +20,23 @@
         vm.init = init;
         vm.initView = initView;
         vm.updateLeace = updateLeace;
+        vm.branchs = JSON.parse(localStorage.getItem('branchs'));
+        vm.selectedBranch = {};
         $scope.postcode = null;
         $scope.language = null;
+
+        if(vm.branchs.length > 0){
+            vm.employeeprofile.branch = vm.branchs[0].branch;
+            vm.selectedBranch = vm.branchs[0];
+        }
+
+        $scope.selectBranch = function(){
+            for (var i = 0; i < vm.branchs.length; i++) {
+                if(vm.branchs[i].branch === vm.employeeprofile.branch){
+                    vm.selectedBranch = vm.branchs[i];
+                } 
+            }
+        };
 
         if (!vm.employeeprofile._id) {
             vm.employeeprofile.address = {
@@ -144,6 +159,7 @@
             if (vm.employeeprofile._id) {
                 vm.employeeprofile.$update(successCallback, errorCallback);
             } else {
+                vm.employeeprofile.branchs = vm.selectedBranch;
                 vm.employeeprofile.company = vm.authentication.user.company;
                 vm.employeeprofile.leader = null;
                 vm.employeeprofile.$save(successCallback, errorCallback);

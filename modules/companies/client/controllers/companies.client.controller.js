@@ -14,6 +14,8 @@
     vm.authentication = Authentication;
     vm.company = company;
     localStorage.setItem('companyId', vm.company._id);
+    $scope.branchs = vm.company.branchs;
+    localStorage.setItem('branchs', JSON.stringify($scope.branchs));
     vm.companyname = JSON.parse(JSON.stringify(vm.company)).name;
     vm.error = null;
     vm.form = {};
@@ -56,7 +58,6 @@
 
       $http.get('/api/leave/company').success(function (leave) {
         vm.leave = leave.reverse();
-        console.log(leave);
         vm.leavePersen = (vm.leave.length / 3000) * 100;
         vm.leavePersenStyle = `width:${vm.leavePersen}%`;
       }).error(function (error) {
@@ -93,6 +94,7 @@
 
       // TODO: move create/update logic to service
       if (vm.company._id) {
+        vm.company.branchs = $scope.branchs;
         vm.company.$update(successCallback, errorCallback);
       } else {
         vm.company.$save(successCallback, errorCallback);
@@ -215,6 +217,32 @@
       vm.company.images.splice(index, 1);
       $scope.imageURL = "";
     };
-    // upload images end 
+    // upload images end
+
+    $scope.addBranch = function (brunch, address, subdistrict, district, province, postcode, country, latitude, longitude) {
+            if (brunch && address) {
+                $scope.branchs.push({
+                    branch: brunch,
+                    address: address,
+                    subdistrict: subdistrict,
+                    district: district,
+                    province: province,
+                    postcode: postcode,
+                    country: country,
+                    latitude: latitude,
+                    longitude: longitude
+                });
+            }
+        };
+
+        $scope.deleteBrunch = function (brunch) {
+            for (var i = 0; i < $scope.branchs.length; i++) {
+                if ($scope.branchs[i].branch === brunch) {
+                    $scope.branchs.splice(i, 1);
+                    break;
+                }
+            }
+        };
+
   }
 }());

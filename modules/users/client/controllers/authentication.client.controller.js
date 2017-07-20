@@ -198,7 +198,6 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
                     longitude: longitude
                 });
             }
-            console.log($scope.branchs);
         };
 
         $scope.deleteBrunch = function (brunch) {

@@ -141,6 +141,39 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div style="text-align:center">
+                                                        <button class="btn btn-info" type="button" ng-click="addBranch(vm.company.brunch,
+                                                        vm.company.address.address,
+                                                        vm.company.address.subdistrict,
+                                                        vm.company.address.district,
+                                                        vm.company.address.province,
+                                                        vm.company.address.postcode,
+                                                        vm.company.address.country.en.common,
+                                                        vm.company.address.location.latitude,
+                                                        vm.company.address.location.longitude
+                                                        )"><i class="fa fa-paste"></i> เพิ่มสาขา</button>
+                                                    </div>
+                                                    <hr>
+                                                    <div class="row">
+                                                        <div class="col-lg-4" ng-repeat="brch in branchs">
+                                                            <div class="panel panel-info">
+                                                                <div class="panel-heading">
+                                                                    <i class="fa fa-info-circle"></i> สาขา {{brch.branch}} <span style="right:0;position: absolute;margin-right: 28px" ng-click="deleteBrunch(brch.branch)">X</span>
+                                                                </div>
+                                                                <div class="panel-body">
+                                                                    <p>{{brch.address}}</p>
+                                                                    <p>แขวง/ตำบล {{brch.subdistrict}} เขต/อำเภอ {{brch.district}} จังหวัด {{brch.province}} {{brch.postcode}} ประเทศ {{brch.country}}</p>
+                                                                    <p>ละติจูด {{brch.latitude}}</p>
+                                                                    <p>ลองจิจูด {{brch.longitude}}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+
                                         <hr>
                                         <div class="form-group" show-errors>
                                             <label class="col-sm-4 col-md-2 control-label">เบอร์โทรศัพท์(บริษัท)</label>

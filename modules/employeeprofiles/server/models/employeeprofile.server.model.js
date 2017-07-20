@@ -33,6 +33,35 @@ var EmployeeprofileSchema = new Schema({
         type: Schema.ObjectId,
         ref: 'Company'
     },
+    branchs: {
+    branch: {
+      type: String,
+    },
+    address: {
+      type: String,
+    },
+    subdistrict: {
+      type: String,
+    },
+    district: {
+      type: String,
+    },
+    province: {
+      type: String,
+    },
+    postcode: {
+      type: String,
+    },
+    country: {
+      type: String,
+    },
+    latitude: {
+      type: String,
+    },
+    longitude: {
+      type: String,
+    }
+  },
     address: {
         address: {
             type: String,

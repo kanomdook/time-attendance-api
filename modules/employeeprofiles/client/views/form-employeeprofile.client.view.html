@@ -98,16 +98,14 @@
                                                 <div class="form-group" show-errors>
                                                     <label class="col-sm-4 control-label">สาขา</label>
                                                     <div class="col-sm-8">
-                                                        <!-- <select class="form-control m-b" id="country" name="country" ng-model="vm.employeeprofile.address.country" ng-options="item as item.en.common for item in country track by item.cca2"
-                                                            required></select> -->
-                                                        <select class="form-control" id="branch" name="branch" required>
-                                                             <option value="branch1">สาขา 1</option>
-                                                             <option value="branch2">สาขา 2</option>
-                                                             <option value="branch3">สาขา 3</option>
+                                                        
+                                                        <select class="form-control" id="branch" name="branch" required ng-model="vm.employeeprofile.branch" ng-change="selectBranch()">
+                                                             <option ng-repeat="bch in vm.branchs"
+                                                                value="{{bch.branch}}">
+                                                                {{bch.branch}}
+                                                                </option>
                                                         </select>
-                                                        <!-- <div ng-messages="vm.form.employeeprofileForm.country.$error" role="alert">
-                                                            <p class="help-block error-text" ng-message="required">กรุณาระบุประเทศ</p>
-                                                        </div> -->
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
