@@ -20,16 +20,34 @@ var CompanySchema = new Schema({
   taxid: {
     type: String
   },
-  brunchs: [{
-    brunch: String,
-    address: String,
-    subdistrict: String,
-    district: String,
-    province: String,
-    postcode: String,
-    country: String,
-    latitude: String,
-    longitude: String
+  branchs: [{
+    branch: {
+      type: String,
+    },
+    address: {
+      type: String,
+    },
+    subdistrict: {
+      type: String,
+    },
+    district: {
+      type: String,
+    },
+    province: {
+      type: String,
+    },
+    postcode: {
+      type: String,
+    },
+    country: {
+      type: String,
+    },
+    latitude: {
+      type: String,
+    },
+    longitude: {
+      type: String,
+    }
   }],
   brunch: {
     type: String
