@@ -14,8 +14,6 @@ var path = require('path'),
  */
 exports.create = function (req, res) {
     var checkin = new Checkin(req.body);
-    checkin.user = req.user;
-
     checkin.save(function (err) {
         if (err) {
             return res.status(400).send({
