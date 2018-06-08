@@ -21,17 +21,17 @@ module.exports = function (app) {
   app.route('/api/checkins/employeeid/:ym/:empid')
     .get(checkins.getByEmployeeId);
 
-  app.route('/api/checkins/:checkinId').all(checkinsPolicy.isAllowed)
+  app.route('/api/checkins/:checkinId')
     .get(checkins.read)
     .put(checkins.update)
     .delete(checkins.delete);
 
   // Checkins Routes By Company
-  app.route('/api/checkin/company').all(checkinsPolicy.isAllowed)
+  app.route('/api/checkin/company')
     .get(checkins.listByCompany)
     .post(checkins.create);
 
-  app.route('/api/checkin/company/:checkinId').all(checkinsPolicy.isAllowed)
+  app.route('/api/checkin/company/:checkinId')
     .get(checkins.read)
     .put(checkins.update)
     .delete(checkins.delete);
