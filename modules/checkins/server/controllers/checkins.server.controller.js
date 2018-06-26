@@ -15,9 +15,6 @@ var path = require('path'),
 exports.create = function (req, res) {
     var checkin = new Checkin(req.body);
     checkin.user = req.user;
-    console.log('=========DATA=======');
-    console.log(JSON.stringify(req.body));
-    console.log('====================');
     checkin.save(function (err) {
         if (err) {
             return res.status(400).send({
