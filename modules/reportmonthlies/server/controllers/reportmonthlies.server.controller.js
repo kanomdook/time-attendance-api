@@ -215,7 +215,10 @@ exports.reportmonthlyByDateAndEmployeeId = function (req, res, next, employeeid)
     var reportbyemployee = [];
     if (reportbymonth.length > 0) {
         reportbyemployee = reportbymonth.filter(function (obj) {
-            return obj.user.employeeprofile._id.toString() === employeeid.toString();
+            if (obj.user && obj.user.employeeprofile) {
+                return obj.user.employeeprofile._id.toString() === employeeid.toString();
+            }
+            return false;
         });
     }
     req.employeeid = employeeid;

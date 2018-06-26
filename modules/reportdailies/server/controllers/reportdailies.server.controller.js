@@ -163,8 +163,10 @@ exports.reportdailyByDate = function (req, res, next, reportdate) {
                     var reportDailyData = [];
                     if (reportdaily.length > 0) {
                         checkinByCompany = reportdaily.filter(function (obj) {
-                            return obj.user.employeeprofile.company._id.toString() === req.user.company.toString();
-
+                            if (obj.user && obj.user.employeeprofile && obj.user.employeeprofile.company) {
+                                return obj.user.employeeprofile.company._id.toString() === req.user.company.toString();
+                            }
+                            return false;
                         });
                     }
                     checkinByCompany.forEach(function (i, index) {
