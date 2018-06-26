@@ -150,6 +150,7 @@ exports.listByCompany = function (req, res) {
             var leaveByCompany = [];
             if (leave.length > 0) {
                 leaveByCompany = leave.filter(function (obj) {
+                    console.log(JSON.stringify(obj));
                     return obj.user.employeeprofile.company ? obj.user.employeeprofile.company._id.toString() : '' === req.user.company ? req.user.company.toString() : '';
                 });
             }
