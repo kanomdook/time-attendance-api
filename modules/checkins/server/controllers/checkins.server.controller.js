@@ -170,14 +170,14 @@ exports.userids = function (req, res) {
     res.jsonp(req.status);
 };
 
-exports.getByUserID = function (req, res, next, id) {
+exports.getByUserID = function (req, res, next, email) {
     console.log('=========Body=====================');
-    console.log(id);
+    console.log(email);
     console.log(req.yearMonth);
     console.log('==================================');
     var reqYearMonth = req.yearMonth;
     var checkinData = [];
-    Checkin.find({ user: id }).populate({ path: 'user', select: 'displayName profileImageURL' }).exec(function (err, checkin) {
+    Checkin.find({ 'email': email }).exec(function (err, checkin) {
         // if (reqYearMonth && reqYearMonth !== "All") {
         //     for (var i = 0; i < checkin.length; i++) {
         //         var checkinDate = new Date(checkin[i].created);
