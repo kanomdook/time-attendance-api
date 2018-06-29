@@ -230,8 +230,10 @@ exports.listByCompany = function (req, res) {
             var checkinByCompany = [];
             if (checkin.length > 0) {
                 checkinByCompany = checkin.filter(function (obj) {
-                    return obj.user.employeeprofile.company._id.toString() === req.user.company.toString();
-
+                    if (obj.user && obj.user.employeeprofile && obj.user.employeeprofile.company) {
+                        return obj.user.employeeprofile.company._id.toString() === req.user.company.toString();
+                    }
+                    return false;
                 });
             }
             res.jsonp(checkinByCompany);
