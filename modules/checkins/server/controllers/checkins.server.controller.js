@@ -204,7 +204,7 @@ exports.getByUserID = function (req, res, next, id) {
 
 exports.getById = function (req, res) {
     console.log('=========Check in List============');
-    console.log(JSON.stringify(eq.checkinByID));
+    console.log(JSON.stringify(req.checkinByID));
     console.log('==================================');
     res.jsonp(req.checkinByID);
 };
