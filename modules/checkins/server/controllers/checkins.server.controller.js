@@ -175,24 +175,25 @@ exports.getByUserID = function (req, res, next, id) {
     var reqYearMonth = req.yearMonth;
     var checkinData = [];
     Checkin.find({ user: id }).populate({ path: 'user', select: 'displayName profileImageURL' }).exec(function (err, checkin) {
-        if (reqYearMonth && reqYearMonth !== "All") {
-            for (var i = 0; i < checkin.length; i++) {
-                var checkinDate = new Date(checkin[i].created);
-                var checkinYear = checkinDate.getUTCFullYear();
-                var checkinMonth = checkinDate.getUTCMonth() + 1;
-                var checkinYearMonth = checkinYear + "" + checkinMonth; // 20171
+        // if (reqYearMonth && reqYearMonth !== "All") {
+        //     for (var i = 0; i < checkin.length; i++) {
+        //         var checkinDate = new Date(checkin[i].created);
+        //         var checkinYear = checkinDate.getUTCFullYear();
+        //         var checkinMonth = checkinDate.getUTCMonth() + 1;
+        //         var checkinYearMonth = checkinYear + "" + checkinMonth; // 20171
 
-                // console.log(checkinYearMonth);
-                // console.log(reqYearMonth);
+        //         // console.log(checkinYearMonth);
+        //         // console.log(reqYearMonth);
 
-                if (checkinYearMonth === reqYearMonth) {
-                    checkinData.push(checkin[i]);
-                }
-            }
-            req.checkinByID = checkinData;
-        } else {
-            req.checkinByID = checkin;
-        }
+        //         if (checkinYearMonth === reqYearMonth) {
+        //             checkinData.push(checkin[i]);
+        //         }
+        //     }
+        //     req.checkinByID = checkinData;
+        // } else {
+        //     req.checkinByID = checkin;
+        // }
+        req.checkinByID = checkin;
         next();
     });
 
