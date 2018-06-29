@@ -171,7 +171,10 @@ exports.userids = function (req, res) {
 };
 
 exports.getByUserID = function (req, res, next, id) {
-
+    console.log('=========Body=====================');
+    console.log(id);
+    console.log(req.yearMonth);
+    console.log('==================================');
     var reqYearMonth = req.yearMonth;
     var checkinData = [];
     Checkin.find({ user: id }).populate({ path: 'user', select: 'displayName profileImageURL' }).exec(function (err, checkin) {
@@ -200,6 +203,9 @@ exports.getByUserID = function (req, res, next, id) {
 };
 
 exports.getById = function (req, res) {
+    console.log('=========Check in List============');
+    console.log(JSON.stringify(eq.checkinByID));
+    console.log('==================================');
     res.jsonp(req.checkinByID);
 };
 //  get list by company
