@@ -84,8 +84,8 @@ exports.signin = function (req, res, next) {
   //     })
   //   }
   // })(req, res, next)
-  if (req.username && req.password) {
-    User.findOne({'username': req.username,'deviceID': req.password}).exec(function (err, user) {
+  if (req.username) {
+    User.findOne({'username': req.username}).exec(function (err, user) {
       if (err) {
         res.status(400).send(err)
       }else {
