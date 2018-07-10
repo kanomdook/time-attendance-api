@@ -86,9 +86,9 @@ exports.signin = function (req, res, next) {
   // })(req, res, next)
   if (req.username) {
     console.log('=======REQ login=====')
-    console.log(JSON.stringify(req))
+    console.log(JSON.stringify(req.body))
     console.log('================')
-    User.findOne({username: req.username}).exec(function (err, user) {
+    User.findOne({username: req.body.username}).exec(function (err, user) {
       if (err) {
         res.status(400).send(err)
       }else {
