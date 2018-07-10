@@ -85,19 +85,19 @@ exports.signin = function (req, res, next) {
   //   }
   // })(req, res, next)
   if (req.username) {
-    console.log('=======REQ login=====')
-    console.log(JSON.stringify(req.body))
-    console.log('================')
+    console.log('=======REQ login=====');
+    console.log(JSON.stringify(req.body));
+    console.log('================');
     User.findOne({username: req.body.username}).exec(function (err, user) {
       if (err) {
-        res.status(400).send(err)
+        res.status(400).send(err);
       }else {
-        console.log('=======USER=====')
-        console.log(JSON.stringify(user))
-        console.log('================')
-        res.json(user)
+        console.log('=======USER=====');
+        console.log(JSON.stringify(user));
+        console.log('================');
+        res.json(user);
       }
-    })
+    });
   }
 }
 
