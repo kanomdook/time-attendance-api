@@ -84,17 +84,11 @@ exports.signin = function (req, res, next) {
   //     })
   //   }
   // })(req, res, next)
-  if (req.username) {
-    console.log('=======REQ login=====');
-    console.log(JSON.stringify(req.body));
-    console.log('================');
-    User.findOne({username: req.body.username}).exec(function (err, user) {
+  if (req.body.username) {
+    User.findOne({ username: req.body.username, password: req.body.password }).exec(function (err, user) {
       if (err) {
         res.status(400).send(err);
-      }else {
-        console.log('=======USER=====');
-        console.log(JSON.stringify(user));
-        console.log('================');
+      } else {
         res.json(user);
       }
     });
