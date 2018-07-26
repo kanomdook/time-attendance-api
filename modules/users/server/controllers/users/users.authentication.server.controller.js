@@ -62,37 +62,29 @@ exports.signup = function (req, res) {
  * Signin after passport authentication
  */
 exports.signin = function (req, res, next) {
-  // passport.authenticate('local', function (err, user, info) {
-  //   if (err || !user) {
-  //     res.status(400).send(info)
-  //   } else {
-  //     // Remove sensitive data before login
-  //     user.password = undefined
-  //     user.salt = undefined
-  //     // .populate('employeeprofile')
-  //     req.login(user, function (err) {
-  //       if (err) {
-  //         res.status(400).send(err)
-  //       } else {
-  //         User.findById(user._id)
-  //           .populate('employeeprofile')
-  //           .populate('company')
-  //           .exec(function (err, userp) {
-  //             res.json(userp)
-  //           })
-  //       }
-  //     })
-  //   }
-  // })(req, res, next)
-  if (req.body.username) {
-    User.findOne({ username: req.body.username, password: req.body.password }).exec(function (err, user) {
-      if (err) {
-        res.status(400).send(err);
-      } else {
-        res.json(user);
-      }
-    });
-  }
+  passport.authenticate('local', function (err, user, info) {
+    if (err || !user) {
+      res.status(400).send(info)
+    } else {
+      // Remove sensitive data before login
+      user.password = undefined
+      user.salt = undefined
+      // .populate('employeeprofile')
+      req.login(user, function (err) {
+        if (err) {
+          res.status(400).send(err)
+        } else {
+          User.findById(user._id)
+            .populate('employeeprofile')
+            .populate('company')
+            .exec(function (err, userp) {
+              res.json(userp)
+            })
+        }
+      })
+    }
+  })(req, res, next)
+
 }
 
 /**
