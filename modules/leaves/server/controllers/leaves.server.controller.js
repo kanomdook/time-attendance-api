@@ -178,7 +178,9 @@ exports.leaveByEmpID = function (req, res, next, empid) {
             var leaveByEmployee = [];
             if (leave.length > 0) {
                 leaveByEmployee = leave.filter(function (obj) {
-                    return obj.user.employeeprofile._id.toString() === empid.toString();
+                    if (obj.user && obj.user.employeeprofile) {
+                        return obj.user.employeeprofile._id.toString() === empid.toString();
+                    }
                 });
             }
             req.leaveByEmployee = leaveByEmployee;
@@ -211,7 +213,9 @@ exports.getLeaveByLeaveTypeAndDate = function (req, res) {
                     var leaveByCompany = [];
                     if (leave.length > 0) {
                         leaveByCompany = leave.filter(function (obj) {
-                            return obj.user.employeeprofile.company._id.toString() === req.user.company.toString();
+                            if (obj.user && obj.user.employeeprofile && obj.user.employeeprofile.company) {
+                                return obj.user.employeeprofile.company._id.toString() === req.user.company.toString();
+                            }
                         });
                     }
                     res.jsonp(leaveByCompany);
