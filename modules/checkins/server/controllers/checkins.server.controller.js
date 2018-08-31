@@ -217,7 +217,7 @@ exports.listByCompany = function (req, res) {
         year = d.getFullYear(),
         sec = d.getSeconds(),
         day = d.getDate();
-    Checkin.find({ 'created': { $gt: new Date(year,month,day), $lt: new Date(year,month,day + 1) } }).sort('-created').populate({
+    Checkin.find({ 'created': { $gt: new Date(year, month, day), $lt: new Date(year, month, day + 1) } }).sort('-created').populate({
         path: 'user',
         model: 'User',
         populate: {
@@ -268,8 +268,9 @@ exports.getByEmpID = function (req, res, next, empid) {
             var checkinByCompany = [];
             if (checkin.length > 0) {
                 checkinByCompany = checkin.filter(function (obj) {
-                    return obj.user.employeeprofile._id.toString() === empid;
-
+                    if (obj.user && obj.user.employeeprofile) {
+                        return obj.user.employeeprofile._id.toString() === empid;
+                    }
                 });
             }
             for (var i = 0; i < checkinByCompany.length; i++) {
