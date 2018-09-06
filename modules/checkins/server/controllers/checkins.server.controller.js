@@ -13,6 +13,7 @@ var path = require('path'),
  * Create a Checkin
  */
 exports.create = function (req, res) {
+    req.body.user = req.body.user ? req.body.user : req.user;
     var checkin = new Checkin(req.body);
     checkin.save(function (err) {
         if (err) {
